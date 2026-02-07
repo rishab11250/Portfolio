@@ -2,7 +2,6 @@ import React from 'react';
 
 import { motion } from 'framer-motion';
 import TiltCard from './TiltCard';
-import profileImg from '../assets/profile.png';
 
 const Profile = () => {
     const timelineData = [

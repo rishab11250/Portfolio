@@ -1,33 +1,28 @@
-import chewyImg from '../assets/chewy.png';
-import loadshareImg from '../assets/loadshare.png';
-import livecoinImg from '../assets/livecoinwatch.png';
-import quizImg from '../assets/cssquiz.png';
-
 const projects = [
     {
         title: "Chewy Clone",
-        image: chewyImg,
+        image: 'https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453383/046bccdc-2b29-426c-8e0e-81a629726634.png',
         skills: ["HTML", "CSS"],
         codeLink: "https://github.com/rishab11250/chewy-clone",
         demoLink: "https://chewy-rishab.netlify.app/"
     },
     {
         title: "LoadShare Clone",
-        image: loadshareImg,
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453402/loadshare_wex7g0.png",
         skills: ["HTML", "CSS"],
         codeLink: "https://github.com/rishab11250/loadshare-clone",
         demoLink: "https://loadshare-rishab.netlify.app/"
     },
     {
         title: "LiveCoinWatch Clone",
-        image: livecoinImg,
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453397/livecoinwatch_opaip4.png",
         skills: ["HTML", "CSS"],
         codeLink: "https://github.com/rishab11250/livecoinwatch-clone",
         demoLink: "https://livecoinwatch-rishab.netlify.app/"
     },
     {
         title: "Master Quiz",
-        image: quizImg,
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453394/cssquiz_fcpmfd.png",
         skills: ["AI Studio"],
         codeLink: "https://github.com/rishab11250/css-quiz",
         demoLink: "https://cssquizrishab.netlify.app/"
