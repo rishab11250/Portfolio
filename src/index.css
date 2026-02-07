@@ -33,6 +33,10 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 
+  /* Performance optimizations */
+  overflow-y: scroll;
+  overflow-x: hidden;
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
     display: none;
@@ -45,12 +49,23 @@ html {
   /* Firefox */
 }
 
+/* Smooth scrolling with custom timing */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   cursor: none;
   /* Hide default cursor */
+  /* GPU acceleration for transforms */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -78,26 +93,26 @@ ul {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px) translateZ(0);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
 @keyframes float {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0px) translateZ(0);
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-10px) translateZ(0);
   }
 
   100% {
-    transform: translateY(0px);
+    transform: translateY(0px) translateZ(0);
   }
 }
 
