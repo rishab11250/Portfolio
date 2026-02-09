@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
+import Logo from './Logo';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -44,7 +45,9 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="logo">My Portfolio</div>
+      <div className="logo" onClick={() => window.scrollTo(0, 0)}>
+        <Logo />
+      </div>
 
       <div className={`nav-toggle ${isOpen ? 'open' : ''}`} onClick={toggleMenu}>
         <div className="bar"></div>
