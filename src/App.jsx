@@ -5,6 +5,7 @@ import Profile from './components/Profile';
 import TechStack from './components/TechStack';
 import Projects from './components/Projects';
 import Certificates from './components/Certificates';
+import EducationTimeline from './components/EducationTimeline';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './App.css';
@@ -44,6 +45,7 @@ function App() {
         <div id="tech-stack"><TechStack /></div>
         <div id="projects"><Projects /></div>
         <div id="certificates"><Certificates /></div>
+        <div id="education"><EducationTimeline /></div>
         <div id="contact"><Contact /></div>
         <Footer />
       </div>

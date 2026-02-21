@@ -62,6 +62,7 @@ const Navbar = () => {
           <li><a href="#tech-stack" className={activeSection === 'tech-stack' ? 'active' : ''} onClick={() => setIsOpen(false)}>Tech Stack</a></li>
           <li><a href="#projects" className={activeSection === 'projects' ? 'active' : ''} onClick={() => setIsOpen(false)}>Projects</a></li>
           <li><a href="#certificates" className={activeSection === 'certificates' ? 'active' : ''} onClick={() => setIsOpen(false)}>Certificates</a></li>
+          <li><a href="#education" className={activeSection === 'education' ? 'active' : ''} onClick={() => setIsOpen(false)}>Education</a></li>
           <li><a href="#contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setIsOpen(false)}>Contact</a></li>
         </ul>
         <ThemeSwitcher />

@@ -13,7 +13,7 @@ const Footer = () => {
 
     const footerLinks = [
         { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about-section' },
+        { name: 'About', href: '#about' },
         { name: 'Tech Stack', href: '#tech-stack' },
         { name: 'Projects', href: '#projects' },
         { name: 'Certificates', href: '#certificates' },
