@@ -94,7 +94,7 @@ const Hero = () => {
                             <span className="role-title">
                                 {text}
                             </span>
-                            <span className="cursor" style={{ fontSize: '1.5rem', color: 'var(--text-color)', marginLeft: '10px' }}>|</span>
+                            <span className="cursor" style={{ fontSize: 'inherit', color: 'var(--text-color)', marginLeft: '2px', lineHeight: 'inherit' }}>|</span>
                         </motion.div>
                     </div>
 

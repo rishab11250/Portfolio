@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="app-container">
       <SciFiTerrain />
-      <Cursor />
+      {typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches && <Cursor />}
       <ScrollToTop />
       <Navbar />
       <div className="content-container">

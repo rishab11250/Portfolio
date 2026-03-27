@@ -57,12 +57,16 @@ html {
 }
 
 
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: none;
-  /* Hide default cursor */
   /* GPU acceleration for transforms */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -218,8 +222,8 @@ ul {
   width: 3px;
   animation: blink 1s infinite;
   margin-left: 5px;
-  vertical-align: text-bottom;
-  /* Align better with text */
+  vertical-align: baseline;
+  line-height: 1.2;
 }
 
 @keyframes blink {
@@ -240,6 +244,17 @@ ul {
   color: var(--text-color);
   text-transform: uppercase;
   letter-spacing: 2px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logo:focus {
+  outline: none;
+  background: transparent !important;
 }
 
 .nav-links {
@@ -1142,6 +1157,13 @@ textarea {
   cursor: pointer;
   gap: 5px;
   z-index: 1001;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.nav-toggle:focus {
+  outline: none;
 }
 
 .nav-toggle .bar {
@@ -1694,12 +1716,12 @@ body {
   display: inline-block;
   white-space: nowrap;
   font-size: 1.3rem;
-  /* Slightly reduced for contrast */
+  line-height: 1.2;
 }
 
 .role-title-wrapper {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   margin-top: 0.5rem;
   padding-left: 5px;
 }
@@ -1767,6 +1789,10 @@ body {
       /* Reduced for mobile */
     }
 
+    .hero-shapes {
+      display: none !important;
+    }
+
     /* ... */
 
     .page-section h1 {
@@ -1776,6 +1802,233 @@ body {
     .hero-actions .btn {
       width: 100%;
       margin-bottom: 0.5rem;
+    }
+
+    .timeline-card-content {
+      padding: 1rem !important;
+      overflow: hidden;
+    }
+
+    .timeline-card-content h3 {
+      font-size: 1.2rem !important;
+    }
+
+    .timeline-card-content h4 {
+      font-size: 0.9rem !important;
+    }
+
+    .timeline-card-content p {
+      font-size: 0.85rem !important;
+    }
+
+    .timeline-card-content [style*="display: flex"] {
+      gap: 0.5rem !important;
+    }
+
+    .timeline-card-content [style*="minWidth"] {
+      min-width: 60px !important;
+      padding: 0.4rem 0.6rem !important;
+    }
+
+    .project-list {
+      grid-template-columns: 1fr !important;
+      padding: 0 !important;
+    }
+
+    .project-card {
+      padding: 0 !important;
+    }
+
+    .project-card .project-img-container {
+      height: 150px !important;
+    }
+
+    .project-info {
+      padding: 1rem !important;
+    }
+
+    .project-info h2 {
+      font-size: 1.2rem !important;
+    }
+
+    .project-skills {
+      flex-wrap: wrap !important;
+      gap: 0.3rem !important;
+    }
+
+    .skill-pill {
+      font-size: 0.7rem !important;
+      padding: 0.2rem 0.5rem !important;
+    }
+
+    .project-links {
+      flex-direction: column !important;
+      gap: 0.5rem !important;
+    }
+
+    .project-links .btn-small {
+      justify-content: center !important;
+      width: 100% !important;
+    }
+
+    .certificates-grid {
+      grid-template-columns: 1fr !important;
+      padding: 0 !important;
+    }
+
+    .certificate-card {
+      padding: 0 !important;
+    }
+
+    .certificate-card img {
+      height: 140px !important;
+    }
+
+    .certificate-card h3 {
+      font-size: 1rem !important;
+    }
+
+    .certificate-card p {
+      font-size: 0.8rem !important;
+    }
+
+    .certificate-card [style*="padding: '1.5rem'"] {
+      padding: 1rem !important;
+    }
+
+    #contact [style*="gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))'"] {
+      grid-template-columns: 1fr !important;
+      gap: 1rem !important;
+    }
+
+    #contact [style*="padding: '2.5rem'"] {
+      padding: 1.5rem !important;
+    }
+
+    #contact [style*="width: '80px'"] {
+      width: 60px !important;
+      height: 60px !important;
+    }
+
+    #contact [style*="width: '80px'"] svg {
+      width: 24px !important;
+      height: 24px !important;
+    }
+
+    #contact h3 {
+      font-size: 1.2rem !important;
+    }
+
+    #contact form [style*="gridTemplateColumns: '1fr 1fr'"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    #contact form input,
+    #contact form textarea {
+      padding: 1rem !important;
+      font-size: 0.95rem !important;
+    }
+
+    #contact form textarea {
+      min-height: 120px !important;
+    }
+
+    #contact [style*="padding: '3rem'"][style*="backdropFilter"] {
+      padding: 1.5rem !important;
+    }
+
+    #contact [style*="fontSize: '2rem'"] {
+      font-size: 1.5rem !important;
+    }
+
+    .tech-grid {
+      gap: 0.8rem !important;
+    }
+
+    .tech-item-img img {
+      height: 32px !important;
+    }
+
+    .footer-content [style*="gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))'"] {
+      grid-template-columns: 1fr !important;
+      gap: 2rem !important;
+    }
+
+    .footer-content [style*="paddingTop: '2rem'"] {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+
+    .footer-content [style*="gap: '1rem'"][style*="marginBottom: '1.5rem'"] {
+      justify-content: center !important;
+    }
+
+    .cursor {
+      font-size: inherit !important;
+      vertical-align: baseline !important;
+      line-height: 1.2 !important;
+      width: 2px !important;
+    }
+
+    .role-title-wrapper {
+      flex-wrap: wrap !important;
+    }
+
+    .custom-timeline {
+      padding: 0 !important;
+    }
+
+    .custom-timeline > div {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      margin-bottom: 3rem !important;
+    }
+
+    .custom-timeline > div > div {
+      width: 100% !important;
+      text-align: left !important;
+    }
+
+    .custom-timeline > div > div:first-child {
+      order: 2;
+    }
+
+    .custom-timeline > div > div:nth-child(2) {
+      display: none !important;
+    }
+
+    .custom-timeline > div > div:last-child {
+      order: 1;
+    }
+
+    .custom-timeline > div > div:first-child h2 {
+      font-size: 2rem !important;
+    }
+
+    .custom-timeline > div > div:last-child h3 {
+      font-size: 1.2rem !important;
+    }
+
+    .custom-timeline > div > div:last-child h4 {
+      font-size: 0.9rem !important;
+    }
+
+    .custom-timeline > div > div:last-child p {
+      font-size: 0.85rem !important;
+    }
+
+    .timeline-card-content {
+      padding: 1.5rem !important;
+    }
+
+    .timeline-card-content [style*="display: flex"][style*="gap"] {
+      flex-wrap: wrap !important;
+    }
+
+    .timeline-card-content [style*="minWidth: '80px'"] {
+      min-width: 70px !important;
+      padding: 0.5rem !important;
     }
   }
 

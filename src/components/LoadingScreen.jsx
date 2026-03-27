@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Torus, Stars, Sparkles, Float } from '@react-three/drei';
-import * as THREE from 'three';
+import { Torus, Stars, Sparkles } from '@react-three/drei';
 
-const WarpTunnel = () => {
+const WarpTunnel = ({ ringCount }) => {
     const groupRef = useRef();
 
     useFrame((state, delta) => {
         if (groupRef.current) {
-            // INCREASED SPEED: 15 -> 40
             groupRef.current.position.z += delta * 40;
             if (groupRef.current.position.z > 20) {
                 groupRef.current.position.z = -20;
@@ -16,10 +14,9 @@ const WarpTunnel = () => {
         }
     });
 
-    // MORE RINGS: 30 -> 60 for density
-    const rings = Array.from({ length: 60 }, (_, i) => ({
+    const rings = Array.from({ length: ringCount }, (_, i) => ({
         z: -i * 1.5,
-        scale: 1 + Math.random() * 1.5, // More random sizing
+        scale: 1 + Math.random() * 1.5,
         color: i % 2 === 0 ? "#00f3ff" : "#ff00ff"
     }));
 
@@ -30,7 +27,7 @@ const WarpTunnel = () => {
                     <meshStandardMaterial
                         color={ring.color}
                         emissive={ring.color}
-                        emissiveIntensity={4} // BRIGHTER
+                        emissiveIntensity={4}
                         toneMapped={false}
                     />
                 </Torus>
@@ -41,6 +38,22 @@ const WarpTunnel = () => {
 
 const LoadingScreen = ({ onComplete }) => {
     const [progress, setProgress] = useState(0);
+    const [isLowPerf, setIsLowPerf] = useState(false);
+
+    useEffect(() => {
+        const checkPerformance = () => {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const isLowMemory = navigator.deviceMemory && navigator.deviceMemory < 4;
+            const isSlowConnection = navigator.connection?.effectiveType === '2g' || navigator.connection?.effectiveType === 'slow-2g';
+            
+            setIsLowPerf(isMobile || isLowMemory || isSlowConnection);
+        };
+        checkPerformance();
+    }, []);
+
+    const ringCount = isLowPerf ? 20 : 60;
+    const starCount = isLowPerf ? 1500 : 7000;
+    const sparkleCount = isLowPerf ? 200 : 1000;
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -52,23 +65,21 @@ const LoadingScreen = ({ onComplete }) => {
                 }
                 return Math.min(prev + 1, 100);
             });
-        }, 20); // Faster updates
+        }, 20);
         return () => clearInterval(timer);
     }, [onComplete]);
 
     return (
         <div className="hyper-loader-container">
-            <Canvas camera={{ position: [0, 0, 5], fov: 90 }}> {/* FOV 90 for speed */}
+            <Canvas camera={{ position: [0, 0, 5], fov: 90 }}>
                 <ambientLight intensity={0.5} />
-                <Stars radius={100} depth={50} count={7000} factor={4} saturation={0} fade speed={5} />
+                <Stars radius={100} depth={50} count={starCount} factor={4} saturation={0} fade speed={5} />
                 <fog attach="fog" args={['#000000', 5, 20]} />
-                <WarpTunnel />
-
-                {/* WARP LINES via Scaled Sparkles */}
+                <WarpTunnel ringCount={ringCount} />
                 <Sparkles
-                    count={1000}
-                    scale={[10, 10, 20]} // Stretch in Z
-                    size={5}
+                    count={sparkleCount}
+                    scale={[10, 10, 20]}
+                    size={isLowPerf ? 8 : 5}
                     speed={2}
                     opacity={0.8}
                     color="#ffffff"

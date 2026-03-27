@@ -10,11 +10,12 @@ const Contact = () => {
         message: ''
     });
     const [status, setStatus] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const form = useRef();
 
-    const SERVICE_ID = 'service_u5kyq7a';
-    const TEMPLATE_ID = 'template_riut535';
-    const PUBLIC_KEY = 'QAVuEX1927cCkpG-u';
+    const SERVICE_ID = import.meta.env.VITE_EMAIL_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAIL_PUBLIC_KEY;
 
     const handleChange = (e) => {
         setFormData({
@@ -26,6 +27,7 @@ const Contact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setStatus('sending');
+        setErrorMessage('');
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
             .then((result) => {
@@ -33,7 +35,7 @@ const Contact = () => {
                 setFormData({ name: '', email: '', message: '' });
             }, (error) => {
                 setStatus('error');
-                alert("Failed to send message. Please try again.");
+                setErrorMessage('Failed to send message. Please try again or email me directly.');
             });
     };
 
@@ -81,9 +83,6 @@ const Contact = () => {
             position: 'relative',
             overflow: 'hidden'
         }}>
-            {/* Floating Orbs Background */}
-            {/* Background Removed per user request */}
-
             <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -98,10 +97,10 @@ const Contact = () => {
                         backgroundClip: 'text',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
-                        color: 'transparent', // Fallback
+                        color: 'transparent',
                         fontWeight: '900',
                         letterSpacing: '-2px',
-                        display: 'inline-block' // Fix for some browsers
+                        display: 'inline-block'
                     }}>Let's Connect</h1>
                     <p style={{ fontSize: '1.3rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
                         I'm always excited to collaborate on new projects or just have a conversation about tech.
@@ -109,7 +108,6 @@ const Contact = () => {
                 </motion.div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginBottom: '4rem' }}>
-                    {/* Contact Methods Cards */}
                     {contactMethods.map((method, index) => (
                         <TiltCard key={index}>
                             <motion.a
@@ -165,7 +163,6 @@ const Contact = () => {
                     ))}
                 </div>
 
-                {/* Quick Message Form */}
                 {status === 'success' ? (
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
@@ -197,7 +194,7 @@ const Contact = () => {
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </motion.div>
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Awesome! 🎉</h2>
+                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Awesome!</h2>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '2rem' }}>
                             Message received! I'll get back to you faster than you can say "Full Stack Developer".
                         </p>
@@ -238,10 +235,26 @@ const Contact = () => {
                             Or drop me a message right here
                         </p>
 
+                        {errorMessage && (
+                            <div style={{
+                                background: 'rgba(255, 82, 82, 0.1)',
+                                border: '1px solid #ff5252',
+                                borderRadius: '12px',
+                                padding: '1rem',
+                                marginBottom: '1.5rem',
+                                color: '#ff5252',
+                                textAlign: 'center'
+                            }}>
+                                {errorMessage}
+                            </div>
+                        )}
+
                         <form ref={form} onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                                 <motion.div whileFocus={{ scale: 1.02 }}>
+                                    <label htmlFor="name" style={{ display: 'none' }}>Your Name</label>
                                     <input
+                                        id="name"
                                         type="text"
                                         name="name"
                                         placeholder="Your Name"
@@ -249,6 +262,7 @@ const Contact = () => {
                                         onChange={handleChange}
                                         required
                                         autoComplete="name"
+                                        aria-label="Your Name"
                                         style={{
                                             width: '100%',
                                             padding: '1.25rem',
@@ -263,7 +277,9 @@ const Contact = () => {
                                     />
                                 </motion.div>
                                 <motion.div whileFocus={{ scale: 1.02 }}>
+                                    <label htmlFor="email" style={{ display: 'none' }}>Your Email</label>
                                     <input
+                                        id="email"
                                         type="email"
                                         name="email"
                                         placeholder="Your Email"
@@ -271,6 +287,7 @@ const Contact = () => {
                                         onChange={handleChange}
                                         required
                                         autoComplete="email"
+                                        aria-label="Your Email"
                                         style={{
                                             width: '100%',
                                             padding: '1.25rem',
@@ -287,13 +304,16 @@ const Contact = () => {
                             </div>
 
                             <motion.div whileFocus={{ scale: 1.02 }}>
+                                <label htmlFor="message" style={{ display: 'none' }}>Your Message</label>
                                 <textarea
+                                    id="message"
                                     name="message"
                                     placeholder="Your message..."
                                     value={formData.message}
                                     onChange={handleChange}
                                     required
                                     rows="5"
+                                    aria-label="Your Message"
                                     style={{
                                         width: '100%',
                                         padding: '1.25rem',

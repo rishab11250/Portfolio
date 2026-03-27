@@ -27,6 +27,11 @@ const TechStack = () => {
         ? techData
         : techData.filter(tech => tech.category.includes(filter));
 
+    const categories = ['All', 'Language', 'Frontend', 'Backend', 'Database', 'Framework', 'Tools'];
+    const availableCategories = categories.filter(cat => 
+        cat === 'All' || techData.some(tech => tech.category.includes(cat))
+    );
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -67,7 +72,7 @@ const TechStack = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.5 }}
             >
-                {['All', 'Language', 'Frontend', 'Backend', 'Database', 'Framework', 'Tools'].map(category => (
+                {availableCategories.map(category => (
                     <button
                         key={category}
                         className={`filter-btn ${filter === category ? 'active' : ''}`}
@@ -98,7 +103,7 @@ const TechStack = () => {
                             zIndex: 10
                         }}
                     >
-                        <img src={tech.img} alt={tech.name} />
+                        <img src={tech.img} alt={tech.name} loading="lazy" />
                     </motion.li>
                 ))}
             </motion.ul>

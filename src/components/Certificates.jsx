@@ -136,6 +136,7 @@ const Certificates = () => {
                                         <img
                                             src={cert.image}
                                             alt={cert.title}
+                                            loading="lazy"
                                             onError={(e) => {
                                                 e.target.src = 'https://via.placeholder.com/400x200?text=Certificate+Image+Not+Found';
                                             }}

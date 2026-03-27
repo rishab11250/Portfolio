@@ -9,19 +9,15 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
 
-    // Active section logic
     const sections = document.querySelectorAll('section');
     const observerOptions = {
       root: null,
-      rootMargin: '-20% 0px -35% 0px', // Adjusts when a section is considered "active"
+      rootMargin: '-20% 0px -35% 0px',
       threshold: 0.1
     };
 
@@ -39,21 +35,21 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
       sections.forEach(section => observer.unobserve(section));
     };
-  }, [scrolled]);
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="logo" onClick={() => window.scrollTo(0, 0)}>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main navigation">
+      <button className="logo" onClick={() => window.scrollTo(0, 0)} aria-label="Scroll to top">
         <Logo />
-      </div>
+      </button>
 
-      <div className={`nav-toggle ${isOpen ? 'open' : ''}`} onClick={toggleMenu}>
+      <button className={`nav-toggle ${isOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Toggle menu" aria-expanded={isOpen}>
         <div className="bar"></div>
         <div className="bar"></div>
         <div className="bar"></div>
-      </div>
+      </button>
 
       <div className={`nav-right ${isOpen ? 'active' : ''}`}>
         <ul className="nav-links">

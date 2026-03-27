@@ -64,6 +64,10 @@ Professional developer entity specializing in the architecture of complex web ec
 # ACTIVATE_RESOURCES
 $ npm install
 
+# CONFIGURE_ENVIRONMENT (Required for contact form)
+$ cp .env.example .env
+# Edit .env with your EmailJS credentials
+
 # INITIATE_HOLOGRAPHIC_PREVIEW
 $ npm run dev
 
