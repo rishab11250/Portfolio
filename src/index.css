@@ -14,6 +14,27 @@
   --gradient-text: linear-gradient(to right, #FFE3A9, #8CCDEB, #725CAD);
 }
 
+.location-easter-egg {
+  cursor: help;
+  display: inline-flex;
+  align-items: center;
+}
+
+.location-easter-egg .location-text {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: bottom;
+  color: var(--primary-color);
+  margin-left: 4px;
+}
+
+.location-easter-egg:hover .location-text {
+  width: 130px; /* Reveal location text */
+}
+
 [data-theme='light'] {
   --bg-color: #FFFFFF;
   --text-color: #1A202C;
@@ -31,7 +52,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 100px;
 
   /* Performance optimizations */
   overflow-y: scroll;
@@ -140,7 +161,7 @@ ul {
 
 .page-section {
   text-align: center;
-  padding: 6rem 0;
+  padding: 8rem 0;
 }
 
 /* Page Section Headings - Solid Color */
@@ -266,30 +287,23 @@ ul {
   font-weight: 500;
   position: relative;
   padding: 0.5rem 0;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary-color);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
+  transition: color 0.3s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--primary-color);
+  opacity: 1;
 }
 
-.nav-links a.active::after {
-  width: 100%;
+.active-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-color);
+  border-radius: 2px;
 }
 
 /* Floating Icons in Hero */
@@ -516,6 +530,17 @@ ul {
   background: var(--primary-color);
   color: #0b1d51;
   transform: translateY(-3px);
+}
+
+html[data-theme="light"] .social-links a,
+html[data-theme="light"] .footer-unique a {
+  color: #000 !important;
+}
+
+html[data-theme="light"] .social-links a svg,
+html[data-theme="light"] .footer-unique a svg {
+  stroke: #000 !important;
+  fill: #000 !important;
 }
 
 /* Profile / About Section */
@@ -975,6 +1000,28 @@ ul {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1.25rem;
+    background: rgba(255,255,255,0.03);
+    border: 2px solid var(--glass-border);
+    border-radius: 16px;
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-color-translucent);
+}
+
+textarea.form-input {
+    resize: vertical;
 }
 
 .contact-container-split {
@@ -1873,15 +1920,18 @@ body {
 
     .certificates-grid {
       grid-template-columns: 1fr !important;
-      padding: 0 !important;
+      padding: 0 1rem !important;
+      gap: 2rem !important;
     }
 
-    .certificate-card {
-      padding: 0 !important;
+    .certificate-card [style*="height: '240px'"] {
+      height: 200px !important;
     }
 
     .certificate-card img {
-      height: 140px !important;
+      height: 100% !important;
+      width: 100% !important;
+      object-fit: fill !important;
     }
 
     .certificate-card h3 {

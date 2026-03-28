@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import TiltCard from './TiltCard';
+import toast from 'react-hot-toast';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -37,6 +38,11 @@ const Contact = () => {
                 setStatus('error');
                 setErrorMessage('Failed to send message. Please try again or email me directly.');
             });
+    };
+
+    const handleCopy = (text) => {
+        navigator.clipboard.writeText(text);
+        toast.success('Copied!');
     };
 
     const contactMethods = [
@@ -108,59 +114,65 @@ const Contact = () => {
                 </motion.div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginBottom: '4rem' }}>
-                    {contactMethods.map((method, index) => (
-                        <TiltCard key={index}>
-                            <motion.a
-                                href={method.link}
-                                target={method.label === 'Email' ? '_self' : '_blank'}
-                                rel="noopener noreferrer"
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ y: -10, borderColor: method.color }}
-                                style={{
-                                    background: 'var(--card-bg)',
-                                    border: '2px solid var(--glass-border)',
-                                    borderRadius: '24px',
-                                    padding: '2.5rem',
-                                    textDecoration: 'none',
-                                    color: 'var(--text-color)',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: '1.5rem',
-                                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                                    position: 'relative',
-                                    overflow: 'hidden',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-                                    <motion.div
-                                        whileHover={{ rotate: 360, scale: 1.1 }}
-                                        transition={{ duration: 0.6 }}
-                                        style={{
-                                            width: '80px',
-                                            height: '80px',
-                                            borderRadius: '20px',
-                                            background: `linear-gradient(135deg, ${method.color}20 0%, ${method.color}10 100%)`,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            color: method.color
-                                        }}
-                                    >
-                                        {method.icon}
-                                    </motion.div>
-                                    <div style={{ textAlign: 'center' }}>
-                                        <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', fontWeight: '700' }}>{method.label}</h3>
-                                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', wordBreak: 'break-all', lineHeight: '1.4' }}>{method.value}</p>
+                    {contactMethods.map((method, index) => {
+                        const isCopyable = method.label === 'Email' || method.label === 'Phone';
+                        const CardComponent = isCopyable ? 'div' : motion.a;
+
+                        return (
+                            <TiltCard key={index}>
+                                <CardComponent
+                                    href={!isCopyable ? method.link : undefined}
+                                    target={!isCopyable ? '_blank' : undefined}
+                                    rel={!isCopyable ? 'noopener noreferrer' : undefined}
+                                    onClick={isCopyable ? () => handleCopy(method.value) : undefined}
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    whileHover={{ y: -10, borderColor: method.color }}
+                                    style={{
+                                        background: 'var(--card-bg)',
+                                        border: '2px solid var(--glass-border)',
+                                        borderRadius: '24px',
+                                        padding: '2.5rem',
+                                        textDecoration: 'none',
+                                        color: 'var(--text-color)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        gap: '1.5rem',
+                                        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+                                        <motion.div
+                                            whileHover={{ rotate: 360, scale: 1.1 }}
+                                            transition={{ duration: 0.6 }}
+                                            style={{
+                                                width: '80px',
+                                                height: '80px',
+                                                borderRadius: '20px',
+                                                background: `linear-gradient(135deg, ${method.color}20 0%, ${method.color}10 100%)`,
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                color: method.color
+                                            }}
+                                        >
+                                            {method.icon}
+                                        </motion.div>
+                                        <div style={{ textAlign: 'center' }}>
+                                            <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', fontWeight: '700' }}>{method.label}</h3>
+                                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', wordBreak: 'break-all', lineHeight: '1.4' }}>{method.value}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </motion.a>
-                        </TiltCard>
-                    ))}
+                                </CardComponent>
+                            </TiltCard>
+                        );
+                    })}
                 </div>
 
                 {status === 'success' ? (
@@ -263,17 +275,7 @@ const Contact = () => {
                                         required
                                         autoComplete="name"
                                         aria-label="Your Name"
-                                        style={{
-                                            width: '100%',
-                                            padding: '1.25rem',
-                                            background: 'rgba(255,255,255,0.03)',
-                                            border: '2px solid var(--glass-border)',
-                                            borderRadius: '16px',
-                                            color: 'var(--text-color)',
-                                            fontSize: '1rem',
-                                            outline: 'none',
-                                            transition: 'all 0.3s ease'
-                                        }}
+                                        className="form-input"
                                     />
                                 </motion.div>
                                 <motion.div whileFocus={{ scale: 1.02 }}>
@@ -288,17 +290,7 @@ const Contact = () => {
                                         required
                                         autoComplete="email"
                                         aria-label="Your Email"
-                                        style={{
-                                            width: '100%',
-                                            padding: '1.25rem',
-                                            background: 'rgba(255,255,255,0.03)',
-                                            border: '2px solid var(--glass-border)',
-                                            borderRadius: '16px',
-                                            color: 'var(--text-color)',
-                                            fontSize: '1rem',
-                                            outline: 'none',
-                                            transition: 'all 0.3s ease'
-                                        }}
+                                        className="form-input"
                                     />
                                 </motion.div>
                             </div>
@@ -314,19 +306,7 @@ const Contact = () => {
                                     required
                                     rows="5"
                                     aria-label="Your Message"
-                                    style={{
-                                        width: '100%',
-                                        padding: '1.25rem',
-                                        background: 'rgba(255,255,255,0.03)',
-                                        border: '2px solid var(--glass-border)',
-                                        borderRadius: '16px',
-                                        color: 'var(--text-color)',
-                                        fontSize: '1rem',
-                                        outline: 'none',
-                                        resize: 'vertical',
-                                        fontFamily: 'inherit',
-                                        transition: 'all 0.3s ease'
-                                    }}
+                                    className="form-input"
                                 ></textarea>
                             </motion.div>
 

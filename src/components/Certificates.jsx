@@ -5,33 +5,17 @@ import TiltCard from './TiltCard';
 
 const Certificates = () => {
     const [showAll, setShowAll] = useState(false);
+    const [filter, setFilter] = useState("All");
+
+    const categories = ["All", "Hackathons", "Courses"];
 
     const certificates = [
-        {
-            id: 1,
-            title: "MOSIP Decode Hackathon",
-            issuer: "Digital Governance Summit 2026",
-            image: "https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/53151819-9cbb-4e07-9609-56dbd74ca269.jpg",
-            link: "https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/53151819-9cbb-4e07-9609-56dbd74ca269.jpg"
-        },
-        {
-            id: 2,
-            title: "CodeClash",
-            issuer: "Unstop",
-            image: "https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/c3267ae3-cfe1-4071-96e1-ebdf6f12eb82.jpg",
-            link: "https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/c3267ae3-cfe1-4071-96e1-ebdf6f12eb82.jpg"
-        },
-        {
-            id: 3,
-            title: "TechFrontier 2025",
-            issuer: "Unstop",
-            image: "https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/ad6a9fd4-f0f4-4498-8002-8c35f58c268d.jpg",
-            link: "https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/ad6a9fd4-f0f4-4498-8002-8c35f58c268d.jpg"
-        },
         {
             id: 4,
             title: "Doppelganger",
             issuer: "OpenPool",
+            category: "Hackathons",
+            description: "Led a 4-member team to successfully develop a working prototype in under 30 hours, demonstrating strong leadership and rapid execution.",
             image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773833685/Rishab_Chandgothia_page-0001_msjfri.jpg",
             link: "https://drive.google.com/file/d/1DaGek1zp2Jl61NEuCO-r3ogAcz_JGykP/view?usp=sharing"
         },
@@ -39,8 +23,82 @@ const Certificates = () => {
             id: 5,
             title: "Dev Heat Hackathon",
             issuer: "Unstop",
+            category: "Hackathons",
+            description: "Led a 3-member team to successfully advance to the offline presentation finals at IIIT Surat, demonstrating strong leadership, collaborative problem-solving, and effective project execution.",
             image: "https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/bb93b606-96ef-4c9a-b60c-d5329fd7d5e3.jpg",
             link: "https://d8it4huxumps7.cloudfront.net/lambda-pdfs/certificate-images/bb93b606-96ef-4c9a-b60c-d5329fd7d5e3.jpg"
+        },
+        {
+            id: 6,
+            title: "Introduction to C",
+            issuer: "Sololearn",
+            category: "Courses",
+            description: "Mastered the foundational concepts of C language, including user input handling, conditional flow control, loops, functions, and array manipulation.",
+            image: "https://api2.sololearn.com/v2/certificates/CC-UAIY2UNI/image/png",
+            link: "https://www.sololearn.com/certificates/CC-UAIY2UNI"
+        },
+        {
+            id: 7,
+            title: "Prompt Engineering",
+            issuer: "Sololearn",
+            category: "Courses",
+            description: "Learned advanced techniques for crafting effective AI prompts, optimizing interactions with LLMs like ChatGPT and Gemini for high-quality results.",
+            image: "https://api2.sololearn.com/v2/certificates/CC-UKVI1YP1/image/png",
+            link: "https://www.sololearn.com/certificates/CC-UKVI1YP1"
+        },
+        {
+            id: 8,
+            title: "Introduction to SQL",
+            issuer: "Sololearn",
+            category: "Courses",
+            description: "Gained proficiency in database management and manipulation using SQL, covering CRUD operations, filtering, and joining multiple interrelated tables.",
+            image: "https://api2.sololearn.com/v2/certificates/CC-J5E1KEMT/image/png",
+            link: "https://www.sololearn.com/certificates/CC-J5E1KEMT"
+        },
+        {
+            id: 9,
+            title: "Introduction to C++",
+            issuer: "Sololearn",
+            category: "Courses",
+            description: "Developed a strong grasp of C++ fundamentals, mastering variables, complex control structures, and the basics of object-oriented programming.",
+            image: "https://api2.sololearn.com/v2/certificates/CC-2NMPWLX4/image/png",
+            link: "https://www.sololearn.com/certificates/CC-2NMPWLX4"
+        },
+        {
+            id: 10,
+            title: "Web Development",
+            issuer: "Sololearn",
+            category: "Courses",
+            description: "Learned the core pillars of modern web development, focusing on structured HTML, stylized CSS layouts, and interactive JavaScript functionality.",
+            image: "https://api2.sololearn.com/v2/certificates/CC-EB87KPA6/image/png",
+            link: "https://www.sololearn.com/certificates/CC-EB87KPA6"
+        },
+        {
+            id: 11,
+            title: "Data Analytics with AI",
+            issuer: "Sololearn",
+            category: "Courses",
+            description: "Integrated AI tools into the data analysis lifecycle, mastering data interpretation, visualization techniques, and automated insight generation.",
+            image: "https://api2.sololearn.com/v2/certificates/CC-CXPPHOOM/image/png",
+            link: "https://www.sololearn.com/certificates/CC-CXPPHOOM"
+        },
+        {
+            id: 12,
+            title: "JavaScript (Basic)",
+            issuer: "HackerRank",
+            category: "Courses",
+            description: "Verified fundamental JavaScript proficiency, covering essential concepts like variable scope, hoisting, closures, inheritance, and error handling.",
+            image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1774602122/download_gc3rvx.png",
+            link: "https://www.hackerrank.com/certificates/ede94602e84f"
+        },
+        {
+            id: 13,
+            title: "HackCrux 2026",
+            issuer: "LNMIIT",
+            category: "Hackathons",
+            description: "Advanced to the second round of HackCrux at LNMIIT, collaborating with a 4-member team to deliver a functional prototype in under 30 hours. Spearheaded the project's backend by architecting the database and implementing web scraping solutions.",
+            image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1774687198/80f0f881-5dcb-40a6-8533-053bdb00573d.png",
+            link: "https://drive.google.com/file/d/1urUKP_td7ItebMWJLDz7R8mC1ZnDN3w6/view?usp=sharing"
         }
     ];
 
@@ -69,11 +127,31 @@ const Certificates = () => {
         }
     };
 
-    const displayedCerts = showAll ? certificates : certificates.slice(0, 3);
+    const filteredCerts = filter === "All"
+        ? certificates
+        : certificates.filter(cert => cert.category === filter);
+
+    const displayedCerts = showAll ? filteredCerts : filteredCerts.slice(0, 3);
 
     return (
-        <section className="page-section certificates" id="certificates">
-            <h1 data-aos="fade-down" style={{ textAlign: 'center', marginBottom: '3rem' }}>Certifications</h1>
+        <section className="page-section certificates" id="certificates" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+            <h1 data-aos="fade-down" style={{ textAlign: 'center', marginBottom: '2rem' }}>Certificates</h1>
+
+            {/* Filter Buttons */}
+            <div className="project-filters" style={{ marginBottom: '3rem' }}>
+                {categories.map((cat) => (
+                    <button
+                        key={cat}
+                        className={`filter-btn ${filter === cat ? 'active' : ''}`}
+                        onClick={() => {
+                            setFilter(cat);
+                            setShowAll(false); // Reset showAll when filter changes
+                        }}
+                    >
+                        {cat}
+                    </button>
+                ))}
+            </div>
 
             <motion.div
                 className="certificates-grid"
@@ -83,10 +161,10 @@ const Certificates = () => {
                 viewport={{ once: true, amount: 0.1 }}
                 style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                    gap: '2rem',
-                    padding: '0 1rem',
-                    maxWidth: '1200px',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '2.5rem',
+                    padding: '0 2rem',
+                    maxWidth: '1400px',
                     margin: '0 auto',
                     justifyContent: 'center'
                 }}
@@ -127,26 +205,63 @@ const Certificates = () => {
                                         position: 'relative'
                                     }}
                                 >
-                                    <div style={{
-                                        width: '100%',
-                                        height: '200px',
-                                        overflow: 'hidden',
-                                        background: '#f0f0f0'
-                                    }}>
-                                        <img
-                                            src={cert.image}
-                                            alt={cert.title}
+                                    <div 
+                                        className="certificate-image-container"
+                                        style={{
+                                            width: '100%',
+                                            height: '240px',
+                                            overflow: 'hidden',
+                                            background: '#fff',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            borderBottom: '1px solid var(--glass-border)',
+                                            position: 'relative'
+                                        }}
+                                    >
+                                        <img 
+                                            src={cert.image} 
+                                            alt={cert.title} 
                                             loading="lazy"
-                                            onError={(e) => {
-                                                e.target.src = 'https://via.placeholder.com/400x200?text=Certificate+Image+Not+Found';
-                                            }}
                                             style={{
                                                 width: '100%',
                                                 height: '100%',
-                                                objectFit: 'cover',
-                                                transition: 'transform 0.3s ease'
+                                                objectFit: 'fill'
                                             }}
                                         />
+                                        
+                                        {/* Hover Description Overlay */}
+                                        <motion.div
+                                            className="certificate-overlay"
+                                            initial={{ opacity: 0 }}
+                                            whileHover={{ opacity: 1 }}
+                                            transition={{ duration: 0.3 }}
+                                            style={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                width: '100%',
+                                                height: '100%',
+                                                background: 'rgba(10, 10, 20, 0.95)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                padding: '1.5rem',
+                                                textAlign: 'center',
+                                                backdropFilter: 'blur(4px)'
+                                            }}
+                                        >
+                                            <p style={{
+                                                color: '#fff',
+                                                fontSize: '0.95rem',
+                                                lineHeight: '1.6',
+                                                margin: 0,
+                                                fontWeight: '500',
+                                                fontFamily: 'Share Tech Mono, monospace'
+                                            }}>
+                                                {cert.description}
+                                            </p>
+                                        </motion.div>
                                     </div>
                                     <div style={{ padding: '1.5rem' }}>
                                         <h3 style={{
@@ -173,7 +288,7 @@ const Certificates = () => {
                 </AnimatePresence>
             </motion.div>
 
-            {certificates.length > 3 && (
+            {filteredCerts.length > 3 && (
                 <div style={{ textAlign: 'center', marginTop: '3rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
                     <motion.button
                         type="button"
@@ -201,7 +316,7 @@ const Certificates = () => {
                             position: 'relative'
                         }}
                     >
-                        {showAll ? 'Show Less' : `View All ${certificates.length} Certificates`}
+                        {showAll ? 'Show Less' : `View All ${filteredCerts.length} Certificates`}
                         <motion.svg
                             animate={{ rotate: showAll ? 180 : 0 }}
                             xmlns="http://www.w3.org/2000/svg"

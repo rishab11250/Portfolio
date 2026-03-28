@@ -2,24 +2,27 @@ const projects = [
     {
         title: "Chewy Clone",
         image: 'https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453383/046bccdc-2b29-426c-8e0e-81a629726634.png',
-        skills: ["HTML5", "CSS3"],
+        skills: ["HTML", "CSS"],
         category: "Frontend",
+        description: "A high-fidelity frontend clone of the Chewy e-commerce platform, focusing on pixel-perfect responsive design and complex CSS layouts.",
         codeLink: "https://github.com/rishab11250/chewy-clone",
         demoLink: "https://chewy-rishab.netlify.app/"
     },
     {
         title: "LoadShare Clone",
         image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453402/loadshare_wex7g0.png",
-        skills: ["HTML5", "CSS3"],
+        skills: ["HTML", "CSS"],
         category: "Frontend",
+        description: "A functional landing page clone of LoadShare, showcasing modern UI components and fluid navigation transitions using vanilla web technologies.",
         codeLink: "https://github.com/rishab11250/loadshare-clone",
         demoLink: "https://loadshare-rishab.netlify.app/"
     },
     {
         title: "LiveCoinWatch Clone",
         image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453397/livecoinwatch_opaip4.png",
-        skills: ["HTML5", "CSS3"],
+        skills: ["HTML", "CSS"],
         category: "Frontend",
+        description: "An interactive cryptocurrency tracking dashboard that mimics LiveCoinWatch, featuring real-time-like data visualization and sleek dark mode UI.",
         codeLink: "https://github.com/rishab11250/livecoinwatch-clone",
         demoLink: "https://livecoinwatch-rishab.netlify.app/"
     },
@@ -28,32 +31,36 @@ const projects = [
         image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453394/cssquiz_fcpmfd.png",
         skills: ["React", "AI Studio", "Framer Motion"],
         category: "AI",
+        description: "An AI-powered quiz application that generates dynamic questions about CSS, featuring smooth animations and real-time score tracking.",
         codeLink: "https://github.com/rishab11250/css-quiz",
         demoLink: "https://cssquizrishab.netlify.app/"
     },
     {
         title: "StudyFlow AI",
         image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773835083/Screenshot_2026-03-18_172743_sea9ak.png",
-        skills: ["React", "Gemini AI", "Three.js", "Zustand", "GSAP"],
+        skills: ["React", "Gemini AI", "Three.js", "Zustand"],
         category: "Hackathon",
+        description: "A comprehensive learning platform combining Gemini AI with real-time analytics to help students optimize study habits and manage tasks.",
         codeLink: "https://github.com/rishab11250/qBit-Coders",
         demoLink: "https://studyflow-neon.vercel.app/"
     },
     {
         title: "AadhaarPulse",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1741870107/aadhaarpulse.png",
-        skills: ["MERN Stack", "Recharts", "Tailwind CSS", "JWT Auth"],
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1774686811/6831c009-d80c-4e08-a996-c3a47695e0aa.png",
+        skills: ["MERN Stack", "Recharts", "Tailwind CSS"],
         category: "Hackathon",
+        description: "A data-driven monitoring system for Aadhaar metrics, providing deep insights through interactive charts and secure authentication.",
         codeLink: "https://github.com/rishab11250/UDAI",
-        demoLink: ""
+        demoLink: "https://udai-n6dk.onrender.com/"
     },
     {
         title: "Cura",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1741870107/cura.png",
-        skills: ["React", "Node.js", "MongoDB", "AI", "HealthTech"],
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1774686272/Screenshot_2026-03-28_135327_vy2dz6.png",
+        skills: ["MERN Stack", "AI", "Python", "Tailwind CSS"],
         category: "Hackathon",
+        description: "A cutting-edge AI-powered health assistant designed to help users monitor and manage their well-being with personalized recommendations.",
         codeLink: "https://github.com/rishab11250",
-        demoLink: "https://cura-health.netlify.app/"
+        demoLink: "https://cura-nu-six.vercel.app/"
     }
 ];
 
@@ -70,7 +77,6 @@ const Projects = () => {
     const getSkillStyle = (skill) => {
         const colors = {
             "HTML": { bg: "rgba(227, 79, 38, 0.15)", text: "#E34F26", border: "#E34F26" },
-            "HTML5": { bg: "rgba(227, 79, 38, 0.15)", text: "#E34F26", border: "#E34F26" },
             "CSS": { bg: "rgba(21, 114, 182, 0.15)", text: "#1572B6", border: "#1572B6" },
             "CSS3": { bg: "rgba(21, 114, 182, 0.15)", text: "#1572B6", border: "#1572B6" },
             "JavaScript": { bg: "rgba(247, 223, 30, 0.15)", text: "#F7DF1E", border: "#F7DF1E" },
@@ -105,8 +111,8 @@ const Projects = () => {
         ? projects
         : projects.filter(p => {
             if (filter === "Full Stack") return p.category === "Full Stack" || p.skills.includes("MERN Stack") || p.skills.includes("Node.js");
-            if (filter === "Frontend") return p.category === "Frontend" || p.skills.includes("HTML") || p.skills.includes("React");
-            if (filter === "AI") return p.category === "AI" || p.skills.includes("AI Studio");
+            if (filter === "Frontend") return p.category === "Frontend" || p.skills.includes("HTML") || p.skills.includes("React")|| p.skills.includes("CSS");
+            if (filter === "AI") return p.category === "AI" || p.skills.includes("AI Studio") || p.skills.includes("AI") || p.skills.includes("Gemini AI");
             if (filter === "Hackathon") return p.category === "Hackathon";
             return p.category === filter;
         });
@@ -151,8 +157,41 @@ const Projects = () => {
                         >
                             <TiltCard>
                                 <div className="project-card" style={{ transform: "translateZ(20px)" }}>
-                                    <div className="project-img-container">
+                                    <div className="project-img-container" style={{ position: 'relative' }}>
                                         <img src={project.image} alt={project.title} loading="lazy" />
+                                        
+                                        {/* Hover Description Overlay */}
+                                        <motion.div
+                                            className="project-overlay"
+                                            initial={{ opacity: 0 }}
+                                            whileHover={{ opacity: 1 }}
+                                            transition={{ duration: 0.3 }}
+                                            style={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                width: '100%',
+                                                height: '100%',
+                                                background: 'rgba(10, 10, 20, 0.95)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                padding: '1.5rem',
+                                                textAlign: 'center',
+                                                backdropFilter: 'blur(4px)'
+                                            }}
+                                        >
+                                            <p style={{
+                                                color: '#fff',
+                                                fontSize: '0.95rem',
+                                                lineHeight: '1.6',
+                                                margin: 0,
+                                                fontWeight: '500',
+                                                fontFamily: 'Share Tech Mono, monospace'
+                                            }}>
+                                                {project.description}
+                                            </p>
+                                        </motion.div>
                                     </div>
                                     <div className="project-info">
                                         <h2>{project.title}</h2>
@@ -170,7 +209,7 @@ const Projects = () => {
                                         <div className="project-links">
                                             <a href={project.codeLink} className="btn-small btn-code" target="_blank" rel="noopener noreferrer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                                                Code
+                                                GitHub
                                             </a>
                                             {project.demoLink && (
                                                 <a href={project.demoLink} className="btn-small btn-demo" target="_blank" rel="noopener noreferrer">

@@ -179,7 +179,9 @@ const Footer = () => {
                         &copy; {new Date().getFullYear()} Rishab Chandgothia. All rights reserved.
                     </div>
                     <div style={{ display: 'flex', gap: '2rem' }}>
-                        <span>LOC: EARTH-[C-137]</span>
+                        <span className="location-easter-egg">
+                            STATUS: <span className="location-text">LOC: EARTH-[C-137]</span>
+                        </span>
                         <span>{time}</span>
                     </div>
                 </div>

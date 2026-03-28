@@ -60,12 +60,12 @@ const LoadingScreen = ({ onComplete }) => {
             setProgress(prev => {
                 if (prev >= 100) {
                     clearInterval(timer);
-                    setTimeout(onComplete, 500);
+                    setTimeout(onComplete, 300);
                     return 100;
                 }
-                return Math.min(prev + 1, 100);
+                return Math.min(prev + 2, 100);
             });
-        }, 20);
+        }, 15);
         return () => clearInterval(timer);
     }, [onComplete]);
 
