@@ -1,4 +1,4 @@
-const projects = [
+export const projects = [
     {
         title: "Chewy Clone",
         image: 'https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453383/046bccdc-2b29-426c-8e0e-81a629726634.png',
@@ -61,6 +61,15 @@ const projects = [
         description: "A cutting-edge AI-powered health assistant designed to help users monitor and manage their well-being with personalized recommendations.",
         codeLink: "https://github.com/rishab11250",
         demoLink: "https://cura-nu-six.vercel.app/"
+    },
+    {
+        title: "DataTime Machine",
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736236/beygag2tbfhqmbaz3wpj.png",
+        skills: ["MERN Stack", "Groq AI", "Custom Scheduler", "Tailwind CSS"],
+        category: "Hackathon",
+        description: "Engineered a full-stack monitoring system with AI-driven forecasting and real-time change detection. Features a 'Time Machine' historical scrubbing tool using a custom timeline slider and snapshots.",
+        codeLink: "https://github.com/rishab11250",
+        demoLink: "https://github.com/rishab11250"
     }
 ];
 

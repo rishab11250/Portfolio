@@ -3,6 +3,7 @@ import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import { motion } from 'framer-motion';
 import HoloGlobe from './HoloGlobe';
+import resumeFile from '../assets/Rishab Chandgothia - Resume.pdf';
 
 const Hero = () => {
     const [text, setText] = useState('');
@@ -125,7 +126,7 @@ const Hero = () => {
                     </button>
                     <a href="#contact" className="btn btn-primary">Get in Touch</a>
                     <a href="#projects" className="btn btn-secondary">View Projects</a>
-                    <a href="https://drive.google.com/file/d/12PhK9vRxknfhgrmZfkhSPgN45CSGGzpx/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-resume">
+                    <a href={resumeFile} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-resume">
                         Resume
                     </a>
                 </motion.div>

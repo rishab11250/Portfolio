@@ -44,6 +44,7 @@ const Navbar = ({ activeSection }) => {
           <AnimatedNavLink href="#tech-stack" isActive={activeSection === 'tech-stack'} onClick={handleLinkClick}>Tech Stack</AnimatedNavLink>
           <AnimatedNavLink href="#projects" isActive={activeSection === 'projects'} onClick={handleLinkClick}>Projects</AnimatedNavLink>
           <AnimatedNavLink href="#certificates" isActive={activeSection === 'certificates'} onClick={handleLinkClick}>Certificates</AnimatedNavLink>
+          <AnimatedNavLink href="#hackathons" isActive={activeSection === 'hackathons'} onClick={handleLinkClick}>Hackathons</AnimatedNavLink>
           <AnimatedNavLink href="#education" isActive={activeSection === 'education'} onClick={handleLinkClick}>Education</AnimatedNavLink>
           <AnimatedNavLink href="#contact" isActive={activeSection === 'contact'} onClick={handleLinkClick}>Contact</AnimatedNavLink>
         </ul>

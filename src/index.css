@@ -159,6 +159,25 @@ ul {
   animation: fadeIn 0.8s ease-out;
 }
 
+/* Glass Modal Scrollbar */
+.glass-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.glass-modal-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.glass-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.glass-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .page-section {
   text-align: center;
   padding: 8rem 0;
@@ -1463,58 +1482,127 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #000;
+  background-color: #000008;
   z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .hyper-ui {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  pointer-events: none;
+}
+
+.loader-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  pointer-events: none;
-  z-index: 10;
+  gap: 1.5rem;
 }
-
 
 .hyper-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  font-weight: 900;
   color: #fff;
-  letter-spacing: 5px;
-  position: relative;
-  margin-bottom: 2rem;
+  letter-spacing: 12px;
   text-transform: uppercase;
-  text-shadow: 0 0 10px #00f3ff;
+  text-shadow: 0 0 20px rgba(0, 243, 255, 0.8), 0 0 40px rgba(0, 243, 255, 0.4);
+  margin: 0;
+  text-align: center;
 }
 
-
-.hyper-bar-wrapper {
-  width: 300px;
-  height: 10px;
-  background: #111;
-  border: 1px solid #333;
-  margin-bottom: 1rem;
+.hyper-bar-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.hyper-bar {
+.hyper-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #00f3ff, #bd00ff);
-  box-shadow: 0 0 20px #00f3ff;
+  background: #00f3ff;
+  border-radius: 2px;
+  position: relative;
+  z-index: 2;
 }
 
-.hyper-status {
+.hyper-bar-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #00f3ff;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.status-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-percent {
   font-family: 'Share Tech Mono', monospace;
   color: #00f3ff;
-  font-size: 1.2rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.status-text {
+  font-family: 'Share Tech Mono', monospace;
+  color: rgba(0, 243, 255, 0.6);
+  font-size: 0.8rem;
+  letter-spacing: 4px;
   text-transform: uppercase;
 }
+
+.vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.scanline-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .hyper-title {
+    font-size: 1.5rem;
+    letter-spacing: 6px;
+  }
+  .status-percent {
+    font-size: 1.5rem;
+  }
+}
+
+
 
 .terminal-window {
   width: 100%;
@@ -1594,12 +1682,14 @@ body {
   background: linear-gradient(to bottom,
       rgba(255, 255, 255, 0),
       rgba(255, 255, 255, 0) 50%,
-      rgba(0, 0, 0, 0.1) 50%,
-      rgba(0, 0, 0, 0.1));
-  background-size: 100% 4px;
+      rgba(0, 0, 0, 0.05) 50%,
+      rgba(0, 0, 0, 0.05));
+  background-size: 100% 2px;
   pointer-events: none;
   z-index: 10000;
+  opacity: 0.2;
 }
+
 
 .app-container {
   overflow-x: hidden;

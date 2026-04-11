@@ -5,6 +5,7 @@ import Profile from './components/Profile';
 import TechStack from './components/TechStack';
 import Projects from './components/Projects';
 import Certificates from './components/Certificates';
+import Hackathons from './components/Hackathons';
 import EducationTimeline from './components/EducationTimeline';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -18,8 +19,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
-import { SpeedInsights } from '@vercel/speed-insights/react';
-import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +36,7 @@ function App() {
   // Update active section on scroll for navbar sync
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'tech-stack', 'projects', 'certificates', 'education', 'contact'];
+      const sections = ['home', 'about', 'tech-stack', 'projects', 'certificates', 'hackathons', 'education', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -72,7 +71,6 @@ function App() {
           },
         }}
       />
-      <SpeedInsights />
       <SciFiTerrain />
       {typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches && <Cursor />}
       <ScrollToTop />
@@ -93,6 +91,9 @@ function App() {
         <section id="certificates" data-aos="fade-up">
           <Certificates />
         </section>
+        <section id="hackathons" data-aos="fade-up">
+          <Hackathons />
+        </section>
         <section id="education" data-aos="fade-up">
           <EducationTimeline />
         </section>
@@ -101,7 +102,6 @@ function App() {
         </section>
         <Footer />
       </main>
-      <Analytics />
     </div>
   );
 }
