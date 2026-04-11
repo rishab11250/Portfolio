@@ -429,7 +429,8 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                             >
                                 <img
                                     src={images[slideIndex]}
-                                    alt={`Slide ${slideIndex}`}
+                                    alt={`${event.project.title} project screenshot ${slideIndex + 1}`}
+                                    loading="lazy"
                                     style={{ 
                                         width: '100%', 
                                         height: '100%', 

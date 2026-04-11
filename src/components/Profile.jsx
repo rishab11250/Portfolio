@@ -21,7 +21,7 @@ const Profile = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
                 >
-                    <img src="https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773478876/WhatsApp_Image_2026-03-07_at_9.25.25_AM_cswpuv.jpg" alt="Profile" className="profile-img-large" style={{ width: '300px', objectFit: 'cover', borderRadius: '25%' }} loading="lazy" />
+                    <img src="https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773478876/WhatsApp_Image_2026-03-07_at_9.25.25_AM_cswpuv.jpg" alt="Rishab Chandgothia - Full Stack Developer Profile Picture" className="profile-img-large" style={{ width: '300px', objectFit: 'cover', borderRadius: '25%' }} loading="lazy" />
                 </motion.div>
                 <div className="profile-text-section">
                     <motion.p
