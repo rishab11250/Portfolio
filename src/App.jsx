@@ -18,6 +18,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -70,6 +71,7 @@ function App() {
           },
         }}
       />
+      <SpeedInsights />
       <SciFiTerrain />
       {typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches && <Cursor />}
       <ScrollToTop />
