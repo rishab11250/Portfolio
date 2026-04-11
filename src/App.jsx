@@ -19,6 +19,7 @@ import 'aos/dist/aos.css';
 import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -100,6 +101,7 @@ function App() {
         </section>
         <Footer />
       </main>
+      <Analytics />
     </div>
   );
 }
