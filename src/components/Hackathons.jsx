@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from './Projects';
 import { certificates } from './Certificates';
 import TiltCard from './TiltCard';
+import { getSkillStyle } from '../utils/skills';
 
 const CardSlideshow = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -60,92 +61,71 @@ const CardSlideshow = ({ images }) => {
     );
 };
 
+const hackathonEvents = [
+    {
+        name: "Dev Heat",
+        organizer: "Unstop / IIIT Surat",
+        badge: "Finalist",
+        achievement: "Led a 3-member team to offline presentation finals at IIIT Surat",
+        projectTitle: "StudyFlow AI",
+        certTitle: "Dev Heat Hackathon"
+    },
+    {
+        name: "HackCrux 2026",
+        organizer: "LNMIIT Jaipur",
+        badge: "Round 2 Advanced",
+        achievement: "Spearheaded backend & web scraping in a 30-hour sprint",
+        projectTitle: "Cura",
+        certTitle: "HackCrux 2026"
+    },
+    {
+        name: "OceanLab x Charusat Hacks 2026",
+        organizer: "Charusat College",
+        badge: "Round 2 Advanced",
+        achievement: "Engineered AI-driven forecasting and real-time anomaly detection",
+        projectTitle: "DataTime Machine", 
+        certTitle: "TBD"     
+    }
+].map(event => {
+    const project = projects.find(p => p.title === event.projectTitle) || {
+        title: "Coming Soon",
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
+        description: "Details about the project developed during this hackathon will be updated soon.",
+        skills: ["Upcoming"],
+        codeLink: "#",
+        demoLink: "#"
+    };
+    const certificate = certificates.find(c => c.title === event.certTitle) || {
+        title: "Coming Soon",
+        image: "https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&q=80&w=800",
+        issuer: event.organizer
+    };
+
+    // Determine images for slideshow
+    let eventImages = [project.image];
+    if (event.name.includes("HackCrux")) {
+        eventImages = [
+            certificate.image,
+            project.image,
+            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775735052/pdy4wpflndsrw2a2fofj.png",
+            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775735053/vmx1jrkps0kpp2w6tj7z.png"
+        ];
+    } else if (event.name.includes("Charusat")) {
+        eventImages = [
+            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736236/beygag2tbfhqmbaz3wpj.png",
+            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736240/mbo57wfyemkejfqfegs7.png",
+            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736239/id0wq7b9i5mdqs8whf1w.png",
+            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736240/ei1crissgtgv4ttnrsrk.png"
+        ];
+    } else if (certificate.image && certificate.image !== project.image) {
+        eventImages = [project.image, certificate.image];
+    }
+
+    return { ...event, project, certificate, images: eventImages };
+});
+
 const Hackathons = () => {
     const [selectedHackathon, setSelectedHackathon] = useState(null);
-
-    const hackathonEvents = [
-        {
-            name: "Dev Heat",
-            organizer: "Unstop / IIIT Surat",
-            badge: "Finalist",
-            achievement: "Led a 3-member team to offline presentation finals at IIIT Surat",
-            projectTitle: "StudyFlow AI",
-            certTitle: "Dev Heat Hackathon"
-        },
-        {
-            name: "HackCrux 2026",
-            organizer: "LNMIIT Jaipur",
-            badge: "Round 2 Advanced",
-            achievement: "Spearheaded backend & web scraping in a 30-hour sprint",
-            projectTitle: "Cura",
-            certTitle: "HackCrux 2026"
-        },
-        {
-            name: "OceanLab x Charusat Hacks 2026",
-            organizer: "Charusat College",
-            badge: "Round 2 Advanced",
-            achievement: "Engineered AI-driven forecasting and real-time anomaly detection",
-            projectTitle: "DataTime Machine", 
-            certTitle: "TBD"     
-        }
-    ].map(event => {
-        const project = projects.find(p => p.title === event.projectTitle) || {
-            title: "Coming Soon",
-            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
-            description: "Details about the project developed during this hackathon will be updated soon.",
-            skills: ["Upcoming"],
-            codeLink: "#",
-            demoLink: "#"
-        };
-        const certificate = certificates.find(c => c.title === event.certTitle) || {
-            title: "Coming Soon",
-            image: "https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&q=80&w=800",
-            issuer: event.organizer
-        };
-
-        // Determine images for slideshow
-        let eventImages = [project.image];
-        if (event.name.includes("HackCrux")) {
-            eventImages = [
-                certificate.image,
-                project.image,
-                "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775735052/pdy4wpflndsrw2a2fofj.png",
-                "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775735053/vmx1jrkps0kpp2w6tj7z.png"
-            ];
-        } else if (event.name.includes("Charusat")) {
-            eventImages = [
-                "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736236/beygag2tbfhqmbaz3wpj.png",
-                "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736240/mbo57wfyemkejfqfegs7.png",
-                "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736239/id0wq7b9i5mdqs8whf1w.png",
-                "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736240/ei1crissgtgv4ttnrsrk.png"
-            ];
-        } else if (certificate.image && certificate.image !== project.image) {
-            eventImages = [project.image, certificate.image];
-        }
-
-        return { ...event, project, certificate, images: eventImages };
-    });
-
-    const getSkillStyle = (skill) => {
-        const colors = {
-            "HTML": { bg: "rgba(227, 79, 38, 0.15)", text: "#E34F26", border: "#E34F26" },
-            "CSS": { bg: "rgba(21, 114, 182, 0.15)", text: "#1572B6", border: "#1572B6" },
-            "JavaScript": { bg: "rgba(247, 223, 30, 0.15)", text: "#F7DF1E", border: "#F7DF1E" },
-            "React": { bg: "rgba(97, 218, 251, 0.15)", text: "#61DAFB", border: "#61DAFB" },
-            "Node.js": { bg: "rgba(51, 153, 51, 0.15)", text: "#339933", border: "#339933" },
-            "MongoDB": { bg: "rgba(71, 162, 72, 0.15)", text: "#47A248", border: "#47A248" },
-            "Tailwind CSS": { bg: "rgba(56, 189, 248, 0.15)", text: "#38BDF8", border: "#38BDF8" },
-            "MERN Stack": { bg: "rgba(99, 102, 241, 0.15)", text: "#6366F1", border: "#6366F1" },
-            "Gemini AI": { bg: "rgba(66, 133, 244, 0.15)", text: "#4285F4", border: "#4285F4" },
-            "AI": { bg: "rgba(100, 100, 255, 0.15)", text: "#6464FF", border: "#6464FF" }
-        };
-        const style = colors[skill] || { bg: "rgba(114, 92, 173, 0.15)", text: "#dcd6f7", border: "rgba(114, 92, 173, 0.3)" };
-        return {
-            backgroundColor: style.bg,
-            color: style.text,
-            border: `1px solid ${style.border}`,
-        };
-    };
 
     return (
         <section className="page-section hackathons" id="hackathons" style={{ padding: '80px 2rem' }}>
@@ -177,7 +157,7 @@ const Hackathons = () => {
                     >
                         <TiltCard className="hackathon-card-tilt">
                             <div className="hackathon-card" style={{
-                                background: 'rgba(15, 15, 25, 0.4)',
+                                background: 'var(--card-bg)',
                                 border: '1px solid var(--glass-border)',
                                 borderRadius: '24px',
                                 cursor: 'pointer',
@@ -202,7 +182,7 @@ const Hackathons = () => {
                                     <div style={{
                                         position: 'absolute',
                                         inset: 0,
-                                        background: 'linear-gradient(to bottom, transparent 0%, rgba(15, 15, 25, 0.6) 100%)',
+                                        background: 'linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%)',
                                         pointerEvents: 'none'
                                     }} />
                                     
@@ -212,13 +192,13 @@ const Hackathons = () => {
                                         top: '0',
                                         right: '1.5rem',
                                         padding: '0.4rem 0.8rem',
-                                        background: 'rgba(97, 218, 251, 0.15)',
-                                        border: '1px solid rgba(97, 218, 251, 0.3)',
+                                        background: 'rgba(140, 205, 235, 0.15)',
+                                        border: '1px solid rgba(140, 205, 235, 0.3)',
                                         borderTop: 'none',
                                         borderRadius: '0 0 10px 10px',
                                         fontSize: '0.6rem',
                                         fontWeight: '800',
-                                        color: '#61DAFB',
+                                        color: 'var(--primary-color)',
                                         letterSpacing: '1px',
                                         textTransform: 'uppercase',
                                         fontFamily: 'Share Tech Mono, monospace',
@@ -234,8 +214,11 @@ const Hackathons = () => {
                                     <h3 style={{ 
                                         fontSize: '1.4rem', 
                                         marginBottom: '0.5rem', 
-                                        color: '#fff',
-                                        fontWeight: '800'
+                                        color: 'var(--text-color)',
+                                        fontWeight: '800',
+                                        minHeight: '2.1em',
+                                        display: 'flex',
+                                        alignItems: 'center'
                                     }}>
                                         {event.name}
                                     </h3>
@@ -247,7 +230,7 @@ const Hackathons = () => {
                                         marginBottom: '1rem'
                                     }}>
                                         <p style={{ 
-                                            color: '#61DAFB', 
+                                            color: 'var(--primary-color)', 
                                             fontWeight: '600', 
                                             fontSize: '0.85rem',
                                             fontFamily: 'Share Tech Mono, monospace',
@@ -258,7 +241,8 @@ const Hackathons = () => {
                                     </div>
 
                                     <p style={{ 
-                                        color: 'rgba(255, 255, 255, 0.6)', 
+                                        color: 'var(--text-color)', 
+                                        opacity: 0.6,
                                         fontSize: '0.9rem', 
                                         lineHeight: '1.5',
                                         flexGrow: 1,
@@ -273,7 +257,7 @@ const Hackathons = () => {
                                             display: 'flex', 
                                             alignItems: 'center', 
                                             gap: '0.5rem', 
-                                            color: '#fff', 
+                                            color: 'var(--text-color)', 
                                             fontSize: '0.8rem', 
                                             fontWeight: '700',
                                             textTransform: 'uppercase',
@@ -352,7 +336,7 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                 left: 0,
                 width: '100%',
                 height: '100%',
-                background: 'rgba(0, 0, 0, 0.8)',
+                background: 'rgba(var(--bg-rgb, 0, 0, 0), 0.8)',
                 backdropFilter: 'blur(12px)',
                 display: 'flex',
                 alignItems: 'center',
@@ -368,8 +352,8 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                 onClick={(e) => e.stopPropagation()}
                 className="glass-modal-content"
                 style={{
-                    background: 'rgba(15, 15, 25, 0.85)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: 'var(--card-bg)',
+                    border: '1px solid var(--glass-border)',
                     backdropFilter: 'blur(20px)',
                     borderRadius: '28px',
                     maxWidth: '1100px',
@@ -399,7 +383,7 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         cursor: 'pointer',
-                        color: '#fff',
+                        color: 'var(--text-color)',
                         zIndex: 40,
                         backdropFilter: 'blur(4px)'
                     }}
@@ -420,9 +404,9 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                         height: window.innerWidth < 950 ? '350px' : 'auto',
                         minHeight: '450px',
                         overflow: 'hidden', 
-                        borderRight: window.innerWidth < 950 ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
-                        borderBottom: window.innerWidth < 950 ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
-                        background: '#000',
+                        borderRight: window.innerWidth < 950 ? 'none' : '1px solid var(--glass-border)',
+                        borderBottom: window.innerWidth < 950 ? '1px solid var(--glass-border)' : 'none',
+                        background: 'var(--card-bg)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center'
@@ -464,9 +448,9 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                             style={{
                                 position: 'absolute',
                                 left: '1rem',
-                                background: 'rgba(0, 0, 0, 0.5)',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                color: '#fff',
+                                background: 'var(--card-bg)',
+                                border: '1px solid var(--glass-border)',
+                                color: 'var(--text-color)',
                                 width: '40px',
                                 height: '40px',
                                 borderRadius: '50%',
@@ -488,9 +472,9 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                             style={{
                                 position: 'absolute',
                                 right: '1rem',
-                                background: 'rgba(0, 0, 0, 0.5)',
-                                border: '1px solid rgba(255, 255, 255, 0.1)',
-                                color: '#fff',
+                                background: 'var(--card-bg)',
+                                border: '1px solid var(--glass-border)',
+                                color: 'var(--text-color)',
                                 width: '40px',
                                 height: '40px',
                                 borderRadius: '50%',
@@ -516,7 +500,7 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                                         width: slideIndex === i ? '20px' : '8px',
                                         height: '8px',
                                         borderRadius: '10px',
-                                        background: slideIndex === i ? '#61DAFB' : 'rgba(255, 255, 255, 0.3)',
+                                        background: slideIndex === i ? 'var(--primary-color)' : 'var(--glass-border)',
                                         cursor: 'pointer',
                                         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
                                     }}
@@ -537,13 +521,13 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                     }} className="glass-modal-content">
                         <div style={{ marginBottom: '1.5rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                                <h2 style={{ fontSize: '1.8rem', color: '#fff', margin: 0, lineHeight: 1.2 }}>{event.name}</h2>
+                                <h2 style={{ fontSize: '1.8rem', color: 'var(--text-color)', margin: 0, lineHeight: 1.2 }}>{event.name}</h2>
                                 <span style={{ 
                                     padding: '0.3rem 0.8rem', 
                                     background: 'rgba(97, 218, 251, 0.1)', 
                                     border: '1px solid rgba(97, 218, 251, 0.3)',
                                     borderRadius: '30px',
-                                    color: '#61DAFB',
+                                    color: 'var(--primary-color)',
                                     fontSize: '0.7rem',
                                     fontWeight: '700',
                                     whiteSpace: 'nowrap'
@@ -553,21 +537,21 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                             </div>
                             <p style={{ 
                                 fontFamily: 'Share Tech Mono, monospace', 
-                                color: '#61DAFB', 
+                                color: 'var(--primary-color)', 
                                 fontSize: '1rem',
                                 marginBottom: '0.5rem',
                                 opacity: 0.9
                             }}>
                                 {event.organizer}
                             </p>
-                            <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.9rem', fontStyle: 'italic' }}>
+                            <p style={{ color: 'var(--text-color)', opacity: 0.7, fontSize: '0.9rem', fontStyle: 'italic' }}>
                                 {event.achievement}
                             </p>
                         </div>
 
                         <div style={{ marginBottom: '1.5rem' }}>
-                            <h4 style={{ color: 'rgba(255, 255, 255, 0.4)', textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '2px', marginBottom: '0.75rem' }}>PROJECT: {event.project.title}</h4>
-                            <p style={{ color: 'rgba(255, 255, 255, 0.8)', lineHeight: '1.6', fontSize: '0.9rem', marginBottom: '1.25rem' }}>{event.project.description}</p>
+                            <h4 style={{ color: 'var(--text-color)', opacity: 0.4, textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '2px', marginBottom: '0.75rem' }}>PROJECT: {event.project.title}</h4>
+                            <p style={{ color: 'var(--text-color)', opacity: 0.8, lineHeight: '1.6', fontSize: '0.9rem', marginBottom: '1.25rem' }}>{event.project.description}</p>
                             
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
                                 {event.project.skills.map((skill, i) => (
@@ -595,10 +579,10 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                                 style={{
                                     flex: 1,
                                     padding: '0.8rem',
-                                    background: 'rgba(255, 255, 255, 0.05)',
-                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    background: 'var(--card-bg)',
+                                    border: '1px solid var(--glass-border)',
                                     borderRadius: '10px',
-                                    color: '#fff',
+                                    color: 'var(--text-color)',
                                     textDecoration: 'none',
                                     textAlign: 'center',
                                     fontWeight: '700',

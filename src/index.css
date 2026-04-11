@@ -180,7 +180,7 @@ ul {
 
 .page-section {
   text-align: center;
-  padding: 8rem 0;
+  padding: 6rem 0;
 }
 
 /* Page Section Headings - Solid Color */
@@ -197,11 +197,10 @@ ul {
 .page-section h1::after {
   content: '';
   display: block;
-  width: 60%;
+  width: 60px;
   height: 4px;
   background: var(--primary-color);
-  /* Solid Underline */
-  margin: 0.5rem auto 0;
+  margin: 0.75rem auto 0;
   border-radius: 2px;
 }
 
@@ -558,8 +557,7 @@ html[data-theme="light"] .footer-unique a {
 
 html[data-theme="light"] .social-links a svg,
 html[data-theme="light"] .footer-unique a svg {
-  stroke: #000 !important;
-  fill: #000 !important;
+  stroke: var(--text-color) !important;
 }
 
 /* Profile / About Section */
@@ -603,6 +601,10 @@ html[data-theme="light"] .footer-unique a svg {
 
 .profile-text-section p {
   margin-bottom: 2rem;
+  color: var(--text-color);
+  opacity: 0.85;
+  line-height: 1.8;
+  font-size: 1.05rem;
 }
 
 /* About Cards Grid */
@@ -756,10 +758,9 @@ html[data-theme="light"] .footer-unique a svg {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 1.25rem;
+  margin-top: 1rem;
   min-height: 200px;
-  /* Prevent layout shift */
 }
 
 .tech-item-img {
@@ -789,7 +790,7 @@ html[data-theme="light"] .footer-unique a svg {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2.5rem;
-  margin-top: 3rem;
+  margin-top: 1.5rem;
   padding: 0 1rem;
 }
 
@@ -905,7 +906,8 @@ html[data-theme="light"] .footer-unique a svg {
 .filter-btn:hover,
 .filter-btn.active {
   background: var(--primary-color);
-  color: #fff;
+  color: #0b1d51;
+  font-weight: 700;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(140, 205, 235, 0.4);
 }

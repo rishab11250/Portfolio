@@ -20,6 +20,8 @@ const techData = [
     { name: 'Vercel', category: ['Tools'], img: 'https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white' },
 ];
 
+const categories = ['All', 'Language', 'Frontend', 'Backend', 'Database', 'Framework', 'Tools'];
+
 const TechStack = () => {
     const [filter, setFilter] = useState('All');
 
@@ -27,7 +29,6 @@ const TechStack = () => {
         ? techData
         : techData.filter(tech => tech.category.includes(filter));
 
-    const categories = ['All', 'Language', 'Frontend', 'Backend', 'Database', 'Framework', 'Tools'];
     const availableCategories = categories.filter(cat => 
         cat === 'All' || techData.some(tech => tech.category.includes(cat))
     );

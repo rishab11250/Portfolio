@@ -96,11 +96,11 @@ export const certificates = [
     }
 ];
 
+const categories = ["All", "Hackathons", "Courses"];
+
 const Certificates = () => {
     const [showAll, setShowAll] = useState(false);
     const [filter, setFilter] = useState("All");
-
-    const categories = ["All", "Hackathons", "Courses"];
 
     const containerVariants = {
         hidden: { opacity: 0 },

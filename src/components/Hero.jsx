@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 import HoloGlobe from './HoloGlobe';
 import resumeFile from '../assets/Rishab Chandgothia - Resume.pdf';
 
+const roles = ["Full Stack Developer", "Web Developer", "UI/UX Developer"];
+
 const Hero = () => {
     const [text, setText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
     const [typingSpeed, setTypingSpeed] = useState(150);
-
-    const roles = ["Full Stack Developer", "Web Developer", "UI/UX Developer"];
 
     useEffect(() => {
         const handleType = () => {

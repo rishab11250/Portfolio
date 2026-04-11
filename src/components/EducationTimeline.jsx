@@ -2,8 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import TiltCard from './TiltCard';
 
-const EducationTimeline = () => {
-    const timelineData = [
+const timelineData = [
         {
             date: "2025 - Present",
             title: "Bachelor's",
@@ -25,6 +24,7 @@ const EducationTimeline = () => {
         }
     ];
 
+const EducationTimeline = () => {
     return (
         <section className="page-section" id="education" style={{ paddingTop: '4rem', paddingBottom: '4rem' }}>
             <motion.h1
@@ -125,7 +125,7 @@ const EducationTimeline = () => {
                                 >
                                     <TiltCard>
                                         <div className="timeline-card-content" style={{
-                                            background: 'rgba(255, 255, 255, 0.03)',
+                                            background: 'var(--card-bg)',
                                             borderRadius: '20px',
                                             border: '1px solid var(--glass-border)',
                                             textAlign: 'left',
@@ -193,7 +193,7 @@ const EducationTimeline = () => {
                                 >
                                     <TiltCard>
                                         <div className="timeline-card-content" style={{
-                                            background: 'rgba(255, 255, 255, 0.03)',
+                                            background: 'var(--card-bg)',
                                             borderRadius: '20px',
                                             border: '1px solid var(--glass-border)',
                                             textAlign: 'left',
