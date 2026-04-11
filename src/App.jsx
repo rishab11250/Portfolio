@@ -16,6 +16,8 @@ import ScrollToTop from './components/ScrollToTop';
 import LoadingScreen from './components/LoadingScreen';
 import Cursor from './components/Cursor';
 import AOS from 'aos';
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import 'aos/dist/aos.css';
 import { Toaster } from 'react-hot-toast';
 import { motion } from 'framer-motion';
@@ -102,6 +104,8 @@ function App() {
         </section>
         <Footer />
       </main>
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
