@@ -65,11 +65,11 @@ export const projects = [
     {
         title: "DataTime Machine",
         image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736236/beygag2tbfhqmbaz3wpj.png",
-        skills: ["MERN Stack", "Groq AI", "Custom Scheduler", "Tailwind CSS"],
+        skills: ["MERN Stack", "Groq AI", "CRON Jobs", "Tailwind CSS"],
         category: "Hackathon",
         description: "Engineered a full-stack monitoring system with AI-driven forecasting and real-time change detection. Features a 'Time Machine' historical scrubbing tool using a custom timeline slider and snapshots.",
-        codeLink: "https://github.com/rishab11250",
-        demoLink: "https://github.com/rishab11250"
+        codeLink: "https://github.com/rishab11250/PixelPwnz",
+        demoLink: "https://pixel-pwnz.vercel.app/"
     }
 ];
 
