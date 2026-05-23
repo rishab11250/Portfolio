@@ -112,7 +112,7 @@ const contactMethods = [
                     </p>
                 </motion.div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginBottom: '4rem' }}>
+                <div className="contact-cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem', marginBottom: '4rem' }}>
                     {contactMethods.map((method, index) => {
                         const isCopyable = method.label === 'Email' || method.label === 'Phone';
                         const CardComponent = isCopyable ? 'div' : motion.a;
@@ -147,7 +147,7 @@ const contactMethods = [
                                     }}
                                 >
                                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
-                                        <motion.div
+                                        <motion.div className="contact-icon-box"
                                             whileHover={{ rotate: 360, scale: 1.1 }}
                                             transition={{ duration: 0.6 }}
                                             style={{

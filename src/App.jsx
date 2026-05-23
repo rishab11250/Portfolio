@@ -35,26 +35,24 @@ function App() {
     });
   }, []);
 
-  // Update active section on scroll for navbar sync
+  // Update active section on scroll for navbar sync (IntersectionObserver — no forced reflow)
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'tech-stack', 'projects', 'certificates', 'hackathons', 'education', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+    const sections = ['home', 'about', 'tech-stack', 'projects', 'certificates', 'hackathons', 'education', 'contact'];
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const height = element.offsetHeight;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
-            setActiveSection(section);
-          }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
         }
-      }
-    };
+      });
+    }, { rootMargin: '-100px 0px -50% 0px' });
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   if (isLoading) {

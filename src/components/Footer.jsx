@@ -48,7 +48,7 @@ const Footer = () => {
             <div className="footer-content" style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto' }}>
 
                 {/* Main 3-Column Grid */}
-                <div style={{
+                <div className="footer-grid" style={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr 1fr',
                     gap: '3rem',
@@ -163,7 +163,7 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar: Copyright & Info */}
-                <div style={{
+                <div className="footer-bottom-bar" style={{
                     borderTop: '1px solid rgba(255,255,255,0.1)',
                     paddingTop: '2rem',
                     display: 'flex',

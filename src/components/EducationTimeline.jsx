@@ -161,7 +161,7 @@ const EducationTimeline = () => {
                         </div>
 
                         {/* Center Icon */}
-                        <div style={{
+                        <div className="timeline-icon" style={{
                             position: 'absolute',
                             left: '50%',
                             top: '50%',
