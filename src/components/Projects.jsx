@@ -12,9 +12,9 @@ const Projects = () => {
     const filteredProjects = filter === "All"
         ? projects
         : projects.filter(p => {
-            if (filter === "Full Stack") return p.category === "Full Stack" || p.skills.includes("MERN Stack") || p.skills.includes("Node.js");
+            if (filter === "Full Stack") return p.category === "Full Stack" || p.skills.includes("Node.js");
             if (filter === "Frontend") return p.category === "Frontend" || p.skills.includes("HTML") || p.skills.includes("React")|| p.skills.includes("CSS");
-            if (filter === "AI") return p.category === "AI" || p.skills.includes("AI Studio") || p.skills.includes("AI") || p.skills.includes("Gemini AI");
+            if (filter === "AI") return p.category === "AI" || p.skills.includes("AI");
             if (filter === "Hackathon") return p.category === "Hackathon";
             return p.category === filter;
         });

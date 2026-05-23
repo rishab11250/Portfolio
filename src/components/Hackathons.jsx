@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { projects, certificates } from '../data';
+import { hackathons as hackathonData } from '../data';
 import TiltCard from './TiltCard';
 import { getSkillStyle } from '../utils/skills';
 
@@ -60,76 +60,6 @@ const CardSlideshow = ({ images }) => {
     );
 };
 
-const hackathonEvents = [
-    {
-        name: "Dev Heat",
-        organizer: "Unstop / IIIT Surat",
-        badge: "Finalist",
-        achievement: "Led a 3-member team to offline presentation finals at IIIT Surat",
-        projectTitle: "StudyFlow AI",
-        certTitle: "Dev Heat Hackathon"
-    },
-    {
-        name: "HackCrux 2026",
-        organizer: "LNMIIT Jaipur",
-        badge: "Round 2 Advanced",
-        achievement: "Spearheaded backend & web scraping in a 30-hour sprint",
-        projectTitle: "Cura",
-        certTitle: "HackCrux 2026"
-    },
-    {
-        name: "OceanLab x Charusat Hacks 2026",
-        organizer: "Charusat College",
-        badge: "Round 2 Advanced",
-        achievement: "Engineered AI-driven forecasting and real-time anomaly detection",
-        projectTitle: "DataTime Machine", 
-        certTitle: "TBD"     
-    }
-].map(event => {
-    const project = projects.find(p => p.title === event.projectTitle) || {
-        title: "Coming Soon",
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800",
-        description: "Details about the project developed during this hackathon will be updated soon.",
-        skills: ["Upcoming"],
-        codeLink: "#",
-        demoLink: "#"
-    };
-    const certificate = certificates.find(c => c.title === event.certTitle) || {
-        title: "Coming Soon",
-        image: "https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&q=80&w=800",
-        issuer: event.organizer
-    };
-
-    // Determine images for slideshow
-    let eventImages = [project.image];
-    if (event.name === "Dev Heat") {
-        eventImages = [
-            project.image,
-            certificate.image,
-            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779564140/1Y6A0934_bavemu.jpg",
-            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779564353/qbitCoders_mx7wm3.jpg"
-        ];
-    } else if (event.name.includes("HackCrux")) {
-        eventImages = [
-            certificate.image,
-            project.image,
-            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775735052/pdy4wpflndsrw2a2fofj.png",
-            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775735053/vmx1jrkps0kpp2w6tj7z.png"
-        ];
-    } else if (event.name.includes("Charusat")) {
-        eventImages = [
-            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736236/beygag2tbfhqmbaz3wpj.png",
-            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736240/mbo57wfyemkejfqfegs7.png",
-            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736239/id0wq7b9i5mdqs8whf1w.png",
-            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736240/ei1crissgtgv4ttnrsrk.png"
-        ];
-    } else if (certificate.image && certificate.image !== project.image) {
-        eventImages = [project.image, certificate.image];
-    }
-
-    return { ...event, project, certificate, images: eventImages };
-});
-
 const Hackathons = () => {
     const [selectedHackathon, setSelectedHackathon] = useState(null);
 
@@ -152,7 +82,7 @@ const Hackathons = () => {
                 maxWidth: '1200px',
                 margin: '0 auto'
             }}>
-                {hackathonEvents.map((event, index) => (
+                {hackathonData.map((event, index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -435,7 +365,7 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                             >
                                 <img
                                     src={images[slideIndex]}
-                                    alt={`${event.project.title} project screenshot ${slideIndex + 1}`}
+                                    alt={`${event.name} screenshot ${slideIndex + 1}`}
                                     loading="lazy"
                                     style={{ 
                                         width: '100%', 
@@ -557,11 +487,11 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                         </div>
 
                         <div style={{ marginBottom: '1.5rem' }}>
-                            <h4 style={{ color: 'var(--text-color)', opacity: 0.4, textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '2px', marginBottom: '0.75rem' }}>PROJECT: {event.project.title}</h4>
-                            <p style={{ color: 'var(--text-color)', opacity: 0.8, lineHeight: '1.6', fontSize: '0.9rem', marginBottom: '1.25rem' }}>{event.project.description}</p>
+                            <h4 style={{ color: 'var(--text-color)', opacity: 0.4, textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '2px', marginBottom: '0.75rem' }}>PROJECT DETAILS</h4>
+                            <p style={{ color: 'var(--text-color)', opacity: 0.8, lineHeight: '1.6', fontSize: '0.9rem', marginBottom: '1.25rem' }}>{event.description}</p>
                             
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
-                                {event.project.skills.map((skill, i) => (
+                                {event.skills.map((skill, i) => (
                                     <span key={i} style={{ 
                                         ...getSkillStyle(skill), 
                                         padding: '0.35rem 0.8rem', 
@@ -580,7 +510,7 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                             <motion.a 
                                 whileHover={{ background: 'rgba(255, 255, 255, 0.15)', scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                href={event.project.codeLink} 
+                                href={event.codeLink} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 style={{
@@ -603,11 +533,11 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                                 GitHub
                             </motion.a>
-                            {event.project.demoLink && (
+                            {event.demoLink && (
                                 <motion.a 
                                     whileHover={{ scale: 1.02, boxShadow: '0 10px 25px rgba(97, 218, 251, 0.4)' }}
                                     whileTap={{ scale: 0.98 }}
-                                    href={event.project.demoLink} 
+                                    href={event.demoLink} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     style={{
