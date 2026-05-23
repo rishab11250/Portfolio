@@ -67,10 +67,10 @@ const contactMethods = [
         setErrorMessage('');
 
         emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-            .then((result) => {
+            .then(() => {
                 setStatus('success');
                 setFormData({ name: '', email: '', message: '' });
-            }, (error) => {
+            }, () => {
                 setStatus('error');
                 setErrorMessage('Failed to send message. Please try again or email me directly.');
             });

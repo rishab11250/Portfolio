@@ -1,82 +1,8 @@
-export const projects = [
-    {
-        title: "Chewy Clone",
-        image: 'https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453383/046bccdc-2b29-426c-8e0e-81a629726634.png',
-        skills: ["HTML", "CSS"],
-        category: "Frontend",
-        description: "A high-fidelity frontend clone of the Chewy e-commerce platform, focusing on pixel-perfect responsive design and complex CSS layouts.",
-        codeLink: "https://github.com/rishab11250/chewy-clone",
-        demoLink: "https://chewy-rishab.netlify.app/"
-    },
-    {
-        title: "LoadShare Clone",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453402/loadshare_wex7g0.png",
-        skills: ["HTML", "CSS"],
-        category: "Frontend",
-        description: "A functional landing page clone of LoadShare, showcasing modern UI components and fluid navigation transitions using vanilla web technologies.",
-        codeLink: "https://github.com/rishab11250/loadshare-clone",
-        demoLink: "https://loadshare-rishab.netlify.app/"
-    },
-    {
-        title: "LiveCoinWatch Clone",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453397/livecoinwatch_opaip4.png",
-        skills: ["HTML", "CSS"],
-        category: "Frontend",
-        description: "An interactive cryptocurrency tracking dashboard that mimics LiveCoinWatch, featuring real-time-like data visualization and sleek dark mode UI.",
-        codeLink: "https://github.com/rishab11250/livecoinwatch-clone",
-        demoLink: "https://livecoinwatch-rishab.netlify.app/"
-    },
-    {
-        title: "Master Quiz",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1770453394/cssquiz_fcpmfd.png",
-        skills: ["React", "AI Studio", "Framer Motion"],
-        category: "AI",
-        description: "An AI-powered quiz application that generates dynamic questions about CSS, featuring smooth animations and real-time score tracking.",
-        codeLink: "https://github.com/rishab11250/css-quiz",
-        demoLink: "https://cssquizrishab.netlify.app/"
-    },
-    {
-        title: "StudyFlow AI",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773835083/Screenshot_2026-03-18_172743_sea9ak.png",
-        skills: ["React", "Gemini AI", "Three.js", "Zustand"],
-        category: "Hackathon",
-        description: "A comprehensive learning platform combining Gemini AI with real-time analytics to help students optimize study habits and manage tasks.",
-        codeLink: "https://github.com/rishab11250/qBit-Coders",
-        demoLink: "https://studyflow-neon.vercel.app/"
-    },
-    {
-        title: "AadhaarPulse",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1774686811/6831c009-d80c-4e08-a996-c3a47695e0aa.png",
-        skills: ["MERN Stack", "Recharts", "Tailwind CSS"],
-        category: "Hackathon",
-        description: "A data-driven monitoring system for Aadhaar metrics, providing deep insights through interactive charts and secure authentication.",
-        codeLink: "https://github.com/rishab11250/UDAI",
-        demoLink: "https://udai-n6dk.onrender.com/"
-    },
-    {
-        title: "Cura",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1774686272/Screenshot_2026-03-28_135327_vy2dz6.png",
-        skills: ["MERN Stack", "AI", "Python", "Tailwind CSS"],
-        category: "Hackathon",
-        description: "A cutting-edge AI-powered health assistant designed to help users monitor and manage their well-being with personalized recommendations.",
-        codeLink: "https://github.com/rishab11250",
-        demoLink: "https://cura-nu-six.vercel.app/"
-    },
-    {
-        title: "DataTime Machine",
-        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1775736236/beygag2tbfhqmbaz3wpj.png",
-        skills: ["MERN Stack", "Groq AI", "CRON Jobs", "Tailwind CSS"],
-        category: "Hackathon",
-        description: "Engineered a full-stack monitoring system with AI-driven forecasting and real-time change detection. Features a 'Time Machine' historical scrubbing tool using a custom timeline slider and snapshots.",
-        codeLink: "https://github.com/rishab11250/PixelPwnz",
-        demoLink: "https://pixel-pwnz.vercel.app/"
-    }
-];
-
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TiltCard from './TiltCard';
 import { getSkillStyle } from '../utils/skills';
+import { projects } from '../data';
 
 const categories = ["All", "Full Stack", "Frontend", "AI", "Hackathon"];
 

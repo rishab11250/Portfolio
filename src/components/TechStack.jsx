@@ -92,7 +92,7 @@ const TechStack = () => {
                 viewport={{ once: true }}
                 key={filter} // Re-animate when filter changes
             >
-                {filteredTech.map((tech, index) => (
+                {filteredTech.map((tech) => (
                     <motion.li
                         key={tech.name}
                         className="tech-item-img"

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import { motion } from 'framer-motion';
-import HoloGlobe from './HoloGlobe';
 import resumeFile from '../assets/Rishab Chandgothia - Resume.pdf';
+
+const HoloGlobe = lazy(() => import('./HoloGlobe'));
 
 const roles = ["Full Stack Developer", "Web Developer", "UI/UX Developer"];
 
@@ -35,7 +36,7 @@ const Hero = () => {
 
         const timer = setTimeout(handleType, typingSpeed);
         return () => clearTimeout(timer);
-    }, [text, isDeleting, loopNum, typingSpeed, roles]);
+    }, [text, isDeleting, loopNum, typingSpeed]);
 
     const startTour = () => {
         const driverObj = driver({
@@ -56,7 +57,9 @@ const Hero = () => {
         <section className="page-section hero" id="home">
             <div className="hero-shapes">
                 {/* Replaced Static Icons with 3D Holo */}
-                <HoloGlobe />
+                <Suspense fallback={null}>
+                    <HoloGlobe />
+                </Suspense>
             </div>
 
             <div className="hero-content" style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1 }}>

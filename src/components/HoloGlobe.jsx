@@ -3,17 +3,28 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Sphere, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
+// Seeded random for deterministic particle positions (pure function)
+function seededRandom(seed) {
+    let s = seed % 2147483647;
+    if (s <= 0) s += 2147483646;
+    return () => {
+        s = (s * 16807) % 2147483647;
+        return (s - 1) / 2147483646;
+    };
+}
+
 const ParticleRing = ({ count, radius, color, speed, opacity, size }) => {
     const points = useRef();
 
     const particles = useMemo(() => {
+        const rand = seededRandom(count + radius * 1000);
         const temp = new Float32Array(count * 3);
         for (let i = 0; i < count; i++) {
-            const angle = Math.random() * Math.PI * 2;
-            const r = radius + (Math.random() - 0.5) * 1.5;
+            const angle = rand() * Math.PI * 2;
+            const r = radius + (rand() - 0.5) * 1.5;
             const x = Math.cos(angle) * r;
             const y = Math.sin(angle) * r;
-            const z = (Math.random() - 0.5) * 0.2;
+            const z = (rand() - 0.5) * 0.2;
 
             temp[i * 3] = x;
             temp[i * 3 + 1] = y;
@@ -64,19 +75,15 @@ const EventHorizon = ({ isLight }) => {
 };
 
 const HoloGlobe = () => {
-    const [theme, setTheme] = useState('dark');
-    const [isLowPerf, setIsLowPerf] = useState(false);
-
-    useEffect(() => {
-        const checkPerformance = () => {
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            const isLowMemory = navigator.deviceMemory && navigator.deviceMemory < 4;
-            const isSlowConnection = navigator.connection?.effectiveType === '2g' || navigator.connection?.effectiveType === 'slow-2g';
-            
-            setIsLowPerf(isMobile || isLowMemory || isSlowConnection);
-        };
-        checkPerformance();
-    }, []);
+    const [theme, setTheme] = useState(() =>
+        document.documentElement.getAttribute('data-theme') || 'dark'
+    );
+    const [isLowPerf] = useState(() => {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isLowMemory = navigator.deviceMemory && navigator.deviceMemory < 4;
+        const isSlowConnection = navigator.connection?.effectiveType === '2g' || navigator.connection?.effectiveType === 'slow-2g';
+        return isMobile || isLowMemory || isSlowConnection;
+    });
 
     useEffect(() => {
         const observer = new MutationObserver((mutations) => {
@@ -88,7 +95,6 @@ const HoloGlobe = () => {
         });
 
         observer.observe(document.documentElement, { attributes: true });
-        setTheme(document.documentElement.getAttribute('data-theme') || 'dark');
         return () => observer.disconnect();
     }, []);
 

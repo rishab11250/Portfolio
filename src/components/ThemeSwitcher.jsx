@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const ThemeSwitcher = () => {
-    const [theme, setTheme] = useState('dark');
-
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
-        setTheme(savedTheme);
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    }, []);
+    const [theme, setTheme] = useState(() => {
+        const saved = localStorage.getItem('portfolio-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', saved);
+        return saved;
+    });
 
     const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('portfolio-theme', newTheme);
+        setTheme(newTheme);
     };
 
     return (

@@ -4,8 +4,7 @@ import * as THREE from 'three';
 
 const Terrain = () => {
     const meshRef = useRef();
-    // Animate the terrain to simulate flight
-    useFrame((state) => {
+    useFrame(() => {
         if (meshRef.current) {
             // Placeholder for potential terrain animation if needed future
         }
@@ -27,7 +26,7 @@ const Terrain = () => {
 // More robust "Vaporwave" style grid
 const MovingGrid = ({ isDarkMode }) => {
     const gridRef = useRef();
-    useFrame((state, delta) => {
+    useFrame((state) => {
         if (gridRef.current) {
             // Move grid towards camera
             gridRef.current.position.z = (state.clock.elapsedTime * 10) % 10;

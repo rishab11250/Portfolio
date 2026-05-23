@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { projects } from './Projects';
-import { certificates } from './Certificates';
+import { projects, certificates } from '../data';
 import TiltCard from './TiltCard';
 import { getSkillStyle } from '../utils/skills';
 
