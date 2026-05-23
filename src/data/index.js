@@ -70,6 +70,24 @@ export const projects = [
         description: "Engineered a full-stack monitoring system with AI-driven forecasting and real-time change detection. Features a 'Time Machine' historical scrubbing tool using a custom timeline slider and snapshots.",
         codeLink: "https://github.com/rishab11250/PixelPwnz",
         demoLink: "https://pixel-pwnz.vercel.app/"
+    },
+    {
+        title: "Veltrix",
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779563152/1777913719527_oq6rka.jpg",
+        skills: ["MERN Stack", "Tailwind CSS", "React Hooks", "JWT Auth" ],
+        category: "Full Stack",
+        description: "The Definitive Financial Operating System & Sovereign Wealth Ledger. A premium MERN-stack SaaS dashboard for automated invoicing, deep cash-flow analytics, and client CRM.",
+        codeLink: "https://github.com/rishab11250/veltrix",
+        demoLink: "https://veltrix-silk.vercel.app/"
+    },
+    {
+        title: "Pixel-Collab",
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779563418/1778356615747_epy9dg.jpg",
+        skills: ["React", "Tailwind CSS", "Zustand"],
+        category: "Frontend",
+        description: "🎨 High-performance collaborative whiteboard with React 19, custom canvas engine, magnetic snapping, and GZIP-compressed state sharing.",
+        codeLink: "https://github.com/rishab11250/HackStreet-2K26",
+        demoLink: "https://pixel-collab-chi.vercel.app/"
     }
 ];
 
@@ -163,5 +181,50 @@ export const certificates = [
         description: "Advanced to the second round of HackCrux at LNMIIT, collaborating with a 4-member team to deliver a functional prototype in under 30 hours. Spearheaded the project's backend by architecting the database and implementing web scraping solutions.",
         image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1774687198/80f0f881-5dcb-40a6-8533-053bdb00573d.png",
         link: "https://drive.google.com/file/d/1urUKP_td7ItebMWJLDz7R8mC1ZnDN3w6/view?usp=sharing"
+    },
+    {
+        id: 14,
+        title: "OceanLab x Charusat Hacks 2026",
+        issuer: "Charusat",
+        category: "Hackathons",
+        description: "Built an AI-first SaaS prototype in a 48-hour hackathon, collaborating in a 2-member team while sharpening problem-solving and decision-making under pressure.",
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779561758/71_vkuczq.jpg",
+        link: "https://drive.google.com/file/d/1rfCzkrxuZwHnweU5PTC0TNkb8tnXwrIc/view?usp=sharing"
+    },
+    {
+        id: 15,
+        title: "Tech for everyone",
+        issuer: "Sololearn",
+        category: "Courses",
+        description: "Gained foundational knowledge in coding concepts, web technologies, and data fundamentals, developing problem-solving and analytical skills.",
+        image: "https://api2.sololearn.com/v2/certificates/CC-T3E3QICT/image/png?t=639125142334823610",
+        link: "https://www.sololearn.com/certificates/CC-T3E3QICT"
+    },
+    {
+        id: 16,
+        title: "C++ Intermediate",
+        issuer: "Sololearn",
+        category: "Courses",
+        description: "Gained a strong foundation in C++ by learning Object-Oriented Programming, Inheritance, Polymorphism, Templates, Exception Handling, and File Handling.",
+        image: "https://api2.sololearn.com/v2/certificates/CC-ANCKYEZZ/image/png?t=639116761203753020",
+        link: "https://www.sololearn.com/certificates/CC-ANCKYEZZ"
+    },
+    {
+        id: 17,
+        title: "Write with AI",
+        issuer: "Sololearn",
+        category: "Courses",
+        description: "Explored the fundamentals of Large Language Models (LLMs) and AI-assisted content creation, learning how to craft effective prompts and generate high-quality written content using AI tools.",
+        image: "https://api2.sololearn.com/v2/certificates/CC-7XPBDH2X/image/png?t=639118690976560550",
+        link: "https://www.sololearn.com/certificates/CC-7XPBDH2X"
+    },
+    {
+        id: 18,
+        title: "HACKSTREET 2K26",
+        issuer: "HACKSTREET",
+        category: "Hackathons",
+        description: "Built a Collaborative Whiteboard Application during HACKSTREET 2K26, securing 6th place among 170+ teams while working on UI/UX development, state management, and real-time collaboration features.",
+        image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779562304/Screenshot_2026-05-24_002027_ayb0yc.png",
+        link: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779562304/Screenshot_2026-05-24_002027_ayb0yc.png"
     }
 ];

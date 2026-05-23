@@ -102,7 +102,14 @@ const hackathonEvents = [
 
     // Determine images for slideshow
     let eventImages = [project.image];
-    if (event.name.includes("HackCrux")) {
+    if (event.name === "Dev Heat") {
+        eventImages = [
+            project.image,
+            certificate.image,
+            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779564140/1Y6A0934_bavemu.jpg",
+            "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779564353/qbitCoders_mx7wm3.jpg"
+        ];
+    } else if (event.name.includes("HackCrux")) {
         eventImages = [
             certificate.image,
             project.image,
