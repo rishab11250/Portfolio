@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { hackathons as hackathonData } from '../data';
 import TiltCard from './TiltCard';
-import { getSkillStyle } from '../utils/skills';
+import { getSkillBadge } from '../utils/skills';
 
 const CardSlideshow = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -231,7 +231,6 @@ const Hackathons = () => {
                     <HackathonModal 
                         event={selectedHackathon} 
                         onClose={() => setSelectedHackathon(null)} 
-                        getSkillStyle={getSkillStyle}
                     />
                 )}
             </AnimatePresence>
@@ -239,7 +238,7 @@ const Hackathons = () => {
     );
 };
 
-const HackathonModal = ({ event, onClose, getSkillStyle }) => {
+const HackathonModal = ({ event, onClose }) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const images = event.images;
 
@@ -490,18 +489,15 @@ const HackathonModal = ({ event, onClose, getSkillStyle }) => {
                             <h4 style={{ color: 'var(--text-color)', opacity: 0.4, textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '2px', marginBottom: '0.75rem' }}>PROJECT DETAILS</h4>
                             <p style={{ color: 'var(--text-color)', opacity: 0.8, lineHeight: '1.6', fontSize: '0.9rem', marginBottom: '1.25rem' }}>{event.description}</p>
                             
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                                 {event.skills.map((skill, i) => (
-                                    <span key={i} style={{ 
-                                        ...getSkillStyle(skill), 
-                                        padding: '0.35rem 0.8rem', 
-                                        borderRadius: '8px', 
-                                        fontSize: '0.75rem', 
-                                        fontWeight: '600',
-                                        backdropFilter: 'blur(4px)'
-                                    }}>
-                                        {skill}
-                                    </span>
+                                    <img
+                                        key={i}
+                                        src={getSkillBadge(skill)}
+                                        alt={skill}
+                                        className="skill-badge"
+                                        loading="lazy"
+                                    />
                                 ))}
                             </div>
                         </div>

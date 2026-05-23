@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TiltCard from './TiltCard';
-import { getSkillStyle } from '../utils/skills';
+import { getSkillBadge } from '../utils/skills';
 import { projects } from '../data';
 
 const categories = ["All", "Full Stack", "Frontend", "AI", "Hackathon"];
@@ -99,13 +99,13 @@ const Projects = () => {
                                         <h2>{project.title}</h2>
                                         <div className="project-skills">
                                             {project.skills.map((skill, i) => (
-                                                <span
+                                                <img
                                                     key={i}
-                                                    className="skill-pill"
-                                                    style={getSkillStyle(skill)}
-                                                >
-                                                    {skill}
-                                                </span>
+                                                    src={getSkillBadge(skill)}
+                                                    alt={skill}
+                                                    className="skill-badge"
+                                                    loading="lazy"
+                                                />
                                             ))}
                                         </div>
                                         <div className="project-links">

@@ -1,27 +1,21 @@
-export const getSkillStyle = (skill) => {
-    const colors = {
-        "HTML": { bg: "rgba(227, 79, 38, 0.15)", text: "#E34F26", border: "#E34F26" },
-        "CSS": { bg: "rgba(21, 114, 182, 0.15)", text: "#1572B6", border: "#1572B6" },
-        "JavaScript": { bg: "rgba(247, 223, 30, 0.15)", text: "#F7DF1E", border: "#F7DF1E" },
-        "TypeScript": { bg: "rgba(49, 120, 198, 0.15)", text: "#3178C6", border: "#3178C6" },
-        "React": { bg: "rgba(97, 218, 251, 0.15)", text: "#61DAFB", border: "#61DAFB" },
-        "Node.js": { bg: "rgba(51, 153, 51, 0.15)", text: "#339933", border: "#339933" },
-        "Express.js": { bg: "rgba(0, 0, 0, 0.15)", text: "#444444", border: "#444444" },
-        "MongoDB": { bg: "rgba(71, 162, 72, 0.15)", text: "#47A248", border: "#47A248" },
-        "SQL": { bg: "rgba(225, 129, 33, 0.15)", text: "#E18121", border: "#E18121" },
-        "Firebase": { bg: "rgba(255, 202, 40, 0.15)", text: "#FFCA28", border: "#FFCA28" },
-        "Tailwind CSS": { bg: "rgba(56, 189, 248, 0.15)", text: "#38BDF8", border: "#38BDF8" },
-        "Python": { bg: "rgba(55, 118, 171, 0.15)", text: "#3776AB", border: "#3776AB" },
-        "C": { bg: "rgba(65, 105, 225, 0.15)", text: "#4169E1", border: "#4169E1" },
-        "C++": { bg: "rgba(0, 73, 144, 0.15)", text: "#004999", border: "#004999" },
-        "AI": { bg: "rgba(100, 100, 255, 0.15)", text: "#6464FF", border: "#6464FF" },
-    };
+const skillBadges = {
+    "HTML": "https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white",
+    "CSS": "https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white",
+    "JavaScript": "https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=323330",
+    "TypeScript": "https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white",
+    "React": "https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB",
+    "Node.js": "https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white",
+    "Express.js": "https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white",
+    "MongoDB": "https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white",
+    "SQL": "https://img.shields.io/badge/SQL-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white",
+    "Firebase": "https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black",
+    "Tailwind CSS": "https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white",
+    "Python": "https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white",
+    "C": "https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=white",
+    "C++": "https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white",
+    "AI": "https://img.shields.io/badge/AI-6464FF?style=for-the-badge&logo=openai&logoColor=white",
+};
 
-    const style = colors[skill] || { bg: "var(--card-bg)", text: "var(--text-color)", border: "var(--glass-border)" };
-
-    return {
-        backgroundColor: style.bg,
-        color: style.text,
-        border: `1px solid ${style.border}`,
-    };
+export const getSkillBadge = (skill) => {
+    return skillBadges[skill] || `https://img.shields.io/badge/${skill}-555555?style=for-the-badge&logo=code&logoColor=white`;
 };
