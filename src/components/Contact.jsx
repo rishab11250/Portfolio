@@ -95,20 +95,9 @@ const contactMethods = [
                     viewport={{ once: true }}
                     style={{ textAlign: 'center', marginBottom: '5rem' }}
                 >
-                    <h1 style={{
-                        fontSize: '4rem',
-                        marginBottom: '1.5rem',
-                        background: 'var(--gradient-text)',
-                        backgroundClip: 'text',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        color: 'transparent',
-                        fontWeight: '900',
-                        letterSpacing: '-2px',
-                        display: 'inline-block'
-                    }}>Let's Connect</h1>
-                    <p style={{ fontSize: '1.3rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
-                        I'm always excited to collaborate on new projects or just have a conversation about tech.
+                    <h1>Get in Touch</h1>
+                    <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
+                        Have an opportunity, project, or question? Feel free to reach out directly or send a message below.
                     </p>
                 </motion.div>
 
@@ -205,25 +194,15 @@ const contactMethods = [
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </motion.div>
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Awesome!</h2>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '2rem' }}>
-                            Message received! I'll get back to you faster than you can say "Full Stack Developer".
+                        <h2 style={{ fontSize: '2rem', marginBottom: '0.75rem', fontWeight: '700' }}>Message Sent</h2>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', marginBottom: '2rem' }}>
+                            Thank you for reaching out. I'll review your message and get back to you shortly.
                         </p>
                         <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
                             onClick={() => setStatus('')}
-                            style={{
-                                padding: '1rem 3rem',
-                                background: 'linear-gradient(135deg, #61DAFB 0%, #4A90E2 100%)',
-                                color: '#fff',
-                                border: 'none',
-                                borderRadius: '16px',
-                                fontSize: '1.1rem',
-                                fontWeight: '700',
-                                cursor: 'pointer',
-                                boxShadow: '0 8px 24px rgba(97, 218, 251, 0.3)'
-                            }}
+                            className="btn-load-more"
                         >Send Another</motion.button>
                     </motion.div>
                 ) : (
@@ -313,23 +292,22 @@ const contactMethods = [
                                 type="submit"
                                 disabled={status === 'sending'}
                                 whileHover={{ scale: 1.05, boxShadow: '0 12px 40px rgba(97, 218, 251, 0.4)' }}
-                                whileTap={{ scale: 0.95 }}
+                                whileTap={{ scale: 0.98 }}
                                 style={{
-                                    padding: '1.5rem',
-                                    background: status === 'sending' ? '#666' : 'linear-gradient(135deg, #61DAFB 0%, #4A90E2 100%)',
-                                    color: '#fff',
-                                    border: 'none',
-                                    borderRadius: '16px',
-                                    fontSize: '1.2rem',
-                                    fontWeight: '800',
+                                    padding: '1.1rem 2rem',
+                                    background: status === 'sending' ? 'rgba(255, 255, 255, 0.1)' : 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)',
+                                    color: status === 'sending' ? 'var(--text-muted)' : '#04101d',
+                                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                                    borderRadius: '12px',
+                                    fontSize: '1rem',
+                                    fontWeight: '700',
                                     cursor: status === 'sending' ? 'not-allowed' : 'pointer',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    gap: '1rem',
+                                    gap: '0.75rem',
                                     transition: 'all 0.3s ease',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '1px'
+                                    boxShadow: '0 8px 24px -6px rgba(56, 189, 248, 0.45)'
                                 }}
                             >
                                 {status === 'sending' ? (

@@ -2,12 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const AnimatedNavLink = ({ href, isActive, onClick, children }) => {
+  const handleClick = (e) => {
+    if (onClick) onClick();
+    if (href && href.startsWith('#')) {
+      const targetId = href.substring(1);
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.pushState(null, '', href);
+      }
+    }
+  };
+
   return (
     <li style={{ position: 'relative' }}>
       <a 
         href={href} 
         className={isActive ? 'active' : ''}
-        onClick={onClick}
+        onClick={handleClick}
       >
         {children}
       </a>
@@ -18,6 +31,7 @@ const AnimatedNavLink = ({ href, isActive, onClick, children }) => {
           initial={false}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ type: "spring", stiffness: 380, damping: 30 }}
         />
       )}
     </li>

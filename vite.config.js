@@ -8,14 +8,12 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Three.js / R3F is the largest vendor (~900 kB)
-          'vendor-three': ['three', '@react-three/fiber', '@react-three/drei'],
-          // Framer Motion is ~130 kB
-          'vendor-animation': ['framer-motion'],
+          'vendor-three': ['three'],
+          'vendor-r3f': ['@react-three/fiber'],
+          'vendor-animation': ['framer-motion', 'aos'],
         },
       },
     },
-    // Warn at 300 kB for individual chunks (500 kB default)
-    chunkSizeWarningLimit: 400,
+    chunkSizeWarningLimit: 800,
   },
 })

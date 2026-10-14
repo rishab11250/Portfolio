@@ -1,7 +1,6 @@
 import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, Stars } from '@react-three/drei';
-import * as THREE from 'three';
+import { AdditiveBlending } from 'three';
 
 // Seeded random for deterministic particle positions (pure function)
 function seededRandom(seed) {
@@ -55,7 +54,7 @@ const ParticleRing = ({ count, radius, color, speed, opacity, size }) => {
                 transparent
                 opacity={opacity}
                 depthWrite={false}
-                blending={THREE.AdditiveBlending}
+                blending={AdditiveBlending}
             />
         </points>
     );
@@ -63,18 +62,67 @@ const ParticleRing = ({ count, radius, color, speed, opacity, size }) => {
 
 const EventHorizon = ({ isLight }) => {
     return (
-        <Sphere args={[1.2, 32, 32]}>
+        <mesh>
+            <sphereGeometry args={[1.2, 32, 32]} />
             <meshStandardMaterial
                 color={isLight ? "#ffffff" : "#000000"}
                 emissive={isLight ? "#00f3ff" : "#000000"}
                 emissiveIntensity={isLight ? 2 : 0}
                 roughness={0.1}
             />
-        </Sphere>
+        </mesh>
+    );
+};
+
+const NativeStars = ({ radius = 100, depth = 50, count = 3000, speed = 0.5 }) => {
+    const pointsRef = useRef();
+
+    const positions = useMemo(() => {
+        const rand = seededRandom(count + radius * 777 + depth);
+        const coords = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+            const r = radius + (rand() - 0.5) * depth;
+            const theta = 2 * Math.PI * rand();
+            const phi = Math.acos(2 * rand() - 1);
+            coords[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+            coords[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+            coords[i * 3 + 2] = r * Math.cos(phi);
+        }
+        return coords;
+    }, [count, radius, depth]);
+
+    useFrame((_, delta) => {
+        if (pointsRef.current) {
+            pointsRef.current.rotation.y -= delta * (speed * 0.05);
+            pointsRef.current.rotation.x -= delta * (speed * 0.02);
+        }
+    });
+
+    return (
+        <points ref={pointsRef}>
+            <bufferGeometry>
+                <bufferAttribute
+                    attach="attributes-position"
+                    count={positions.length / 3}
+                    array={positions}
+                    itemSize={3}
+                />
+            </bufferGeometry>
+            <pointsMaterial
+                size={0.06}
+                color="#ffffff"
+                transparent
+                opacity={0.8}
+                sizeAttenuation={true}
+                depthWrite={false}
+            />
+        </points>
     );
 };
 
 const HoloGlobe = () => {
+    const containerRef = useRef(null);
+    const [isInView, setIsInView] = useState(true);
     const [theme, setTheme] = useState(() =>
         document.documentElement.getAttribute('data-theme') || 'dark'
     );
@@ -84,6 +132,16 @@ const HoloGlobe = () => {
         const isSlowConnection = navigator.connection?.effectiveType === '2g' || navigator.connection?.effectiveType === 'slow-2g';
         return isMobile || isLowMemory || isSlowConnection;
     });
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+        const observer = new IntersectionObserver(([entry]) => {
+            setIsInView(entry.isIntersecting);
+        }, { threshold: 0.05 });
+
+        observer.observe(containerRef.current);
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         const observer = new MutationObserver((mutations) => {
@@ -103,11 +161,16 @@ const HoloGlobe = () => {
     const particleCount1 = isLowPerf ? 400 : 2000;
     const particleCount2 = isLowPerf ? 600 : 3000;
     const particleCount3 = isLowPerf ? 150 : 800;
-    const starCount = isLowPerf ? 500 : 3000;
+    const starCount = isLowPerf ? 500 : 2500;
 
     return (
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
-            <Canvas camera={{ position: [0, 0, 7], fov: 45 }} gl={{ alpha: true, antialias: !isLowPerf }}>
+        <div ref={containerRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
+            <Canvas
+                frameloop={isInView ? 'always' : 'never'}
+                dpr={isLowPerf ? [1, 1] : [1, 1.5]}
+                camera={{ position: [0, 0, 7], fov: 45 }}
+                gl={{ alpha: true, antialias: !isLowPerf, powerPreference: 'high-performance', stencil: false }}
+            >
                 <ambientLight intensity={isLight ? 1 : 0.2} />
 
                 <group position={[0, 0, -1]}>
@@ -144,7 +207,7 @@ const HoloGlobe = () => {
                 </group>
 
                 {!isLight && (
-                    <Stars radius={100} depth={50} count={starCount} factor={4} saturation={0} fade speed={0.5} />
+                    <NativeStars radius={100} depth={50} count={starCount} speed={0.5} />
                 )}
 
                 {isLight && (

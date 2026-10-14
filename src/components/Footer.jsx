@@ -7,6 +7,8 @@ const footerLinks = [
     { name: 'Tech Stack', href: '#tech-stack' },
     { name: 'Projects', href: '#projects' },
     { name: 'Certificates', href: '#certificates' },
+    { name: 'Hackathons', href: '#hackathons' },
+    { name: 'Education', href: '#education' },
     { name: 'Contact', href: '#contact' }
 ];
 
@@ -58,27 +60,27 @@ const Footer = () => {
                     {/* Col 1: Brand & Status */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         <h2 style={{
-                            fontSize: '2rem',
-                            fontWeight: '900',
+                            fontSize: '1.5rem',
+                            fontWeight: '700',
                             color: 'var(--text-color)',
                             margin: 0,
-                            letterSpacing: '2px'
-                        }}>RISHAB<span style={{ color: 'var(--primary-color)' }}>.DEV</span></h2>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>
-                            Full Stack Developer building immersive web experiences.
+                            letterSpacing: '-0.5px'
+                        }}>Rishab Chandgothia</h2>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                            Computer Engineering student & Full Stack Developer building modern, high-performance web applications.
                         </p>
                         <div style={{
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '8px',
-                            background: 'rgba(0, 243, 255, 0.05)',
-                            padding: '0.5rem 1rem',
-                            borderRadius: '4px',
+                            background: 'rgba(56, 189, 248, 0.08)',
+                            padding: '0.4rem 0.85rem',
+                            borderRadius: '20px',
                             border: '1px solid var(--glass-border)',
                             width: 'fit-content'
                         }}>
-                            <span style={{ width: '8px', height: '8px', background: '#00ff41', borderRadius: '50%', boxShadow: '0 0 5px #00ff41', animation: 'pulse 2s infinite' }}></span>
-                            <span style={{ fontSize: '0.8rem', color: 'var(--primary-color)', fontFamily: 'Share Tech Mono, monospace' }}>SYSTEM ONLINE</span>
+                            <span style={{ width: '7px', height: '7px', background: '#22c55e', borderRadius: '50%', boxShadow: '0 0 6px #22c55e' }}></span>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text-color)', fontWeight: '500' }}>Available for opportunities</span>
                         </div>
                     </div>
 
@@ -115,7 +117,7 @@ const Footer = () => {
 
                     {/* Col 3: Connect */}
                     <div>
-                        <h3 style={{ fontSize: '1.2rem', color: 'var(--text-color)', marginBottom: '1.5rem', borderLeft: '3px solid var(--secondary-color)', paddingLeft: '10px' }}>Establish Uplink</h3>
+                        <h3 style={{ fontSize: '1.2rem', color: 'var(--text-color)', marginBottom: '1.5rem', borderLeft: '3px solid var(--secondary-color)', paddingLeft: '10px' }}>Connect</h3>
                         <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
                             {[
                                 { name: 'GitHub', url: 'https://github.com/rishab11250', icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg> },
@@ -173,15 +175,14 @@ const Footer = () => {
                     gap: '1rem',
                     fontSize: '0.85rem',
                     color: 'var(--text-secondary)',
-                    fontFamily: 'Share Tech Mono, monospace'
+                    fontFamily: 'inherit'
                 }}>
                     <div>
                         &copy; {new Date().getFullYear()} Rishab Chandgothia. All rights reserved.
                     </div>
-                    <div style={{ display: 'flex', gap: '2rem' }}>
-                        <span className="location-easter-egg">
-                            STATUS: <span className="location-text">LOC: EARTH-[C-137]</span>
-                        </span>
+                    <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                        <span>Surat, India</span>
+                        <span>•</span>
                         <span>{time}</span>
                     </div>
                 </div>

@@ -4,70 +4,44 @@ const Logo = () => {
     return (
         <div className="logo-container" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
             <svg
-                width="180"
-                height="50"
-                viewBox="0 0 180 50"
+                width="54"
+                height="54"
+                viewBox="0 0 64 64"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-label="Rishab Chandgothia Logo"
+                style={{ transition: 'transform 0.25s ease' }}
             >
                 <defs>
-                    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#8CCDEB" />
-                        <stop offset="100%" stopColor="#725CAD" />
+                    <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#38bdf8" />
+                        <stop offset="100%" stopColor="#818cf8" />
                     </linearGradient>
-                    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-                        <feMerge>
-                            <feMergeNode in="coloredBlur" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
+                    <linearGradient id="navLogoBorderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.8" />
+                        <stop offset="100%" stopColor="#818cf8" stopOpacity="0.3" />
+                    </linearGradient>
+                    <filter id="navLogoGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="2.5" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
                     </filter>
                 </defs>
-
-                {/* Circuit Board Decor Left */}
-                <path
-                    d="M10 25 H 25 L 30 20"
-                    stroke="url(#logoGradient)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    filter="url(#neonGlow)"
-                    opacity="0.8"
-                />
-                <circle cx="10" cy="25" r="2" fill="#8CCDEB" filter="url(#neonGlow)" />
-
-                {/* Monogram 'RC' */}
+                <rect width="64" height="64" rx="16" fill="var(--bg-surface, #10131d)" />
+                <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="url(#navLogoBorderGrad)" strokeWidth="2" />
                 <text
-                    x="45"
-                    y="35"
-                    fontFamily="'Orbitron', sans-serif"
+                    x="31"
+                    y="43"
+                    fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', 'Orbitron', sans-serif"
                     fontWeight="900"
-                    fontSize="32"
-                    fill="url(#logoGradient)"
-                    style={{ letterSpacing: '2px' }}
-                    filter="url(#neonGlow)"
+                    fontSize="27"
+                    fill="url(#navLogoGrad)"
+                    textAnchor="middle"
+                    letterSpacing="1"
+                    filter="url(#navLogoGlow)"
                 >
                     RC
                 </text>
-
-                {/* Tech Dot */}
-                <circle cx="105" cy="15" r="3" fill="#725CAD">
-                    <animate attributeName="opacity" values="0;1;0" duration="2s" repeatCount="indefinite" />
-                </circle>
-
-                {/* Circuit Board Decor Right */}
-                <path
-                    d="M115 25 H 130 L 125 30"
-                    stroke="url(#logoGradient)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    filter="url(#neonGlow)"
-                    opacity="0.8"
-                />
-                <circle cx="130" cy="25" r="2" fill="#725CAD" filter="url(#neonGlow)" />
-
-                {/* Full Name Subtext (optional, visible on larger screens) */}
-                {/* <text x="45" y="48" fontFamily="sans-serif" fontSize="8" fill="#a0aec0" letterSpacing="1">PORTFOLIO</text> */}
+                <circle cx="50" cy="18" r="3" fill="#38bdf8" />
             </svg>
         </div>
     );

@@ -1,17 +1,20 @@
 
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const Cursor = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
+    const cursorX = useMotionValue(-100);
+    const cursorY = useMotionValue(-100);
+
+    const springConfig = { damping: 28, stiffness: 500 };
+    const ringX = useSpring(cursorX, springConfig);
+    const ringY = useSpring(cursorY, springConfig);
 
     useEffect(() => {
         const mouseMove = (e) => {
-            setMousePosition({
-                x: e.clientX,
-                y: e.clientY
-            });
+            cursorX.set(e.clientX);
+            cursorY.set(e.clientY);
         };
 
         const handleMouseOver = (e) => {
@@ -22,61 +25,32 @@ const Cursor = () => {
             }
         };
 
-        window.addEventListener("mousemove", mouseMove);
-        window.addEventListener("mouseover", handleMouseOver);
+        window.addEventListener("mousemove", mouseMove, { passive: true });
+        window.addEventListener("mouseover", handleMouseOver, { passive: true });
 
         return () => {
             window.removeEventListener("mousemove", mouseMove);
             window.removeEventListener("mouseover", handleMouseOver);
         };
-    }, []);
-
-    const variants = {
-        default: {
-            x: mousePosition.x - 16,
-            y: mousePosition.y - 16,
-            height: 32,
-            width: 32,
-            backgroundColor: "transparent",
-            border: "2px solid var(--primary-color)",
-            mixBlendMode: "difference"
-        },
-        hover: {
-            x: mousePosition.x - 24,
-            y: mousePosition.y - 24,
-            height: 48,
-            width: 48,
-            backgroundColor: "var(--primary-color)",
-            border: "none",
-            mixBlendMode: "difference",
-            opacity: 0.8
-        }
-    };
-
-    const dotVariants = {
-        default: {
-            x: mousePosition.x - 4,
-            y: mousePosition.y - 4,
-            opacity: 1
-        },
-        hover: {
-            x: mousePosition.x - 4,
-            y: mousePosition.y - 4,
-            opacity: 0
-        }
-    };
+    }, [cursorX, cursorY]);
 
     return (
         <>
             <motion.div
                 className="cursor-dot"
-                variants={dotVariants}
-                animate={isHovering ? "hover" : "default"}
-                transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
+                animate={{
+                    scale: isHovering ? 0 : 1,
+                    opacity: isHovering ? 0 : 1
+                }}
+                transition={{ duration: 0.15 }}
                 style={{
                     position: 'fixed',
                     top: 0,
                     left: 0,
+                    x: cursorX,
+                    y: cursorY,
+                    translateX: '-50%',
+                    translateY: '-50%',
                     width: '8px',
                     height: '8px',
                     backgroundColor: 'var(--primary-color)',
@@ -87,15 +61,25 @@ const Cursor = () => {
             />
             <motion.div
                 className="cursor-ring"
-                variants={variants}
-                animate={isHovering ? "hover" : "default"}
-                transition={{ type: "spring", stiffness: 500, damping: 28 }}
+                animate={{
+                    width: isHovering ? 48 : 32,
+                    height: isHovering ? 48 : 32,
+                    backgroundColor: isHovering ? "var(--primary-color)" : "transparent",
+                    border: isHovering ? "none" : "2px solid var(--primary-color)",
+                    opacity: isHovering ? 0.8 : 1,
+                }}
+                transition={{ duration: 0.15 }}
                 style={{
                     position: 'fixed',
                     top: 0,
                     left: 0,
+                    x: ringX,
+                    y: ringY,
+                    translateX: '-50%',
+                    translateY: '-50%',
                     borderRadius: '50%',
                     pointerEvents: 'none',
+                    mixBlendMode: "difference",
                     zIndex: 99998
                 }}
             />

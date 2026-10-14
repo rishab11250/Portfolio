@@ -21,6 +21,9 @@ const CardSlideshow = ({ images }) => {
                 <motion.img
                     key={currentIndex}
                     src={images[currentIndex]}
+                    alt="Hackathon project highlight"
+                    width="400"
+                    height="220"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -72,7 +75,7 @@ const Hackathons = () => {
                 viewport={{ once: true }}
                 style={{ textAlign: 'center', marginBottom: '3rem' }}
             >
-                Hackathon Journey
+                Hackathons
             </motion.h1>
 
             <div className="hackathon-grid" style={{
@@ -137,7 +140,7 @@ const Hackathons = () => {
                                         color: 'var(--primary-color)',
                                         letterSpacing: '1px',
                                         textTransform: 'uppercase',
-                                        fontFamily: 'Share Tech Mono, monospace',
+                                        fontFamily: 'inherit',
                                         backdropFilter: 'blur(8px)',
                                         zIndex: 5
                                     }}>
@@ -169,7 +172,7 @@ const Hackathons = () => {
                                             color: 'var(--primary-color)', 
                                             fontWeight: '600', 
                                             fontSize: '0.85rem',
-                                            fontFamily: 'Share Tech Mono, monospace',
+                                            fontFamily: 'inherit',
                                             opacity: 0.9
                                         }}>
                                             {event.organizer}
@@ -200,7 +203,7 @@ const Hackathons = () => {
                                             letterSpacing: '1px'
                                         }}
                                     >
-                                        Explore Mission
+                                        View details
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                     </motion.div>
                                 </div>
@@ -218,7 +221,7 @@ const Hackathons = () => {
                                     fontFamily: 'monospace',
                                     zIndex: 0
                                 }}>
-                                    {"</>"}
+                                    {null}
                                 </div>
                             </div>
                         </TiltCard>
@@ -472,7 +475,7 @@ const HackathonModal = ({ event, onClose }) => {
                                 </span>
                             </div>
                             <p style={{ 
-                                fontFamily: 'Share Tech Mono, monospace', 
+                                fontFamily: 'inherit', 
                                 color: 'var(--primary-color)', 
                                 fontSize: '1rem',
                                 marginBottom: '0.5rem',
@@ -486,7 +489,7 @@ const HackathonModal = ({ event, onClose }) => {
                         </div>
 
                         <div style={{ marginBottom: '1.5rem' }}>
-                            <h4 style={{ color: 'var(--text-color)', opacity: 0.4, textTransform: 'uppercase', fontSize: '0.65rem', letterSpacing: '2px', marginBottom: '0.75rem' }}>PROJECT DETAILS</h4>
+                            <h4 style={{ color: 'var(--text-color)', opacity: 0.6, fontSize: '0.8rem', fontWeight: '700', marginBottom: '0.75rem' }}>Project Details</h4>
                             <p style={{ color: 'var(--text-color)', opacity: 0.8, lineHeight: '1.6', fontSize: '0.9rem', marginBottom: '1.25rem' }}>{event.description}</p>
                             
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -539,9 +542,9 @@ const HackathonModal = ({ event, onClose }) => {
                                     style={{
                                         flex: 1,
                                         padding: '0.8rem',
-                                        background: 'linear-gradient(135deg, #61DAFB 0%, #4A90E2 100%)',
+                                        background: 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)',
                                         borderRadius: '10px',
-                                        color: '#fff',
+                                        color: '#04101d',
                                         textDecoration: 'none',
                                         textAlign: 'center',
                                         fontWeight: '700',

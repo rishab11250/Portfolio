@@ -40,10 +40,16 @@ const Certificates = () => {
         : certificates.filter(cert => cert.category === filter);
 
     const displayedCerts = showAll ? filteredCerts : filteredCerts.slice(0, 3);
-
     return (
-        <section className="page-section certificates" id="certificates" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
-            <h1 data-aos="fade-down" style={{ textAlign: 'center', marginBottom: '2rem' }}>Certificates</h1>
+        <section className="page-section certificates" id="certificates">
+            <motion.h1
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+            >
+                Certificates
+            </motion.h1>
 
             {/* Filter Buttons */}
             <div className="project-filters" style={{ marginBottom: '3rem' }}>
@@ -131,10 +137,13 @@ const Certificates = () => {
                                             src={cert.image} 
                                             alt={cert.title} 
                                             loading="lazy"
+                                            width="400"
+                                            height="240"
                                             style={{
                                                 width: '100%',
                                                 height: '100%',
-                                                objectFit: 'fill'
+                                                objectFit: 'cover',
+                                                objectPosition: 'center top'
                                             }}
                                         />
                                         
@@ -165,7 +174,7 @@ const Certificates = () => {
                                                 lineHeight: '1.6',
                                                 margin: 0,
                                                 fontWeight: '500',
-                                                fontFamily: 'Share Tech Mono, monospace'
+                                                fontFamily: 'inherit'
                                             }}>
                                                 {cert.description}
                                             </p>
@@ -200,40 +209,27 @@ const Certificates = () => {
                 <div style={{ textAlign: 'center', marginTop: '3rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
                     <motion.button
                         type="button"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
                         onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             setShowAll(!showAll);
                         }}
-                        style={{
-                            padding: '1rem 3rem',
-                            background: 'linear-gradient(135deg, #61DAFB 0%, #4A90E2 100%)',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '12px',
-                            fontSize: '1.1rem',
-                            fontWeight: '700',
-                            cursor: 'pointer',
-                            boxShadow: '0 4px 20px rgba(97, 218, 251, 0.3)',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '0.75rem',
-                            zIndex: 100,
-                            position: 'relative'
-                        }}
+                        className="btn-load-more"
                     >
                         {showAll ? 'Show Less' : `View All ${filteredCerts.length} Certificates`}
                         <motion.svg
                             animate={{ rotate: showAll ? 180 : 0 }}
                             xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
+                            width="18"
+                            height="18"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            strokeWidth="2"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                         >
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </motion.svg>

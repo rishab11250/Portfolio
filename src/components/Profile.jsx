@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { motion } from 'framer-motion';
 
 const Profile = () => {
@@ -16,12 +15,21 @@ const Profile = () => {
             <div className="profile-container-split">
                 <motion.div
                     className="profile-image-section"
-                    initial={{ opacity: 0, x: -100, rotate: -10 }}
-                    whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                    initial={{ opacity: 0, x: -60 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+                    transition={{ duration: 0.6 }}
                 >
-                    <img src="https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773478876/WhatsApp_Image_2026-03-07_at_9.25.25_AM_cswpuv.jpg" alt="Rishab Chandgothia - Full Stack Developer Profile Picture" className="profile-img-large" style={{ width: '300px', objectFit: 'cover', borderRadius: '25%' }} loading="lazy" />
+                    <div className="profile-img-frame">
+                        <img
+                            src="https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773478876/WhatsApp_Image_2026-03-07_at_9.25.25_AM_cswpuv.jpg"
+                            alt="Rishab Chandgothia - Full Stack Developer Profile Picture"
+                            className="profile-img-large"
+                            width="280"
+                            height="280"
+                            loading="lazy"
+                        />
+                    </div>
                 </motion.div>
                 <div className="profile-text-section">
                     <motion.p

@@ -3,7 +3,7 @@ import ThemeSwitcher from './ThemeSwitcher';
 import Logo from './Logo';
 import AnimatedNavLink from './AnimatedNavLink';
 
-const Navbar = ({ activeSection }) => {
+const Navbar = ({ activeSection, onSelectSection }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,8 +21,11 @@ const Navbar = ({ activeSection }) => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (id) => {
     setIsOpen(false);
+    if (onSelectSection) {
+      onSelectSection(id);
+    }
   };
 
   return (
@@ -39,14 +42,14 @@ const Navbar = ({ activeSection }) => {
 
       <div className={`nav-right ${isOpen ? 'active' : ''}`}>
         <ul className="nav-links">
-          <AnimatedNavLink href="#home" isActive={activeSection === 'home'} onClick={handleLinkClick}>Home</AnimatedNavLink>
-          <AnimatedNavLink href="#about" isActive={activeSection === 'about'} onClick={handleLinkClick}>About</AnimatedNavLink>
-          <AnimatedNavLink href="#tech-stack" isActive={activeSection === 'tech-stack'} onClick={handleLinkClick}>Tech Stack</AnimatedNavLink>
-          <AnimatedNavLink href="#projects" isActive={activeSection === 'projects'} onClick={handleLinkClick}>Projects</AnimatedNavLink>
-          <AnimatedNavLink href="#certificates" isActive={activeSection === 'certificates'} onClick={handleLinkClick}>Certificates</AnimatedNavLink>
-          <AnimatedNavLink href="#hackathons" isActive={activeSection === 'hackathons'} onClick={handleLinkClick}>Hackathons</AnimatedNavLink>
-          <AnimatedNavLink href="#education" isActive={activeSection === 'education'} onClick={handleLinkClick}>Education</AnimatedNavLink>
-          <AnimatedNavLink href="#contact" isActive={activeSection === 'contact'} onClick={handleLinkClick}>Contact</AnimatedNavLink>
+          <AnimatedNavLink href="#home" isActive={activeSection === 'home'} onClick={() => handleLinkClick('home')}>Home</AnimatedNavLink>
+          <AnimatedNavLink href="#about" isActive={activeSection === 'about'} onClick={() => handleLinkClick('about')}>About</AnimatedNavLink>
+          <AnimatedNavLink href="#tech-stack" isActive={activeSection === 'tech-stack'} onClick={() => handleLinkClick('tech-stack')}>Tech Stack</AnimatedNavLink>
+          <AnimatedNavLink href="#projects" isActive={activeSection === 'projects'} onClick={() => handleLinkClick('projects')}>Projects</AnimatedNavLink>
+          <AnimatedNavLink href="#certificates" isActive={activeSection === 'certificates'} onClick={() => handleLinkClick('certificates')}>Certificates</AnimatedNavLink>
+          <AnimatedNavLink href="#hackathons" isActive={activeSection === 'hackathons'} onClick={() => handleLinkClick('hackathons')}>Hackathons</AnimatedNavLink>
+          <AnimatedNavLink href="#education" isActive={activeSection === 'education'} onClick={() => handleLinkClick('education')}>Education</AnimatedNavLink>
+          <AnimatedNavLink href="#contact" isActive={activeSection === 'contact'} onClick={() => handleLinkClick('contact')}>Contact</AnimatedNavLink>
         </ul>
         <ThemeSwitcher />
       </div>

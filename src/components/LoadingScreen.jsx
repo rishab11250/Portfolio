@@ -30,7 +30,7 @@ const LoadingScreen = ({ onComplete }) => {
       } else {
         clearInterval(typeInterval);
       }
-    }, 80);
+    }, 40);
     return () => clearInterval(typeInterval);
   }, []);
 
@@ -53,12 +53,12 @@ const LoadingScreen = ({ onComplete }) => {
       starsRef.current = Array.from({ length: STAR_COUNT }, () => {
         const rand = Math.random();
         let hue;
-        if (rand > 0.85) {
-          hue = 42 + Math.random() * 10; // gold accent (#FFE3A9 ≈ 42°)
-        } else if (rand > 0.5) {
-          hue = 197 + Math.random() * 15; // primary blue (#8CCDEB ≈ 200°)
+        if (rand > 0.6) {
+          hue = 195 + Math.random() * 15; // electric sky blue (#38bdf8 ≈ 199°)
+        } else if (rand > 0.3) {
+          hue = 230 + Math.random() * 20; // indigo (#818cf8 ≈ 234°)
         } else {
-          hue = 260 + Math.random() * 20; // secondary purple (#725CAD ≈ 266°)
+          hue = 215 + Math.random() * 15; // slate
         }
         return {
           x: (Math.random() - 0.5) * W * 2,
@@ -75,7 +75,7 @@ const LoadingScreen = ({ onComplete }) => {
     window.addEventListener('resize', resize);
 
     let startTime = null;
-    const TOTAL_DURATION = 3200;
+    const TOTAL_DURATION = 1500;
 
     const draw = (timestamp) => {
       if (!startTime) startTime = timestamp;
@@ -103,7 +103,7 @@ const LoadingScreen = ({ onComplete }) => {
       const cy = H / 2;
 
       const fadeAlpha = 0.15 + (1 - speed) * 0.5;
-      ctx.fillStyle = `rgba(11, 29, 81, ${fadeAlpha})`;
+      ctx.fillStyle = `rgba(9, 10, 15, ${fadeAlpha})`;
       ctx.fillRect(0, 0, W, H);
 
       const warpStep = speed * 30 + 0.5;
@@ -148,21 +148,21 @@ const LoadingScreen = ({ onComplete }) => {
         }
       });
 
-      // Central warp core glow — primary→secondary gradient
+      // Central warp core glow — electric sky → indigo gradient
       if (speed > 0.3) {
         const coreSize = speed * 140;
         const coreGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, coreSize);
-        coreGrad.addColorStop(0, `rgba(140, 205, 235, ${speed * 0.3})`);
-        coreGrad.addColorStop(0.4, `rgba(114, 92, 173, ${speed * 0.12})`);
-        coreGrad.addColorStop(1, 'rgba(11, 29, 81, 0)');
+        coreGrad.addColorStop(0, `rgba(56, 189, 248, ${speed * 0.3})`);
+        coreGrad.addColorStop(0.4, `rgba(129, 140, 248, ${speed * 0.12})`);
+        coreGrad.addColorStop(1, 'rgba(9, 10, 15, 0)');
         ctx.fillStyle = coreGrad;
         ctx.fillRect(0, 0, W, H);
       }
 
-      // Warm gold exit flash
+      // Exit flash
       if (rawProgress > 0.88) {
-        const flashAlpha = Math.pow((rawProgress - 0.88) / 0.12, 2) * 0.9;
-        ctx.fillStyle = `rgba(255, 227, 169, ${flashAlpha})`;
+        const flashAlpha = Math.pow((rawProgress - 0.88) / 0.12, 2) * 0.7;
+        ctx.fillStyle = `rgba(56, 189, 248, ${flashAlpha * 0.3})`;
         ctx.fillRect(0, 0, W, H);
       }
 
@@ -170,7 +170,7 @@ const LoadingScreen = ({ onComplete }) => {
         animRef.current = requestAnimationFrame(draw);
       } else {
         setDone(true);
-        setTimeout(onComplete, 600);
+        setTimeout(onComplete, 250);
       }
     };
 

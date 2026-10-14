@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import TiltCard from './TiltCard';
-import { getSkillBadge } from '../utils/skills';
 import { projects } from '../data';
+import { getSkillBadge } from '../utils/skills';
 
 const categories = ["All", "Full Stack", "Frontend", "AI", "Hackathon"];
 
@@ -59,44 +59,19 @@ const Projects = () => {
                         >
                             <TiltCard>
                                 <div className="project-card" style={{ transform: "translateZ(20px)" }}>
-                                    <div className="project-img-container" style={{ position: 'relative' }}>
-                                        <img src={project.image} alt={project.title} loading="lazy" />
-                                        
-                                        {/* Hover Description Overlay */}
-                                        <motion.div
-                                            className="project-overlay"
-                                            initial={{ opacity: 0 }}
-                                            whileHover={{ opacity: 1 }}
-                                            transition={{ duration: 0.3 }}
-                                            style={{
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                width: '100%',
-                                                height: '100%',
-                                                background: 'rgba(10, 10, 20, 0.95)',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                padding: '1.5rem',
-                                                textAlign: 'center',
-                                                backdropFilter: 'blur(4px)'
-                                            }}
-                                        >
-                                            <p style={{
-                                                color: '#fff',
-                                                fontSize: '0.95rem',
-                                                lineHeight: '1.6',
-                                                margin: 0,
-                                                fontWeight: '500',
-                                                fontFamily: 'Share Tech Mono, monospace'
-                                            }}>
-                                                {project.description}
-                                            </p>
-                                        </motion.div>
+                                    <div className="project-img-container">
+                                        <img src={project.image} alt={project.title} width="400" height="220" loading="lazy" />
+                                        {project.category && (
+                                            <span className="project-category-tag">
+                                                {project.category}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="project-info">
                                         <h2>{project.title}</h2>
+                                        <p className="project-desc">
+                                            {project.description}
+                                        </p>
                                         <div className="project-skills">
                                             {project.skills.map((skill, i) => (
                                                 <img
@@ -110,12 +85,12 @@ const Projects = () => {
                                         </div>
                                         <div className="project-links">
                                             <a href={project.codeLink} className="btn-small btn-code" target="_blank" rel="noopener noreferrer">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                                                GitHub
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                                Source
                                             </a>
                                             {project.demoLink && (
                                                 <a href={project.demoLink} className="btn-small btn-demo" target="_blank" rel="noopener noreferrer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                                                     Live Demo
                                                 </a>
                                             )}
@@ -135,34 +110,23 @@ const Projects = () => {
                     style={{ textAlign: 'center', marginTop: '3rem' }}
                 >
                     <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
                         onClick={() => setShowAll(!showAll)}
-                        style={{
-                            padding: '1rem 3rem',
-                            background: 'linear-gradient(135deg, #61DAFB 0%, #4A90E2 100%)',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '12px',
-                            fontSize: '1.1rem',
-                            fontWeight: '700',
-                            cursor: 'pointer',
-                            boxShadow: '0 4px 20px rgba(97, 218, 251, 0.3)',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '0.75rem'
-                        }}
+                        className="btn-load-more"
                     >
                         {showAll ? 'Show Less' : `View All ${filteredProjects.length} Projects`}
                         <motion.svg
                             animate={{ rotate: showAll ? 180 : 0 }}
                             xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
+                            width="18"
+                            height="18"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            strokeWidth="2"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                         >
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </motion.svg>

@@ -71,18 +71,18 @@ const Hero = () => {
                     <div className="hero-left-identity">
                         <motion.p
                             className="greeting"
-                            initial={{ opacity: 0, y: -20 }}
+                            initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
+                            transition={{ duration: 0.4, delay: 0.1 }}
                         >
                             Hi, I'm
                         </motion.p>
 
                         <motion.div
                             className="hero-name-wrapper"
-                            initial={{ opacity: 0, x: -50 }}
+                            initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
+                            transition={{ duration: 0.5, delay: 0.15 }}
                         >
                             <h1 className="main-name">
                                 Rishab Chandgothia
@@ -91,14 +91,14 @@ const Hero = () => {
 
                         <motion.div
                             className="role-title-wrapper"
-                            initial={{ opacity: 0, x: -50 }}
+                            initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
+                            transition={{ duration: 0.5, delay: 0.25 }}
                         >
                             <span className="role-title">
                                 {text}
                             </span>
-                            <span className="cursor" style={{ fontSize: 'inherit', color: 'var(--text-color)', marginLeft: '2px', lineHeight: 'inherit' }}>|</span>
+                            <span className="cursor">|</span>
                         </motion.div>
                     </div>
 
@@ -110,8 +110,7 @@ const Hero = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
                         >
-                            Crafting beautiful and functional web experiences with modern technologies.
-                            Turning ideas into reality through clean and efficient code.
+                            Crafting high-performance web applications, interactive 3D interfaces, and scalable full-stack software with clean code and modern design.
                         </motion.p>
                     </div>
                 </div>
@@ -121,17 +120,23 @@ const Hero = () => {
                     className="hero-actions"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
+                    transition={{ duration: 0.5, delay: 0.55 }}
                 >
-                    <button onClick={startTour} className="btn btn-tour">
-                        Start Tour
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
-                    </button>
-                    <a href="#contact" className="btn btn-primary">Get in Touch</a>
-                    <a href="#projects" className="btn btn-secondary">View Projects</a>
-                    <a href={resumeFile} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-resume">
-                        Resume
+                    <a href="#projects" className="btn btn-primary">
+                        View Projects
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
+                    <a href="#contact" className="btn btn-secondary">
+                        Get in Touch
+                    </a>
+                    <a href={resumeFile} target="_blank" rel="noopener noreferrer" className="btn btn-resume">
+                        Resume
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                    <button onClick={startTour} className="btn btn-tour">
+                        Guided Tour
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                    </button>
                 </motion.div>
 
                 <div className="social-links">

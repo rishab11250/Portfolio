@@ -35,25 +35,38 @@ function App() {
     });
   }, []);
 
-  // Update active section on scroll for navbar sync (IntersectionObserver — no forced reflow)
+  // Update active section on scroll for navbar sync
   useEffect(() => {
+    if (isLoading) return;
+
     const sections = ['home', 'about', 'tech-stack', 'projects', 'certificates', 'hackathons', 'education', 'contact'];
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 160;
+
+      // Bottom of page check -> activate last section
+      if (window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight - 60) {
+        setActiveSection('contact');
+        return;
+      }
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(sections[i]);
+            break;
+          }
         }
-      });
-    }, { rootMargin: '-100px 0px -50% 0px' });
+      }
+    };
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
-    return () => observer.disconnect();
-  }, []);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isLoading]);
 
   if (isLoading) {
     return <LoadingScreen onComplete={() => setIsLoading(false)} />;
@@ -76,30 +89,30 @@ function App() {
       </Suspense>
       {typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches && <Cursor />}
       <ScrollToTop />
-      <Navbar activeSection={activeSection} />
+      <Navbar activeSection={activeSection} onSelectSection={setActiveSection} />
       <main className="content-container">
-        <section id="home">
+        <section id="home" className="page-section-container">
           <Hero />
         </section>
-        <section id="about" data-aos="fade-up">
+        <section id="about" className="page-section-container" data-aos="fade-up">
           <Profile />
         </section>
-        <section id="tech-stack" data-aos="fade-up">
+        <section id="tech-stack" className="page-section-container" data-aos="fade-up">
           <TechStack />
         </section>
-        <section id="projects" data-aos="fade-up">
+        <section id="projects" className="page-section-container" data-aos="fade-up">
           <Projects />
         </section>
-        <section id="certificates" data-aos="fade-up">
+        <section id="certificates" className="page-section-container" data-aos="fade-up">
           <Certificates />
         </section>
-        <section id="hackathons" data-aos="fade-up">
+        <section id="hackathons" className="page-section-container" data-aos="fade-up">
           <Hackathons />
         </section>
-        <section id="education" data-aos="fade-up">
+        <section id="education" className="page-section-container" data-aos="fade-up">
           <EducationTimeline />
         </section>
-        <section id="contact" data-aos="fade-up">
+        <section id="contact" className="page-section-container" data-aos="fade-up">
           <Contact />
         </section>
         <Footer />

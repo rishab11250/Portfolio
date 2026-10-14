@@ -1,53 +1,25 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 
-const Terrain = () => {
-    const meshRef = useRef();
-    useFrame(() => {
-        if (meshRef.current) {
-            // Placeholder for potential terrain animation if needed future
-        }
-    });
-
-    return (
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2, 0]}>
-            <planeGeometry args={[100, 100, 40, 40]} />
-            <meshStandardMaterial
-                color="#00bfff"
-                wireframe={true}
-                transparent={true}
-                opacity={0.3}
-            />
-        </mesh>
-    );
-};
-
-// More robust "Vaporwave" style grid
+// Sleek ambient perspective horizon grid (Linear / Vercel dark style)
 const MovingGrid = ({ isDarkMode }) => {
     const gridRef = useRef();
     useFrame((state) => {
         if (gridRef.current) {
-            // Move grid towards camera
-            gridRef.current.position.z = (state.clock.elapsedTime * 10) % 10;
+            gridRef.current.position.z = (state.clock.elapsedTime * 6) % 10;
         }
     });
 
-    const gridColor1 = isDarkMode ? 0x1f1f3d : 0x00bfff; // Dark Blue vs Deep Sky Blue
-    const gridColor2 = isDarkMode ? 0x3d1f1f : 0xda70d6; // Dark Red vs Orchid
+    const gridColor = isDarkMode ? 0x1e293b : 0xcbd5e1;
+    const centerColor = isDarkMode ? 0x38bdf8 : 0x0284c7;
 
     return (
         <group ref={gridRef}>
-            {/* Floor Grids */}
-            <gridHelper args={[80, 40, gridColor1, gridColor1]} position={[0, -2, 0]} />
-            <gridHelper args={[80, 40, gridColor1, gridColor1]} position={[0, -2, -80]} />
-
-            {/* Ceiling Grids (Mirrored & Lowered) */}
-            <gridHelper args={[80, 40, gridColor2, gridColor2]} position={[0, 4, 0]} />
-            <gridHelper args={[80, 40, gridColor2, gridColor2]} position={[0, 4, -80]} />
+            <gridHelper args={[100, 50, centerColor, gridColor]} position={[0, -2.5, 0]} />
+            <gridHelper args={[100, 50, centerColor, gridColor]} position={[0, -2.5, -100]} />
         </group>
     );
-}
+};
 
 const SciFiTerrain = () => {
     const [isDarkMode, setIsDarkMode] = useState(true);
@@ -58,7 +30,7 @@ const SciFiTerrain = () => {
             setIsDarkMode(theme !== 'light');
         };
 
-        checkTheme(); // Initial check
+        checkTheme();
 
         const observer = new MutationObserver(checkTheme);
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -66,8 +38,8 @@ const SciFiTerrain = () => {
         return () => observer.disconnect();
     }, []);
 
-    const bgColor = isDarkMode ? '#050510' : '#f0f8ff'; // Deep Dark vs Alice Blue
-    const fogColor = isDarkMode ? '#050510' : '#f0f8ff';
+    const bgColor = isDarkMode ? '#090a0f' : '#f8fafc';
+    const fogColor = isDarkMode ? '#090a0f' : '#f8fafc';
 
     return (
         <div style={{
@@ -80,18 +52,16 @@ const SciFiTerrain = () => {
             background: bgColor,
             transition: 'background 0.5s ease'
         }}>
-            <Canvas camera={{ position: [0, 1, 5], fov: 75 }}>
-                <fog attach="fog" args={[fogColor, 5, 30]} /> {/* Extended Fog for better visibility */}
+            <Canvas
+                dpr={[1, 1.5]}
+                camera={{ position: [0, 1, 5], fov: 75 }}
+                gl={{ powerPreference: 'low-power', antialias: false, stencil: false }}
+            >
+                <color attach="background" args={[bgColor]} />
+                <fog attach="fog" args={[fogColor, 4, 25]} />
                 <ambientLight intensity={0.5} />
 
-                {/* Moving Grid Floor & Ceiling */}
                 <MovingGrid isDarkMode={isDarkMode} />
-
-                {/* Floating "Data" Cubes */}
-                <mesh position={[0, 0, -5]}>
-                    <boxGeometry args={[100, 100, 100]} />
-                    <meshBasicMaterial color={isDarkMode ? "#000" : "#fff"} side={THREE.BackSide} /> {/* Void container */}
-                </mesh>
             </Canvas>
         </div>
     );
