@@ -1,6 +1,6 @@
 # Rishab Chandgothia — Portfolio
 
-Full-Stack Developer portfolio built with **Next.js (App Router)**, **React 19**, **Three.js**, and **Framer Motion**. Features interactive 3D elements, dynamic project case studies, and a dedicated dark cyberpunk aesthetic.
+Full-Stack Developer portfolio built with **Next.js (App Router)**, **React 19**, **Three.js**, and **Framer Motion**. Features interactive 3D elements, modular data architecture, and a dedicated dark cyberpunk aesthetic.
 
 - **Live URL**: [https://www.itsrishab.xyz/](https://www.itsrishab.xyz/)
 - **Vercel Deployment**: Configured with Next.js App Router preset
@@ -22,8 +22,8 @@ Full-Stack Developer portfolio built with **Next.js (App Router)**, **React 19**
 
 ## Features
 
-- **Dynamic Case Studies**: Static routes generated at `/projects/[slug]` with dedicated metadata and Open Graph images.
-- **Unified SEO & Security**: Content Security Policy (CSP) with standard Next.js bootstrap script allowances, automated `robots.js`, and dynamic `sitemap.js` containing all project URLs generated from the canonical domain `https://www.itsrishab.xyz/`.
+- **Single-Page Showcase**: Pre-rendered landing page with smooth section-based navigation, project showcase (live demo & code links), and dynamic modals for certificates and hackathons.
+- **Unified SEO & Security**: Content Security Policy (CSP) with standard Next.js bootstrap script allowances, automated `robots.js`, and canonical `sitemap.js` generated from `https://www.itsrishab.xyz/`.
 - **Honeypot & Rate-Limited Contact**: Contact form with honeypot field and 30-second client-side cooldown.
 - **Session-Aware Loader**: Intro starfield displays once per session via `sessionStorage` with instant `SKIP [ESC]` shortcut; crawlers receive full static HTML immediately.
 - **Interactive 3D**: `SciFiTerrain` horizon mesh and `HoloGlobe` tech globe with interactive controls and lazy-loaded WebGL canvas.
@@ -45,12 +45,12 @@ Full-Stack Developer portfolio built with **Next.js (App Router)**, **React 19**
 
 | Metric | Vite Build | Next.js App Router Build |
 |---|---|---|
-| **HTML Rendering** | Client-only (empty `<div id="root">`) | Pre-rendered Static HTML (SSG) across all routes |
+| **HTML Rendering** | Client-only (empty `<div id="root">`) | Pre-rendered Static HTML (SSG) |
 | **Initial Client JS** | ~143 kB gzipped | ~265 kB gzipped (sum of initial scripts referenced in HTML) |
 | **Three.js / 3D Chunk** | 718.6 kB raw (186.7 kB gzip) | 854.6 kB raw (228.8 kB gzip) lazy-loaded via `next/dynamic` |
-| **Static Pages** | 1 (`index.html`) | 15 pre-rendered static routes (Home, Not Found, 7 Case Studies, Robots, Sitemap, Icon, OG Image) |
+| **Pre-rendered Routes** | 1 (`index.html`) | 6 routes (Home, Not Found, Robots, Sitemap, Icon, OG Image) |
 
-> **Architecture Trade-off**: Next.js App Router increases the initial hydration bundle from ~143 kB to ~265 kB gzipped due to the framework runtime and router. In exchange, every route receives full pre-rendered HTML on the initial response, enabling instant search engine indexability, rich crawler previews, and dedicated static case study pages.
+> **Architecture Trade-off**: Next.js App Router increases initial hydration JavaScript from ~143 kB to ~265 kB gzipped due to framework runtime and routing architecture. In return, the landing page is delivered as fully formed static HTML on the first byte, enabling instant crawler indexing, rich social sharing cards, and faster perceived content rendering.
 
 ---
 
