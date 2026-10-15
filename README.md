@@ -1,214 +1,109 @@
-<div align="center">
-  <br/>
-  <br/>
-  <pre>
-██████╗ ██╗███████╗██╗  ██╗ █████╗ ██████╗ 
-██╔══██╗██║██╔════╝██║  ██║██╔══██╗██╔══██╗
-██████╔╝██║███████╗███████║███████║██████╔╝
-██╔══██╗██║╚════██║██╔══██║██╔══██║██╔══██╗
-██║  ██║██║███████║██║  ██║██║  ██║██████╔╝
-╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  
-  </pre>
-  <br/>
-  <br/>
-</div>
+# Rishab Chandgothia — Portfolio
 
-<p align="center">
-  <a href="https://portfolio-rishab-chandgothia.vercel.app/" target="_blank">
-    <img src="https://img.shields.io/badge/Vercel-0B1D51?style=for-the-badge&logo=vercel&logoColor=8CCDEB" alt="Vercel"/>
-  </a>
-  <a href="https://github.com/rishab11250/Portfolio/stargazers">
-    <img src="https://img.shields.io/github/stars/rishab11250/Portfolio?style=for-the-badge&logo=github&color=FFE3A9&labelColor=0B1D51" alt="Stars"/>
-  </a>
-</p>
+Full-Stack Developer portfolio built with **Next.js (App Router)**, **React 19**, **Three.js**, and **Framer Motion**. Features interactive 3D elements, dynamic project case studies, and dark/light theme switching.
 
-<p align="center">
-  <sub>
-    <code>⟐ system.online // neural.link.established ⟐</code>
-  </sub>
-</p>
-
-<br/>
+- **Live URL**: [https://www.itsrishab.xyz/](https://www.itsrishab.xyz/)
+- **Vercel Deployment**: Configured with Next.js App Router preset
 
 ---
 
-<br/>
+## Tech Stack
 
-## ⚡ SIGNAL // Overview
-
-A **next-generation digital identity** — part portfolio, part technical statement. Every pixel, animation, and 3D manifold is engineered to demonstrate what modern web development can be when you push past templates.
-
-This isn't a static resume page. It's a **live, interactive environment** built with React 19, Three.js, and Framer Motion — delivering a 100/100 Lighthouse score while rendering real-time 3D particle systems in the background.
-
-> **[ ⟐ ACTIVATE LIVE NEXUS ⟐ ](https://portfolio-rishab-chandgothia.vercel.app/)** — *Open in a Chromium-based browser for full effect.*
-
-<br/>
+- **Framework**: Next.js 16 (App Router, JavaScript)
+- **UI Library**: React 19
+- **Styling**: CSS Custom Properties (zero-flicker dark/light themes via `next-themes`)
+- **3D Graphics**: Three.js, React Three Fiber (lazy-loaded dynamically with `ssr: false`)
+- **Animations**: Framer Motion
+- **Tour**: Driver.js (8 guided steps)
+- **Analytics**: `@vercel/analytics`, `@vercel/speed-insights`
+- **Contact**: EmailJS with honeypot spam protection and client-side cooldown
 
 ---
 
-<br/>
+## Features
 
-## ⚡ SUBSYSTEMS // Features
+- **Dynamic Case Studies**: Static routes generated at `/projects/[slug]` with dedicated metadata and Open Graph images.
+- **Unified SEO & Security**: Strict Content Security Policy (CSP), automated `robots.js`, and `sitemap.js` generated from the canonical domain `https://www.itsrishab.xyz/`.
+- **Honeypot & Rate-Limited Contact**: Contact form with honeypot field and 30-second client-side cooldown.
+- **Session-Aware Loader**: Intro starfield displays once per session via `sessionStorage` with instant `SKIP [ESC]` shortcut; crawlers receive full static HTML immediately.
+- **Theme-Aware 3D**: `SciFiTerrain` and `HoloGlobe` dynamically respond to theme shifts with zero paint flicker.
 
-| Module | Description |
+---
+
+## Measured Performance & Metrics
+
+### Mobile Lighthouse Audit (Measured Locally on Production Build)
+
+| Category | Score |
 |---|---|
-| **🌐 Holo-Globe** | Real-time 3D particle ring visualization (Three.js / R3F). Adaptive performance — 2,000 particles on desktop, 400 on mobile. Reacts to theme toggles. |
-| **🎨 Dual-Theme Matrix** | Dark/Light mode with smooth CSS custom property transitions. Theme persisted in localStorage. Instant toggle, zero flicker. |
-| **🖱️ Precision Cursor** | High-DPI custom cursor with `mix-blend-mode: difference` and spring-physics hover states. Auto-disabled on touch devices. |
-| **🚀 Warp-Gate Loading** | Canvas-based starfield with parallax depth, speed ramping, gold exit flash, and typewriter tagline. |
-| **📐 Responsive Grid** | Adaptive across 4K monitors to mobile. Grid layouts, clamp-driven typography, no breakpoint spaghetti. |
-| **🧭 Guided Tour** | Driver.js onboarding sequence — one click, seven steps. No onboarding? No problem. It stays out of the way. |
-| **📬 Comms Uplink** | EmailJS contact form with validation, toast feedback, and one-click copy for email/phone. |
-| **💾 Chunked Payload** | Three.js vendor chunk (~1MB) lazy-loaded via `React.lazy()`. Initial JS payload: **86 kB gzipped**. |
-| **♿ Accessible** | Semantic HTML, aria-labels, keyboard navigation, focus management. **Lighthouse Accessibility: 100**. |
-| **🌗 Theme-Aware 3D** | SciFiTerrain and HoloGlobe both react to theme changes via MutationObserver — colors, fog, and lighting shift in real-time. |
+| **SEO** | 100 / 100 |
+| **Best Practices** | 96 / 100 |
+| **Accessibility** | 91 / 100 |
+| **Performance** | 64 / 100 (mobile emulation, includes 3D canvas initialization) |
 
-<br/>
+### Bundle & Payload Comparison
 
----
-
-<br/>
-
-## ⚡ CORE ARCHITECTURE // Stack
-
-<p align="center">
-  <img src="https://img.shields.io/badge/React_19-0B1D51?style=for-the-badge&logo=react&logoColor=8CCDEB" alt="React 19"/>
-  <img src="https://img.shields.io/badge/Vite_7-0B1D51?style=for-the-badge&logo=vite&logoColor=8CCDEB" alt="Vite 7"/>
-  <img src="https://img.shields.io/badge/Three.js-0B1D51?style=for-the-badge&logo=three.js&logoColor=8CCDEB" alt="Three.js"/>
-  <img src="https://img.shields.io/badge/R3F-0B1D51?style=for-the-badge&logo=react&logoColor=725CAD" alt="R3F"/>
-  <img src="https://img.shields.io/badge/Framer_Motion-0B1D51?style=for-the-badge&logo=framer&logoColor=8CCDEB" alt="Framer Motion"/>
-  <img src="https://img.shields.io/badge/JavaScript-0B1D51?style=for-the-badge&logo=javascript&logoColor=FFE3A9" alt="JavaScript"/>
-  <img src="https://img.shields.io/badge/CSS3-0B1D51?style=for-the-badge&logo=css3&logoColor=8CCDEB" alt="CSS3"/>
-  <img src="https://img.shields.io/badge/Vercel-0B1D51?style=for-the-badge&logo=vercel&logoColor=8CCDEB" alt="Vercel"/>
-  <img src="https://img.shields.io/badge/EmailJS-0B1D51?style=for-the-badge&logo=gmail&logoColor=725CAD" alt="EmailJS"/>
-  <img src="https://img.shields.io/badge/ESLint-0B1D51?style=for-the-badge&logo=eslint&logoColor=725CAD" alt="ESLint"/>
-</p>
-
-<br/>
+| Metric | Vite Build | Next.js App Router Build |
+|---|---|---|
+| **HTML Rendering** | Client-only (empty `<div id="root">`) | Pre-rendered Static HTML (SSG) across all 13 routes |
+| **Initial Client JS** | ~143 kB gzipped | ~140 kB gzipped |
+| **Three.js / 3D Chunk** | 718.6 kB raw (186.7 kB gzip) | 854.6 kB raw (228.8 kB gzip) lazy-loaded via `next/dynamic` |
+| **Static Pages** | 1 (`index.html`) | 13 pre-rendered static routes (Home, Not Found, 7 Case Studies, Robots, Sitemap, OG Image) |
 
 ---
 
-<br/>
+## Getting Started
 
-## ⚡ DEPLOYMENT SEQUENCE // Get Started
+### Prerequisites
+
+- Node.js 18+ (Node 20+ recommended)
+- `pnpm` (or `npm`)
+
+### Installation
 
 ```bash
-# 01. Clone the nexus
+# Clone the repository
 git clone https://github.com/rishab11250/Portfolio.git
 cd Portfolio
 
-# 02. Install dependencies
-npm install
+# Install dependencies
+pnpm install
 
-# 03. Configure environment (required for contact form)
+# Configure environment variables
 cp .env.example .env
-# Populate with EmailJS credentials (see below)
-
-# 04. Start holographic preview
-npm run dev
-
-# 05. Compile for production
-npm run build
-
-# 06. Preview production build locally
-npm run preview
 ```
 
-### 🔐 Environment Variables
+### Environment Variables
 
-| Variable | Purpose |
+| Variable | Description |
 |---|---|
-| `VITE_EMAIL_SERVICE_ID` | EmailJS service identifier |
-| `VITE_EMAIL_TEMPLATE_ID` | EmailJS template identifier |
-| `VITE_EMAIL_PUBLIC_KEY` | EmailJS public API key |
+| `NEXT_PUBLIC_EMAIL_SERVICE_ID` | EmailJS Service ID |
+| `NEXT_PUBLIC_EMAIL_TEMPLATE_ID` | EmailJS Template ID |
+| `NEXT_PUBLIC_EMAIL_PUBLIC_KEY` | EmailJS Public API Key |
 
-<br/>
+> **Note**: For production deployments, ensure the canonical domain `https://www.itsrishab.xyz` is added to the allowed origins list in your [EmailJS Dashboard](https://dashboard.emailjs.com/).
 
----
+### Running Locally
 
-<br/>
+```bash
+# Start development server
+pnpm run dev
 
-## ⚡ FILE SYSTEM // Structure
+# Run ESLint check
+pnpm run lint
 
-```
-src/
-├── App.jsx                    # Root — section detection + orchestration
-├── index.css                  # Global styles (2.6k lines, all-in-one)
-│
-├── components/
-│   ├── Navbar.jsx             # Fixed nav with active-section tracking
-│   ├── Hero.jsx               # Landing — 3D globe + typewriter titles
-│   ├── Profile.jsx            # About section
-│   ├── TechStack.jsx          # Filterable grid of technologies
-│   ├── Projects.jsx           # Filterable project cards with hover overlays
-│   ├── Certificates.jsx       # Certificate gallery with category filters
-│   ├── Hackathons.jsx         # Event cards + modal deep-dive with slideshow
-│   ├── EducationTimeline.jsx  # Alternate-layout timeline
-│   ├── Contact.jsx            # Form + social contact cards
-│   ├── Footer.jsx             # Footer with live clock + easter egg
-│   ├── HoloGlobe.jsx          # 3D particle ring (lazy-loaded)
-│   ├── SciFiTerrain.jsx       # 3D grid terrain (lazy-loaded)
-│   ├── Cursor.jsx             # Custom cursor (desktop only)
-│   ├── TiltCard.jsx           # 3D tilt wrapper using motion values
-│   ├── ThemeSwitcher.jsx      # Dark/light toggle
-│   ├── LoadingScreen.jsx      # Canvas starfield intro
-│   ├── AnimatedNavLink.jsx    # Nav link with layout animations
-│   └── ScrollToTop.jsx        # Floating action button
-│
-├── data/
-│   └── index.js               # Shared projects + certificates data
-│
-└── utils/
-    └── skills.js              # Color mapping for skill badges
+# Build for production
+pnpm run build
+
+# Start production server
+pnpm run start
 ```
 
-<br/>
-
 ---
 
-<br/>
+## Deployment & Vercel Settings
 
-## ⚡ SIGNAL METRICS // Lighthouse
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Accessibility-1 0 0-4CAF50?style=for-the-badge&logo=lighthouse&labelColor=0B1D51" alt="A11y 100"/>
-  &nbsp;
-  <img src="https://img.shields.io/badge/Best_Practices-1 0 0-4CAF50?style=for-the-badge&logo=lighthouse&labelColor=0B1D51" alt="Best Practices 100"/>
-  &nbsp;
-  <img src="https://img.shields.io/badge/SEO-1 0 0-4CAF50?style=for-the-badge&logo=lighthouse&labelColor=0B1D51" alt="SEO 100"/>
-</p>
-
-<p align="center">
-  <sub>— Perfect scores across all three dimensions —</sub>
-</p>
-
-<br/>
-
----
-
-<br/>
-
-## ⚡ UPLINK // Connect
-
-<p align="center">
-  <a href="https://github.com/rishab11250"><img src="https://img.shields.io/badge/GitHub-0B1D51?style=for-the-badge&logo=github&logoColor=8CCDEB" alt="GitHub"/></a>
-  <a href="https://www.linkedin.com/in/rishab-chandgothia-8823112a4/"><img src="https://img.shields.io/badge/LinkedIn-0B1D51?style=for-the-badge&logo=linkedin&logoColor=8CCDEB" alt="LinkedIn"/></a>
-  <a href="https://leetcode.com/u/rishab11250"><img src="https://img.shields.io/badge/LeetCode-0B1D51?style=for-the-badge&logo=leetcode&logoColor=FFE3A9" alt="LeetCode"/></a>
-  <a href="https://x.com/Rishab25361722"><img src="https://img.shields.io/badge/X-0B1D51?style=for-the-badge&logo=x&logoColor=8CCDEB" alt="X"/></a>
-  <a href="mailto:rishab.chandgothia.cg@gmail.com"><img src="https://img.shields.io/badge/Email-0B1D51?style=for-the-badge&logo=gmail&logoColor=725CAD" alt="Email"/></a>
-</p>
-
-<br/>
-
----
-
-<br/>
-
-<p align="center">
-  <sub>
-    <code>⟐ system.holographic // engineered.with.precision // rishab.dev ⟐</code>
-    <br/>
-    <br/>
-    © 2026 Rishab · Built with React 19, Three.js, and ☕
-  </sub>
-</p>
+When deploying to Vercel:
+1. Ensure the **Framework Preset** is set to **Next.js** (auto-detected).
+2. Set Environment Variables in Project Settings (`NEXT_PUBLIC_EMAIL_*`).
+3. Custom Domain is mapped to `www.itsrishab.xyz` with 308 redirect from apex `itsrishab.xyz`.
