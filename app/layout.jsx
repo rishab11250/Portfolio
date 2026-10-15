@@ -55,14 +55,6 @@ export const metadata = {
       'Crafting high-performance, modern web applications. Check out my latest projects and tech stack.',
   },
   robots: { index: true, follow: true },
-  icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/favicon.svg',
-  },
   verification: {
     google: '0lvYx0RQIY_REfNUbc7B0lggcAN74uU1JlElYgKWe-Q',
   },

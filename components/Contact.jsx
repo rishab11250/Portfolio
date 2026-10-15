@@ -63,9 +63,9 @@ const Contact = () => {
     return () => clearInterval(timer);
   }, [cooldown]);
 
-  const SERVICE_ID = process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID || process.env.VITE_EMAIL_SERVICE_ID;
-  const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAIL_TEMPLATE_ID || process.env.VITE_EMAIL_TEMPLATE_ID;
-  const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY || process.env.VITE_EMAIL_PUBLIC_KEY;
+  const SERVICE_ID = process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID;
+  const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAIL_TEMPLATE_ID;
+  const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY;
 
   const handleChange = (e) => {
     setFormData({
