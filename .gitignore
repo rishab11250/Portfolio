@@ -27,7 +27,10 @@ dist-ssr
 skills-lock.json
 .next
 out
-AGENTS.md
 .taste-skill/
+.taste-skill
+.taske-skill/
+.taske-skill
 taste-skill/
 *taste-skill*
+*taske-skill*

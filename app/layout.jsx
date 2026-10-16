@@ -101,7 +101,7 @@ export default function RootLayout({ children }) {
                   jobTitle: 'Full Stack Developer',
                   alumniOf: {
                     '@type': 'CollegeOrUniversity',
-                    name: 'Arya College of Engineering & IT',
+                    name: 'CodingGita',
                   },
                   knowsAbout: [
                     'React',

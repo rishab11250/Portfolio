@@ -3,7 +3,6 @@
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import SealMark from '../primitives/SealMark';
 import SeasonTag from '../SeasonTag';
 
 const SKILL_BADGES = [
@@ -18,6 +17,13 @@ const SKILL_BADGES = [
   'C++',
   'Docker',
   'Git',
+];
+
+const SOCIAL_LINKS = [
+  { label: 'GitHub', href: 'https://github.com/rishab11250' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rishab-chandgothia-8823112a4/' },
+  { label: 'X (Twitter)', href: 'https://x.com/Rishab25361722' },
+  { label: 'Email', href: 'mailto:rishab.chandgothia.cg@gmail.com' },
 ];
 
 const SOCIAL_DOCK = [
@@ -188,17 +194,17 @@ export default function BentoGridHome() {
       <div className="relative z-10 w-full max-w-7xl mx-auto my-auto py-0.5 sm:py-1">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 lg:gap-3 items-stretch">
           
-          {/* ================= COLUMN 1: IDENTITY & ABOUT ================= */}
+          {/* ================= COLUMN 1: IDENTITY & ABOUT (2 Cards) ================= */}
           <div className="flex flex-col gap-2.5 lg:gap-3 justify-between">
             
-            {/* CARD 1: MASTER PROFILE CARD */}
+            {/* CARD 1: MASTER PROFILE CARD (NO duplicate logo) */}
             <div
-              className="rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4.5 flex flex-col justify-between animate-enter"
+              className="rounded-2xl sm:rounded-3xl bg-paper p-4 sm:p-5 flex flex-col justify-between animate-enter"
               style={{ animationDelay: '40ms' }}
             >
               <div>
-                {/* Header: Centered Avatar + Seal */}
-                <div className="flex items-center justify-between mb-2.5">
+                {/* Header: Centered Avatar + Status Indicator (No duplicate logo) */}
+                <div className="flex items-center justify-between mb-3">
                   <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-ink/15 bg-ink/5">
                     <Image
                       src="https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773478876/WhatsApp_Image_2026-03-07_at_9.25.25_AM_cswpuv.jpg"
@@ -209,11 +215,14 @@ export default function BentoGridHome() {
                       priority
                     />
                   </div>
-                  <SealMark size={40} />
+                  <div className="px-3 py-1 rounded-full bg-pine/10 text-pine text-[13px] font-semibold flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-pine" />
+                    <span>Open for Roles</span>
+                  </div>
                 </div>
 
                 {/* Name & Title */}
-                <h1 className="font-display font-black text-2xl sm:text-[25px] text-ink tracking-tight leading-tight mb-0.5">
+                <h1 className="font-display font-black text-2xl sm:text-[25px] text-ink tracking-tight leading-tight mb-1">
                   Rishab <span className="text-seal">Chandgothia</span>
                 </h1>
                 <p className="font-body text-indigo font-semibold text-sm sm:text-base mb-2">
@@ -221,8 +230,8 @@ export default function BentoGridHome() {
                 </p>
 
                 {/* Bio Statement */}
-                <p className="font-body text-ink/85 text-base sm:text-base leading-relaxed mb-3">
-                  Crafting reliable distributed systems, high-throughput cloud runtimes, and deliberate web experiences with verified academic foundations.
+                <p className="font-body text-ink/85 text-base leading-relaxed mb-3.5">
+                  Crafting reliable distributed systems, high-throughput cloud runtimes, and deliberate web applications with clean design and solid engineering foundations.
                 </p>
               </div>
 
@@ -232,7 +241,7 @@ export default function BentoGridHome() {
                   href="/Rishab-Chandgothia-Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center h-9 px-4 rounded-xl bg-ink text-paper font-body text-sm font-semibold hover:bg-seal transition-colors duration-150 ease-[var(--ease-twos)] focus-visible:ring-2 focus-visible:ring-seal"
+                  className="w-full inline-flex items-center justify-center h-10 px-4 rounded-xl bg-ink text-paper font-body text-sm font-semibold hover:bg-seal transition-colors duration-150 ease-[var(--ease-twos)] focus-visible:ring-2 focus-visible:ring-seal"
                 >
                   <svg className="w-4 h-4 mr-2 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 12L12 16.5m0 0L16.5 12M12 16.5V3" />
@@ -257,27 +266,24 @@ export default function BentoGridHome() {
                   ))}
                 </div>
 
-                {/* Status Indicator */}
+                {/* Location indicator */}
                 <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-ink/5 text-ink text-[13px] font-body">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-pine inline-block" />
-                    <span className="font-semibold text-pine">Open for Roles</span>
-                  </div>
-                  <span className="text-mist font-medium">Jaipur, India</span>
+                  <span className="text-mist font-medium">Location</span>
+                  <span className="font-semibold text-ink">Surat, Gujarat, India</span>
                 </div>
               </div>
             </div>
 
-            {/* CARD 2: ABOUT ME CARD */}
+            {/* CARD 2: ABOUT ME CARD (CodingGita • Surat) */}
             <Link
               href="/about"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
+              className="group rounded-2xl sm:rounded-3xl bg-paper p-4 sm:p-4.5 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
               style={{ animationDelay: '100ms' }}
             >
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    <span className="w-6.5 h-6.5 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
                       志
                     </span>
                     <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
@@ -290,22 +296,22 @@ export default function BentoGridHome() {
                 </div>
 
                 <p className="font-body text-mist text-[13px] font-semibold mb-1">
-                  Academic Roots &amp; Engineering Ethos
+                  CodingGita &bull; Surat, India
                 </p>
 
-                <p className="font-body text-ink/85 text-base sm:text-base leading-relaxed">
-                  B.Tech CSE @ Arya College (8.88 CGPA). Passionate about high-concurrency systems, deterministic state machines, and clean craftsmanship.
+                <p className="font-body text-ink/85 text-base leading-relaxed">
+                  Full-Stack Developer studying Computer Science at CodingGita in Surat, Gujarat. Building high-concurrency architectures, scalable cloud runtimes, and dependable software.
                 </p>
               </div>
 
-              <div className="pt-1.5 flex items-center justify-between text-[13px] font-body">
+              <div className="pt-2 flex items-center justify-between text-[13px] font-body">
                 <span className="text-seal font-semibold group-hover:underline">Read dossier &rarr;</span>
-                <span className="text-mist font-medium">8.88 CGPA</span>
+                <span className="text-mist font-medium">Surat, Gujarat</span>
               </div>
             </Link>
           </div>
 
-          {/* ================= COLUMN 2: PROJECTS, EXPERIENCE & SKILLS ================= */}
+          {/* ================= COLUMN 2: PROJECTS, EXPERIENCE & SKILLS (3 Cards) ================= */}
           <div className="flex flex-col gap-2.5 lg:gap-3 justify-between">
             
             {/* CARD 3: FEATURED PROJECTS CARD */}
@@ -317,7 +323,7 @@ export default function BentoGridHome() {
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    <span className="w-6.5 h-6.5 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
                       創
                     </span>
                     <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
@@ -363,7 +369,7 @@ export default function BentoGridHome() {
               </div>
             </Link>
 
-            {/* CARD 4: EXPERIENCE & PODIUMS CARD */}
+            {/* CARD 4: EXPERIENCE & PODIUMS CARD (Dev Heat @ IIIT Surat & ECSOC) */}
             <Link
               href="/certificates"
               className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
@@ -372,7 +378,7 @@ export default function BentoGridHome() {
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    <span className="w-6.5 h-6.5 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
                       証
                     </span>
                     <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-indigo transition-colors">
@@ -385,17 +391,17 @@ export default function BentoGridHome() {
                 </div>
 
                 <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
-                  National Hackathon Podiums &amp; Open Source
+                  Hackathon Finals &amp; Open Source
                 </p>
 
-                {/* Sub-item: SIH */}
-                <div data-ui="experience-sih" className="p-2 rounded-xl bg-ink/5 mb-1.5">
+                {/* Sub-item: Dev Heat @ IIIT Surat */}
+                <div data-ui="experience-iiit" className="p-2 rounded-xl bg-ink/5 mb-1.5">
                   <div className="flex items-center justify-between text-[13px] font-body font-semibold">
-                    <span className="text-ink">Smart India Hackathon</span>
-                    <span className="text-indigo font-medium">Finalist &apos;24</span>
+                    <span className="text-ink">Dev Heat &bull; IIIT Surat</span>
+                    <span className="text-indigo font-medium">Finalist</span>
                   </div>
                   <p className="font-body text-[13px] text-ink/80 leading-snug mt-0.5">
-                    National Finalist with full-stack AI telemetry platform.
+                    Led 3-member team to offline presentation finals at IIIT Surat.
                   </p>
                 </div>
 
@@ -406,7 +412,7 @@ export default function BentoGridHome() {
                     <span className="text-pine font-medium">Top 20 Nat’l</span>
                   </div>
                   <p className="font-body text-[13px] text-ink/80 leading-snug mt-0.5">
-                    Top 20 national open-source contributors (12k+ applicants).
+                    Recognized among Top 20 participants out of 12,000+ national applicants.
                   </p>
                 </div>
               </div>
@@ -425,7 +431,7 @@ export default function BentoGridHome() {
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-pine text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    <span className="w-6.5 h-6.5 rounded-lg bg-pine text-paper flex items-center justify-center font-bold text-[13px] font-serif">
                       技
                     </span>
                     <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-pine transition-colors">
@@ -460,19 +466,19 @@ export default function BentoGridHome() {
             </Link>
           </div>
 
-          {/* ================= COLUMN 3: CREDENTIALS, PHILOSOPHY & CONTACT ================= */}
+          {/* ================= COLUMN 3: CREDENTIALS & CONTACT (2 Cards, No The Way box) ================= */}
           <div className="flex flex-col gap-2.5 lg:gap-3 justify-between">
             
             {/* CARD 6: CERTIFICATES CARD */}
             <Link
               href="/certificates"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
+              className="group rounded-2xl sm:rounded-3xl bg-paper p-4 sm:p-4.5 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
               style={{ animationDelay: '340ms' }}
             >
               <div>
-                <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    <span className="w-6.5 h-6.5 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
                       誉
                     </span>
                     <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-indigo transition-colors">
@@ -484,76 +490,53 @@ export default function BentoGridHome() {
                   </span>
                 </div>
 
-                <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
+                <p className="font-body text-mist text-[13px] font-semibold mb-2.5">
                   Verified Industry &amp; Algorithmic Honors
                 </p>
 
                 {/* Stacked Certificate Proof Items */}
-                <div className="space-y-1.5 mb-1.5">
-                  <div data-ui="cert-item" className="p-2 rounded-xl bg-ink/5 flex items-center justify-between">
+                <div className="space-y-2 mb-2">
+                  <div data-ui="cert-item" className="p-2.5 rounded-xl bg-ink/5 flex items-center justify-between">
                     <div>
                       <p className="font-body font-semibold text-[13px] text-ink">HackerRank Verified</p>
                       <p className="font-body text-[13px] text-mist">JavaScript (Basic) • 100% Score</p>
                     </div>
                     <span className="text-indigo font-bold text-[13px]">100%</span>
                   </div>
-                  <div data-ui="cert-item" className="p-2 rounded-xl bg-ink/5 flex items-center justify-between">
+
+                  <div data-ui="cert-item" className="p-2.5 rounded-xl bg-ink/5 flex items-center justify-between">
                     <div>
                       <p className="font-body font-semibold text-[13px] text-ink">Sololearn Certified</p>
                       <p className="font-body text-[13px] text-mist">C &amp; C++ Data Structures</p>
                     </div>
                     <span className="text-indigo font-bold text-[13px]">Verified</span>
                   </div>
+
+                  <div data-ui="cert-item" className="p-2.5 rounded-xl bg-ink/5 flex items-center justify-between">
+                    <div>
+                      <p className="font-body font-semibold text-[13px] text-ink">IIIT Surat Dev Heat</p>
+                      <p className="font-body text-[13px] text-mist">Offline Presentation Finalist</p>
+                    </div>
+                    <span className="text-indigo font-bold text-[13px]">Finals</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-1 text-[13px] font-body text-indigo font-semibold group-hover:underline">
+              <div className="pt-2 text-[13px] font-body text-indigo font-semibold group-hover:underline">
                 View verified credentials &rarr;
               </div>
             </Link>
 
-            {/* CARD 7: THE WAY / PHILOSOPHY CARD */}
-            <div
-              className="rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between animate-enter"
-              style={{ animationDelay: '400ms' }}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
-                      道
-                    </span>
-                    <span className="font-display font-bold text-base sm:text-lg text-ink">
-                      The Way
-                    </span>
-                  </div>
-                  <span className="text-mist font-serif text-[13px]">質実剛健</span>
-                </div>
-
-                <p className="font-body text-mist text-[13px] font-semibold mb-1">
-                  Engineering Ethos
-                </p>
-
-                <blockquote className="font-body text-base sm:text-base text-ink/85 leading-relaxed italic border-l-2 border-seal/30 pl-3 my-1">
-                  &ldquo;Beyond code, engineering is creating order from ambiguity — architectures built to endure.&rdquo;
-                </blockquote>
-              </div>
-
-              <div className="pt-1 text-[13px] font-body text-mist font-medium">
-                Simplicity • Rigor • Longevity
-              </div>
-            </div>
-
-            {/* CARD 8: CONTACT DISPATCH CARD */}
+            {/* CARD 7: CONTACT DISPATCH CARD */}
             <Link
               href="/contact"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
-              style={{ animationDelay: '460ms' }}
+              className="group rounded-2xl sm:rounded-3xl bg-paper p-4 sm:p-4.5 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
+              style={{ animationDelay: '420ms' }}
             >
               <div>
-                <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-ink text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    <span className="w-6.5 h-6.5 rounded-lg bg-ink text-paper flex items-center justify-center font-bold text-[13px] font-serif">
                       墨
                     </span>
                     <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
@@ -565,35 +548,56 @@ export default function BentoGridHome() {
                   </span>
                 </div>
 
-                <p className="font-body text-mist text-[13px] font-semibold mb-1">
+                <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
                   Direct Dispatch &amp; Collaboration
                 </p>
 
-                <p className="font-body text-base sm:text-base text-ink/85 leading-relaxed mb-1.5">
-                  Open for full-stack engineering roles, architecture consulting, and open-source contributions.
+                <p className="font-body text-base text-ink/85 leading-relaxed mb-2.5">
+                  Based in Surat, Gujarat. Open for full-stack engineering roles, technical architecture, and open-source contributions.
                 </p>
               </div>
 
-              <div className="pt-1 flex items-center justify-between text-[13px] font-body">
-                <span className="text-seal font-semibold group-hover:underline">Compose message &rarr;</span>
-                <span className="text-mist font-medium">Within 24h</span>
+              <div className="space-y-2 pt-1">
+                <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-ink/5 text-[13px] font-body">
+                  <span className="text-mist font-medium">Response Time</span>
+                  <span className="text-pine font-semibold">Within 24 Hours</span>
+                </div>
+
+                <div className="flex items-center justify-between text-[13px] font-body pt-0.5">
+                  <span className="text-seal font-semibold group-hover:underline">Compose message &rarr;</span>
+                  <span className="text-mist font-medium">rishab.chandgothia.cg@gmail.com</span>
+                </div>
               </div>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* 3. Bottom Telemetry Bar: Copyright + Season Tag */}
+      {/* 3. Bottom Telemetry Bar: Crystal-Clear Floating Dock for Links + Copyright + Season Tag */}
       <div
-        className="relative z-10 pt-1 flex flex-col sm:flex-row items-center justify-between gap-2 text-[13px] font-body text-ink/75 animate-enter"
+        className="relative z-20 mt-1 flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-2 rounded-2xl bg-ink/95 text-paper text-[13px] font-body border border-paper/15 animate-enter"
         style={{ animationDelay: '520ms' }}
       >
-        <div className="flex items-center gap-4">
-          <p>© {currentYear} Rishab Chandgothia. All rights reserved.</p>
+        <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+          <p className="text-paper/90 font-medium">© {currentYear} Rishab Chandgothia</p>
+          <ul className="flex items-center gap-4 list-none">
+            {SOCIAL_LINKS.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-paper/85 hover:text-white hover:underline underline-offset-4 font-semibold transition-colors duration-150"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="scale-90 origin-right">
-          <SeasonTag />
+          <SeasonTag theme="paper" />
         </div>
       </div>
     </div>

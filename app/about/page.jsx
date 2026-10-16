@@ -6,13 +6,13 @@ import SealMark from '@/components/primitives/SealMark';
 export const metadata = {
   title: 'About & Philosophy | Rishab Chandgothia',
   description:
-    'Academic foundations at Arya College, engineering philosophy, problem-solving mindset, and full-stack development journey of Rishab Chandgothia.',
+    'Academic foundations at CodingGita, engineering philosophy, problem-solving mindset, and full-stack development journey of Rishab Chandgothia.',
   alternates: { canonical: '/about' },
   openGraph: {
     url: '/about',
     title: 'About & Philosophy | Rishab Chandgothia',
     description:
-      'Academic foundations at Arya College, engineering philosophy, problem-solving mindset, and full-stack development journey of Rishab Chandgothia.',
+      'Academic foundations at CodingGita, engineering philosophy, problem-solving mindset, and full-stack development journey of Rishab Chandgothia.',
   },
 };
 
