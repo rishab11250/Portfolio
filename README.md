@@ -1,67 +1,96 @@
 # Rishab Chandgothia — Portfolio
 
-Full-Stack Developer portfolio built with **Next.js (App Router)**, **React 19**, **Three.js**, and **Framer Motion**. Features interactive 3D elements, modular data architecture, and a dedicated dark cyberpunk aesthetic.
+Full-Stack Developer portfolio engineered with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, and **Framer Motion**. Designed with the **"Mist & Indigo"** paper-and-ink aesthetic: warm paper surfaces, black-ink typography, indigo print duotones, vermilion seal accents, and anime-style stepping animation.
 
 - **Live URL**: [https://www.itsrishab.xyz/](https://www.itsrishab.xyz/)
-- **Vercel Deployment**: Configured with Next.js App Router preset
+- **Vercel Deployment**: Pre-rendered static Next.js App Router export
+
+---
+
+## Design System: "Mist & Indigo"
+
+The portfolio follows a paper-and-ink visual language paired with anime-style light and timing:
+
+* **Color Palette**:
+  * **Paper** (`#F1ECE0`): Warm washi-style paper background with subtle procedural turbulence grain (`opacity: 0.05`).
+  * **Ink** (`#17181C`): Deep sumi black for high-contrast typography (15.5:1 contrast ratio, WCAG AAA).
+  * **Indigo** (`#1E3A5F`): Traditional blue-black dye for print imagery and interactive highlights (9.8:1 contrast ratio).
+  * **Prussian Sky** (`#0B2545`): Deep twilight navy for the footer skyline.
+  * **Vermilion Seal** (`#C91F37`): Traditional red ink stamp ("RC") brand mark and button accents.
+  * **Mist** (`#5E636D`): Neutral graphite tone for secondary captions and metadata (5.1:1 contrast ratio).
+* **Typography**:
+  * **Headings**: `Zen_Old_Mincho` (weights 700 and 900, Latin subset only).
+  * **Body / UI**: `Zen_Kaku_Gothic_New` (weights 400 and 500, Latin subset only).
+* **Motion & Timing**:
+  * Stepping easings (`--ease-twos: steps(4)`, `--ease-threes: steps(6)`).
+  * Full accessibility fallback via `prefers-reduced-motion` (instant reveal, zero forced motion).
+* **Language**:
+  * Plain English exclusively across all UI copy, navigation labels, alt text, and metadata.
+
+---
+
+## Architecture & Pages
+
+The application is structured into 6 focused pages using Next.js App Router and React Server Components (RSC):
+
+1. **Home (`/`)**:
+   * Traditional ink landscape aesthetic with pointer-tracked ink mask revealing distant ridge, mid ridge, and pine artwork layers.
+   * Asymmetrical layout featuring verified engineering summary, resume links, and navigation cards to all core pages.
+   * Prerendered as a pure React Server Component (zero client-side JS for the page body).
+2. **Projects (`/projects`)**:
+   * 6 production systems detailed with architecture summaries, tech stacks, and live links (Veltrix, DataTime Machine, Pixel-Collab, AadhaarPulse, StudyFlow AI, Cura).
+   * Verified competitive hackathon podiums (IIIT Surat, LNMIIT Jaipur, OceanLab Charusat).
+   * Isolated client island modal (`ProjectDialog.jsx`) synced with URL hash (`#<slug>`).
+3. **Skills (`/skills`)**:
+   * Categorized technical matrix covering Frontend Engineering, Backend & Systems, Databases & AI Integration, and Deployment & Tooling.
+   * Real, practical scopes without gameified stats or unmeasured benchmarks.
+   * Pure React Server Component.
+4. **About (`/about`)**:
+   * Academic record at Parul University (AIML, 9.14 & 8.04 SGPA), engineering philosophy, and deckled-frame portrait.
+   * Pure React Server Component.
+5. **Certificates (`/certificates`)**:
+   * Clean contact-sheet archive of verified credentials, including HackerRank (100% Score) and course completions.
+   * Pure React Server Component.
+6. **Contact (`/contact`)**:
+   * Letter stationery layout with direct email, LinkedIn, GitHub, and phone channels.
+   * EmailJS form dispatch with honeypot spam protection, 30s cooldown timer, and vermilion seal stamp confirmation.
+
+---
+
+## Measured Performance & Bundle Metrics
+
+Measurements conducted against the production static build (`pnpm run build` and `pnpm run measure`):
+
+| Metric | Previous Architecture | Redesign (Multi-Page Server Components) | Impact |
+|---|---|---|---|
+| **Runtime 3D / WebGL** | Three.js + React Three Fiber (~854 kB raw) | None (Tailwind CSS + vector SVGs) | **-100% 3D overhead** |
+| **Component Architecture** | 100% Client Components (`"use client"`) | Server Components with 5 isolated client islands | **Eliminated page JS execution** |
+| **Initial Client JS** | ~265.0 kB gzipped | **192.1 kB gzipped** | **-27.5% reduction** |
+| **Pages** | Single-page monolithic scroll | 6 dedicated pages (`/`, `/projects`, `/skills`, `/about`, `/certificates`, `/contact`) | Deep URLs, clean navigation |
+| **Typography & Sizing** | Inconsistent sub-10px text | 12px minimum font size (`text-xs`) everywhere | Legible across all mobile devices |
+| **Color System** | Hard-coded arbitrary hexes | System design tokens (`bg-paper`, `text-ink`, `text-seal`, etc.) | Verified contrast ratios |
 
 ---
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 (App Router, JavaScript)
-- **UI Library**: React 19
-- **Styling**: CSS Custom Properties (dedicated cyberpunk dark theme with glassmorphism)
-- **3D Graphics**: Three.js, React Three Fiber (lazy-loaded dynamically with `ssr: false`)
-- **Animations**: Framer Motion
-- **Tour**: Driver.js (8 guided steps)
-- **Analytics**: `@vercel/analytics`, `@vercel/speed-insights`
-- **Contact**: EmailJS with honeypot spam protection and client-side cooldown
+* **Framework**: Next.js 16.4 (App Router, Turbopack, JavaScript)
+* **UI & Styling**: React 19, Tailwind CSS v4, PostCSS
+* **Animation**: Framer Motion (LazyMotion, scroll transforms, reduced-motion fallbacks)
+* **Email Service**: `@emailjs/browser`
+* **Analytics**: `@vercel/analytics`, `@vercel/speed-insights`
+* **Linter**: ESLint 9 (`components`, `data`, `app`, `scripts`, `lib`)
 
 ---
 
-## Features
-
-- **Single-Page Showcase**: Pre-rendered landing page with smooth section-based navigation, project showcase (live demo & code links), and dynamic modals for certificates and hackathons.
-- **Unified SEO & Security**: Content Security Policy (CSP) with standard Next.js bootstrap script allowances, automated `robots.js`, and canonical `sitemap.js` generated from `https://www.itsrishab.xyz/`.
-- **Honeypot & Rate-Limited Contact**: Contact form with honeypot field and 30-second client-side cooldown.
-- **Session-Aware Loader**: Intro starfield displays once per session via `sessionStorage` with instant `SKIP [ESC]` shortcut; crawlers receive full static HTML immediately.
-- **Interactive 3D**: `SciFiTerrain` horizon mesh and `HoloGlobe` tech globe with interactive controls and lazy-loaded WebGL canvas.
-
----
-
-## Measured Performance & Metrics
-
-### Mobile Lighthouse Audit (Measured Locally on Production Build)
-
-| Category | Score |
-|---|---|
-| **SEO** | 100 / 100 |
-| **Best Practices** | 96 / 100 |
-| **Accessibility** | 91 / 100 |
-| **Performance** | 64 / 100 (mobile emulation, includes 3D canvas initialization) |
-
-### Bundle & Payload Comparison
-
-| Metric | Vite Build | Next.js App Router Build |
-|---|---|---|
-| **HTML Rendering** | Client-only (empty `<div id="root">`) | Pre-rendered Static HTML (SSG) |
-| **Initial Client JS** | ~143 kB gzipped | ~265 kB gzipped (sum of initial scripts referenced in HTML) |
-| **Three.js / 3D Chunk** | 718.6 kB raw (186.7 kB gzip) | 854.6 kB raw (228.8 kB gzip) lazy-loaded via `next/dynamic` |
-| **Pre-rendered Routes** | 1 (`index.html`) | 6 routes (Home, Not Found, Robots, Sitemap, Icon, OG Image) |
-
-> **Architecture Trade-off**: Next.js App Router increases initial hydration JavaScript from ~143 kB to ~265 kB gzipped due to framework runtime and routing architecture. In return, the landing page is delivered as fully formed static HTML on the first byte, enabling instant crawler indexing, rich social sharing cards, and faster perceived content rendering.
-
----
-
-## Getting Started
+## Local Development
 
 ### Prerequisites
 
-- Node.js 18+ (Node 20+ recommended)
-- `pnpm` (or `npm`)
+* Node.js 20+
+* `pnpm`
 
-### Installation
+### Setup
 
 ```bash
 # Clone the repository
@@ -83,29 +112,24 @@ cp .env.example .env
 | `NEXT_PUBLIC_EMAIL_TEMPLATE_ID` | EmailJS Template ID |
 | `NEXT_PUBLIC_EMAIL_PUBLIC_KEY` | EmailJS Public API Key |
 
-> **Note**: For production deployments, ensure the canonical domain `https://www.itsrishab.xyz` is added to the allowed origins list in your [EmailJS Dashboard](https://dashboard.emailjs.com/).
-
-### Running Locally
+### Commands
 
 ```bash
-# Start development server
+# Run local development server
 pnpm run dev
 
-# Run ESLint check
+# Run ESLint validation across all source folders
 pnpm run lint
 
-# Build for production
+# Verify 72 microseasons calendar mapping (365 days, 0 gaps, 0 overlaps)
+pnpm run check:seasons
+
+# Measure exact client JS bundle sizes
+pnpm run measure
+
+# Build production static export
 pnpm run build
 
 # Start production server
 pnpm run start
 ```
-
----
-
-## Deployment & Vercel Settings
-
-When deploying to Vercel:
-1. Ensure the **Framework Preset** is set to **Next.js** (auto-detected).
-2. Set Environment Variables in Project Settings (`NEXT_PUBLIC_EMAIL_*`).
-3. Custom Domain is mapped to `www.itsrishab.xyz` with 308 redirect from apex `itsrishab.xyz`.
