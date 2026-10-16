@@ -104,7 +104,7 @@ export default function BentoGridHome() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full min-h-[calc(100dvh-4.25rem)] sm:min-h-[calc(100dvh-4.75rem)] flex flex-col justify-between px-3 sm:px-6 lg:px-8 py-2 sm:py-3 select-none"
+      className="relative w-full h-[calc(100dvh-4.25rem)] sm:h-[calc(100dvh-4.75rem)] flex flex-col justify-between px-3 sm:px-6 lg:px-8 py-2 sm:py-2.5 select-none overflow-hidden"
       style={{
         '--mx': '50%',
         '--my': '50%',
@@ -190,173 +190,129 @@ export default function BentoGridHome() {
         </div>
       </div>
 
-      {/* 2. Concise Balanced 3-Column Japanese Bento Grid */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto my-auto py-0.5 sm:py-1">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 lg:gap-3 items-stretch">
+      {/* 2. Symmetric 3-Column × 2-Row Bento Grid (Flawlessly Aligned, Exactly 6 Cards) */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto my-auto flex-1 flex flex-col justify-center py-0.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 items-stretch lg:auto-rows-fr h-full max-h-[calc(100dvh-10rem)]">
           
-          {/* ================= COLUMN 1: IDENTITY & ABOUT (2 Cards) ================= */}
-          <div className="flex flex-col gap-2.5 lg:gap-3 justify-between">
-            
-            {/* CARD 1: MASTER PROFILE CARD (NO duplicate logo) */}
-            <div
-              className="rounded-2xl sm:rounded-3xl bg-paper p-4 sm:p-5 flex flex-col justify-between animate-enter"
-              style={{ animationDelay: '40ms' }}
-            >
-              <div>
-                {/* Header: Centered Avatar + Status Indicator (No duplicate logo) */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden border-2 border-ink/15 bg-ink/5">
-                    <Image
-                      src="https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773478876/WhatsApp_Image_2026-03-07_at_9.25.25_AM_cswpuv.jpg"
-                      alt="Rishab Chandgothia"
-                      fill
-                      sizes="140px"
-                      className="object-cover object-top"
-                      priority
-                    />
-                  </div>
-                  <div className="px-3 py-1 rounded-full bg-pine/10 text-pine text-[13px] font-semibold flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-pine" />
-                    <span>Open for Roles</span>
-                  </div>
+          {/* ================= ROW 1, CARD 1: MASTER PROFILE CARD ================= */}
+          <div
+            className="rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between animate-enter h-full"
+            style={{ animationDelay: '40ms' }}
+          >
+            <div>
+              {/* Header: Centered Avatar + Status Pill (No duplicate logo) */}
+              <div className="flex items-center justify-between mb-2">
+                <div className="relative w-13 h-13 sm:w-15 sm:h-15 rounded-2xl overflow-hidden border-2 border-ink/15 bg-ink/5">
+                  <Image
+                    src="https://res.cloudinary.com/dhr1jtyi2/image/upload/v1773478876/WhatsApp_Image_2026-03-07_at_9.25.25_AM_cswpuv.jpg"
+                    alt="Rishab Chandgothia"
+                    fill
+                    sizes="120px"
+                    className="object-cover object-top"
+                    priority
+                  />
                 </div>
-
-                {/* Name & Title */}
-                <h1 className="font-display font-black text-2xl sm:text-[25px] text-ink tracking-tight leading-tight mb-1">
-                  Rishab <span className="text-seal">Chandgothia</span>
-                </h1>
-                <p className="font-body text-indigo font-semibold text-sm sm:text-base mb-2">
-                  Full-Stack Developer &amp; Systems Engineer
-                </p>
-
-                {/* Bio Statement */}
-                <p className="font-body text-ink/85 text-base leading-relaxed mb-3.5">
-                  Crafting reliable distributed systems, high-throughput cloud runtimes, and deliberate web applications with clean design and solid engineering foundations.
-                </p>
-              </div>
-
-              <div className="space-y-2 pt-0.5">
-                {/* Download Resume Action */}
-                <a
-                  href="/Rishab-Chandgothia-Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center h-10 px-4 rounded-xl bg-ink text-paper font-body text-sm font-semibold hover:bg-seal transition-colors duration-150 ease-[var(--ease-twos)] focus-visible:ring-2 focus-visible:ring-seal"
-                >
-                  <svg className="w-4 h-4 mr-2 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 12L12 16.5m0 0L16.5 12M12 16.5V3" />
-                  </svg>
-                  <span>Download Resume</span>
-                  <span className="ml-1.5 font-body">&rarr;</span>
-                </a>
-
-                {/* Inset Social Dock */}
-                <div className="flex items-center justify-around py-1.5 px-2.5 rounded-xl bg-ink/5">
-                  {SOCIAL_DOCK.map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={item.label}
-                      className="p-1 rounded-lg text-ink/75 hover:text-seal hover:bg-seal/10 transition-colors duration-150"
-                    >
-                      {item.icon}
-                    </a>
-                  ))}
-                </div>
-
-                {/* Location indicator */}
-                <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-ink/5 text-ink text-[13px] font-body">
-                  <span className="text-mist font-medium">Location</span>
-                  <span className="font-semibold text-ink">Surat, Gujarat, India</span>
+                <div className="px-2.5 py-0.5 rounded-full bg-pine/10 text-pine text-[13px] font-semibold flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-pine" />
+                  <span>Open for Roles</span>
                 </div>
               </div>
+
+              {/* Name & Title */}
+              <h1 className="font-display font-black text-2xl sm:text-[24px] text-ink tracking-tight leading-tight mb-0.5">
+                Rishab <span className="text-seal">Chandgothia</span>
+              </h1>
+              <p className="font-body text-indigo font-semibold text-sm sm:text-base mb-1.5">
+                Full-Stack Developer &amp; Systems Engineer
+              </p>
+
+              {/* Bio Statement */}
+              <p className="font-body text-ink/85 text-[15px] sm:text-base leading-relaxed mb-2">
+                Crafting reliable distributed systems, high-throughput cloud runtimes, and dependable web applications.
+              </p>
             </div>
 
-            {/* CARD 2: ABOUT ME CARD (CodingGita • Surat) */}
-            <Link
-              href="/about"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-4 sm:p-4.5 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
-              style={{ animationDelay: '100ms' }}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6.5 h-6.5 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
-                      志
-                    </span>
-                    <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
-                      About Me
-                    </span>
-                  </div>
-                  <span className="text-ink/50 group-hover:text-seal font-semibold text-sm transition-transform group-hover:translate-x-0.5">
-                    ↗
-                  </span>
-                </div>
+            <div className="space-y-1.5 pt-0.5">
+              {/* Download Resume Action */}
+              <a
+                href="/Rishab-Chandgothia-Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center h-9 px-4 rounded-xl bg-ink text-paper font-body text-sm font-semibold hover:bg-seal transition-colors duration-150 ease-[var(--ease-twos)] focus-visible:ring-2 focus-visible:ring-seal"
+              >
+                <svg className="w-4 h-4 mr-2 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 12L12 16.5m0 0L16.5 12M12 16.5V3" />
+                </svg>
+                <span>Download Resume</span>
+                <span className="ml-1.5 font-body">&rarr;</span>
+              </a>
 
-                <p className="font-body text-mist text-[13px] font-semibold mb-1">
-                  CodingGita &bull; Surat, India
-                </p>
-
-                <p className="font-body text-ink/85 text-base leading-relaxed">
-                  Full-Stack Developer studying Computer Science at CodingGita in Surat, Gujarat. Building high-concurrency architectures, scalable cloud runtimes, and dependable software.
-                </p>
+              {/* Inset Social Dock */}
+              <div className="flex items-center justify-around py-1 px-2.5 rounded-xl bg-ink/5">
+                {SOCIAL_DOCK.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.label}
+                    className="p-1 rounded-lg text-ink/75 hover:text-seal hover:bg-seal/10 transition-colors duration-150"
+                  >
+                    {item.icon}
+                  </a>
+                ))}
               </div>
 
-              <div className="pt-2 flex items-center justify-between text-[13px] font-body">
-                <span className="text-seal font-semibold group-hover:underline">Read dossier &rarr;</span>
-                <span className="text-mist font-medium">Surat, Gujarat</span>
+              {/* Location indicator */}
+              <div className="flex items-center justify-between px-3 py-1 rounded-xl bg-ink/5 text-ink text-[13px] font-body">
+                <span className="text-mist font-medium">Location</span>
+                <span className="font-semibold text-ink">Surat, Gujarat, India</span>
               </div>
-            </Link>
+            </div>
           </div>
 
-          {/* ================= COLUMN 2: PROJECTS, EXPERIENCE & SKILLS (3 Cards) ================= */}
-          <div className="flex flex-col gap-2.5 lg:gap-3 justify-between">
-            
-            {/* CARD 3: FEATURED PROJECTS CARD */}
-            <Link
-              href="/projects"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
-              style={{ animationDelay: '160ms' }}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6.5 h-6.5 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
-                      創
-                    </span>
-                    <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
-                      Projects
-                    </span>
-                  </div>
-                  <span className="text-ink/50 group-hover:text-seal font-semibold text-sm transition-transform group-hover:translate-x-0.5">
-                    Explore ↗
+          {/* ================= ROW 1, CARD 2: FEATURED PROJECTS ================= */}
+          <Link
+            href="/projects"
+            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
+            style={{ animationDelay: '100ms' }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    創
+                  </span>
+                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
+                    Projects
                   </span>
                 </div>
-
-                <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
-                  Production Platforms &amp; Distributed Systems
-                </p>
-
-                {/* Sleek UI Mockup Preview Box */}
-                <div data-ui="project-mockup" className="p-2.5 rounded-xl bg-ink/5 space-y-1 mb-1.5">
-                  <div className="flex items-center justify-between text-[13px] font-body font-semibold">
-                    <span className="text-ink">Veltrix • Wealth Platform</span>
-                    <span className="px-1.5 py-0.5 rounded-md bg-seal/10 text-seal font-medium text-[13px]">
-                      Production
-                    </span>
-                  </div>
-                  <p className="font-body text-[13px] text-ink/80 leading-snug">
-                    Sovereign financial ledger with real-time cash analytics and sub-50ms latency.
-                  </p>
-                  <p className="text-[13px] font-body text-mist pt-0.5">
-                    Next.js • Node • Express • MongoDB
-                  </p>
-                </div>
+                <span className="text-ink/50 group-hover:text-seal font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                  Explore ↗
+                </span>
               </div>
 
-              <div className="flex flex-wrap gap-1.5 pt-0.5">
+              <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
+                Production Platforms &amp; Distributed Systems
+              </p>
+
+              {/* Sleek UI Mockup Preview Box */}
+              <div data-ui="project-mockup" className="p-2.5 rounded-xl bg-ink/5 space-y-1 mb-2">
+                <div className="flex items-center justify-between text-[13px] font-body font-semibold">
+                  <span className="text-ink">Veltrix • Wealth Platform</span>
+                  <span className="px-1.5 py-0.5 rounded-md bg-seal/10 text-seal font-medium text-[13px]">
+                    Production
+                  </span>
+                </div>
+                <p className="font-body text-[13px] text-ink/80 leading-snug">
+                  Sovereign financial operating ledger with real-time cash analytics and sub-50ms query latency.
+                </p>
+                <p className="text-[13px] font-body text-mist pt-0.5">
+                  Next.js • Node.js • Express • MongoDB
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-1">
                 <span className="px-2 py-0.5 rounded-md bg-ink/5 text-ink text-[13px] font-semibold">
                   Pixel-Collab
                 </span>
@@ -367,216 +323,214 @@ export default function BentoGridHome() {
                   +4 more
                 </span>
               </div>
-            </Link>
+            </div>
 
-            {/* CARD 4: EXPERIENCE & PODIUMS CARD (Dev Heat @ IIIT Surat & ECSOC) */}
-            <Link
-              href="/certificates"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
-              style={{ animationDelay: '220ms' }}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6.5 h-6.5 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
-                      証
-                    </span>
-                    <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-indigo transition-colors">
-                      Experience &amp; Podiums
-                    </span>
-                  </div>
-                  <span className="text-ink/50 group-hover:text-indigo font-semibold text-sm transition-transform group-hover:translate-x-0.5">
-                    Verify ↗
+            <div className="pt-1.5 text-[13px] font-body text-seal font-semibold group-hover:underline">
+              Explore production architectures &rarr;
+            </div>
+          </Link>
+
+          {/* ================= ROW 1, CARD 3: EXPERIENCE & PODIUMS ================= */}
+          <Link
+            href="/certificates"
+            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
+            style={{ animationDelay: '160ms' }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    証
+                  </span>
+                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-indigo transition-colors">
+                    Experience &amp; Podiums
                   </span>
                 </div>
+                <span className="text-ink/50 group-hover:text-indigo font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                  Verify ↗
+                </span>
+              </div>
 
-                <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
-                  Hackathon Finals &amp; Open Source
+              <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
+                Hackathon Finals &amp; Open Source Honors
+              </p>
+
+              {/* Sub-item: Dev Heat @ IIIT Surat */}
+              <div data-ui="experience-iiit" className="p-2.5 rounded-xl bg-ink/5 mb-1.5">
+                <div className="flex items-center justify-between text-[13px] font-body font-semibold">
+                  <span className="text-ink">Dev Heat &bull; IIIT Surat</span>
+                  <span className="text-indigo font-medium">Finalist</span>
+                </div>
+                <p className="font-body text-[13px] text-ink/80 leading-snug mt-0.5">
+                  Led 3-member team to offline presentation finals at IIIT Surat.
                 </p>
-
-                {/* Sub-item: Dev Heat @ IIIT Surat */}
-                <div data-ui="experience-iiit" className="p-2 rounded-xl bg-ink/5 mb-1.5">
-                  <div className="flex items-center justify-between text-[13px] font-body font-semibold">
-                    <span className="text-ink">Dev Heat &bull; IIIT Surat</span>
-                    <span className="text-indigo font-medium">Finalist</span>
-                  </div>
-                  <p className="font-body text-[13px] text-ink/80 leading-snug mt-0.5">
-                    Led 3-member team to offline presentation finals at IIIT Surat.
-                  </p>
-                </div>
-
-                {/* Sub-item: ECSOC */}
-                <div data-ui="experience-ecsoc" className="p-2 rounded-xl bg-ink/5">
-                  <div className="flex items-center justify-between text-[13px] font-body font-semibold">
-                    <span className="text-ink">Elite Summer of Code</span>
-                    <span className="text-pine font-medium">Top 20 Nat’l</span>
-                  </div>
-                  <p className="font-body text-[13px] text-ink/80 leading-snug mt-0.5">
-                    Recognized among Top 20 participants out of 12,000+ national applicants.
-                  </p>
-                </div>
               </div>
 
-              <div className="pt-1.5 text-[13px] font-body text-indigo font-semibold group-hover:underline">
-                View competitive achievements &rarr;
+              {/* Sub-item: ECSOC */}
+              <div data-ui="experience-ecsoc" className="p-2.5 rounded-xl bg-ink/5">
+                <div className="flex items-center justify-between text-[13px] font-body font-semibold">
+                  <span className="text-ink">Elite Summer of Code</span>
+                  <span className="text-pine font-medium">Top 20 Nat’l</span>
+                </div>
+                <p className="font-body text-[13px] text-ink/80 leading-snug mt-0.5">
+                  Recognized among Top 20 participants out of 12,000+ national applicants.
+                </p>
               </div>
-            </Link>
+            </div>
 
-            {/* CARD 5: SKILLS MATRIX CARD */}
-            <Link
-              href="/skills"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
-              style={{ animationDelay: '280ms' }}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6.5 h-6.5 rounded-lg bg-pine text-paper flex items-center justify-center font-bold text-[13px] font-serif">
-                      技
-                    </span>
-                    <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-pine transition-colors">
-                      Skills Matrix
-                    </span>
-                  </div>
-                  <span className="text-ink/50 group-hover:text-pine font-semibold text-sm transition-transform group-hover:translate-x-0.5">
-                    Inspect ↗
+            <div className="pt-1.5 text-[13px] font-body text-indigo font-semibold group-hover:underline">
+              View competitive achievements &rarr;
+            </div>
+          </Link>
+
+          {/* ================= ROW 2, CARD 1: ABOUT ME (CodingGita • Surat) ================= */}
+          <Link
+            href="/about"
+            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
+            style={{ animationDelay: '220ms' }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    志
+                  </span>
+                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
+                    About Me
                   </span>
                 </div>
-
-                <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
-                  Frontend, Backend runtimes &amp; ACID Data
-                </p>
-
-                {/* Interactive Skill Chips */}
-                <div className="flex flex-wrap gap-1">
-                  {SKILL_BADGES.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-2 py-0.5 rounded-md bg-ink/5 hover:bg-pine/10 hover:text-pine text-ink text-[13px] font-semibold transition-colors duration-150"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+                <span className="text-ink/50 group-hover:text-seal font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                  ↗
+                </span>
               </div>
 
-              <div className="pt-1.5 text-[13px] font-body text-pine font-semibold group-hover:underline">
-                Enter 16-bit interactive skill realm &rarr;
-              </div>
-            </Link>
-          </div>
+              <p className="font-body text-mist text-[13px] font-semibold mb-1">
+                CodingGita &bull; Surat, Gujarat
+              </p>
 
-          {/* ================= COLUMN 3: CREDENTIALS & CONTACT (2 Cards, No The Way box) ================= */}
-          <div className="flex flex-col gap-2.5 lg:gap-3 justify-between">
-            
-            {/* CARD 6: CERTIFICATES CARD */}
-            <Link
-              href="/certificates"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-4 sm:p-4.5 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
-              style={{ animationDelay: '340ms' }}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6.5 h-6.5 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
-                      誉
-                    </span>
-                    <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-indigo transition-colors">
-                      Certificates
-                    </span>
-                  </div>
-                  <span className="text-ink/50 group-hover:text-indigo font-semibold text-sm transition-transform group-hover:translate-x-0.5">
-                    Verify ↗
+              <p className="font-body text-ink/85 text-[15px] sm:text-base leading-relaxed mb-2">
+                Full-Stack Developer studying Computer Science at CodingGita in Surat, Gujarat. Building high-concurrency systems, scalable cloud runtimes, and dependable software.
+              </p>
+
+              <p className="text-[13px] font-body text-ink/75">
+                Specialized in distributed architectures, ACID data integrity, and deterministic state transitions.
+              </p>
+            </div>
+
+            <div className="pt-1.5 flex items-center justify-between text-[13px] font-body">
+              <span className="text-seal font-semibold group-hover:underline">Read background dossier &rarr;</span>
+              <span className="text-mist font-medium">Surat, Gujarat</span>
+            </div>
+          </Link>
+
+          {/* ================= ROW 2, CARD 2: SKILLS MATRIX ================= */}
+          <Link
+            href="/skills"
+            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
+            style={{ animationDelay: '280ms' }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-lg bg-pine text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    技
+                  </span>
+                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-pine transition-colors">
+                    Skills Matrix
                   </span>
                 </div>
-
-                <p className="font-body text-mist text-[13px] font-semibold mb-2.5">
-                  Verified Industry &amp; Algorithmic Honors
-                </p>
-
-                {/* Stacked Certificate Proof Items */}
-                <div className="space-y-2 mb-2">
-                  <div data-ui="cert-item" className="p-2.5 rounded-xl bg-ink/5 flex items-center justify-between">
-                    <div>
-                      <p className="font-body font-semibold text-[13px] text-ink">HackerRank Verified</p>
-                      <p className="font-body text-[13px] text-mist">JavaScript (Basic) • 100% Score</p>
-                    </div>
-                    <span className="text-indigo font-bold text-[13px]">100%</span>
-                  </div>
-
-                  <div data-ui="cert-item" className="p-2.5 rounded-xl bg-ink/5 flex items-center justify-between">
-                    <div>
-                      <p className="font-body font-semibold text-[13px] text-ink">Sololearn Certified</p>
-                      <p className="font-body text-[13px] text-mist">C &amp; C++ Data Structures</p>
-                    </div>
-                    <span className="text-indigo font-bold text-[13px]">Verified</span>
-                  </div>
-
-                  <div data-ui="cert-item" className="p-2.5 rounded-xl bg-ink/5 flex items-center justify-between">
-                    <div>
-                      <p className="font-body font-semibold text-[13px] text-ink">IIIT Surat Dev Heat</p>
-                      <p className="font-body text-[13px] text-mist">Offline Presentation Finalist</p>
-                    </div>
-                    <span className="text-indigo font-bold text-[13px]">Finals</span>
-                  </div>
-                </div>
+                <span className="text-ink/50 group-hover:text-pine font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                  Inspect ↗
+                </span>
               </div>
 
-              <div className="pt-2 text-[13px] font-body text-indigo font-semibold group-hover:underline">
-                View verified credentials &rarr;
-              </div>
-            </Link>
+              <p className="font-body text-mist text-[13px] font-semibold mb-2">
+                Frontend, Backend runtimes &amp; ACID Data
+              </p>
 
-            {/* CARD 7: CONTACT DISPATCH CARD */}
-            <Link
-              href="/contact"
-              className="group rounded-2xl sm:rounded-3xl bg-paper p-4 sm:p-4.5 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter"
-              style={{ animationDelay: '420ms' }}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6.5 h-6.5 rounded-lg bg-ink text-paper flex items-center justify-center font-bold text-[13px] font-serif">
-                      墨
-                    </span>
-                    <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
-                      Contact
-                    </span>
-                  </div>
-                  <span className="text-ink/50 group-hover:text-seal font-semibold text-sm transition-transform group-hover:translate-x-0.5">
-                    Dispatch ↗
+              {/* Interactive Skill Chips */}
+              <div className="flex flex-wrap gap-1 mb-1.5">
+                {SKILL_BADGES.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-2 py-0.5 rounded-md bg-ink/5 hover:bg-pine/10 hover:text-pine text-ink text-[13px] font-semibold transition-colors duration-150"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-1.5 text-[13px] font-body text-pine font-semibold group-hover:underline">
+              Enter 16-bit interactive skill realm &rarr;
+            </div>
+          </Link>
+
+          {/* ================= ROW 2, CARD 3: CERTIFICATES & HONORS ================= */}
+          <Link
+            href="/certificates"
+            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
+            style={{ animationDelay: '340ms' }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                    誉
+                  </span>
+                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-indigo transition-colors">
+                    Certificates
                   </span>
                 </div>
-
-                <p className="font-body text-mist text-[13px] font-semibold mb-1.5">
-                  Direct Dispatch &amp; Collaboration
-                </p>
-
-                <p className="font-body text-base text-ink/85 leading-relaxed mb-2.5">
-                  Based in Surat, Gujarat. Open for full-stack engineering roles, technical architecture, and open-source contributions.
-                </p>
+                <span className="text-ink/50 group-hover:text-indigo font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                  Verify ↗
+                </span>
               </div>
 
-              <div className="space-y-2 pt-1">
-                <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-ink/5 text-[13px] font-body">
-                  <span className="text-mist font-medium">Response Time</span>
-                  <span className="text-pine font-semibold">Within 24 Hours</span>
+              <p className="font-body text-mist text-[13px] font-semibold mb-2">
+                Verified Industry &amp; Algorithmic Honors
+              </p>
+
+              {/* Stacked Certificate Proof Items */}
+              <div className="space-y-1.5 mb-1.5">
+                <div data-ui="cert-item" className="p-2 rounded-xl bg-ink/5 flex items-center justify-between">
+                  <div>
+                    <p className="font-body font-semibold text-[13px] text-ink">HackerRank Verified</p>
+                    <p className="font-body text-[13px] text-mist">JavaScript (Basic) • 100% Score</p>
+                  </div>
+                  <span className="text-indigo font-bold text-[13px]">100%</span>
                 </div>
 
-                <div className="flex items-center justify-between text-[13px] font-body pt-0.5">
-                  <span className="text-seal font-semibold group-hover:underline">Compose message &rarr;</span>
-                  <span className="text-mist font-medium">rishab.chandgothia.cg@gmail.com</span>
+                <div data-ui="cert-item" className="p-2 rounded-xl bg-ink/5 flex items-center justify-between">
+                  <div>
+                    <p className="font-body font-semibold text-[13px] text-ink">Sololearn Certified</p>
+                    <p className="font-body text-[13px] text-mist">C &amp; C++ Data Structures</p>
+                  </div>
+                  <span className="text-indigo font-bold text-[13px]">Verified</span>
+                </div>
+
+                <div data-ui="cert-item" className="p-2 rounded-xl bg-ink/5 flex items-center justify-between">
+                  <div>
+                    <p className="font-body font-semibold text-[13px] text-ink">IIIT Surat Dev Heat</p>
+                    <p className="font-body text-[13px] text-mist">Offline Presentation Finalist</p>
+                  </div>
+                  <span className="text-indigo font-bold text-[13px]">Finals</span>
                 </div>
               </div>
-            </Link>
-          </div>
+            </div>
+
+            <div className="pt-1.5 text-[13px] font-body text-indigo font-semibold group-hover:underline">
+              View verified credentials &rarr;
+            </div>
+          </Link>
+
         </div>
       </div>
 
       {/* 3. Bottom Telemetry Bar: Crystal-Clear Floating Dock for Links + Copyright + Season Tag */}
       <div
-        className="relative z-20 mt-1 flex flex-col sm:flex-row items-center justify-between gap-3 px-4 py-2 rounded-2xl bg-ink/95 text-paper text-[13px] font-body border border-paper/15 animate-enter"
-        style={{ animationDelay: '520ms' }}
+        className="relative z-20 mt-0.5 flex flex-col sm:flex-row items-center justify-between gap-2.5 px-4 py-1.5 rounded-2xl bg-ink/95 text-paper text-[13px] font-body border border-paper/15 animate-enter"
+        style={{ animationDelay: '400ms' }}
       >
         <div className="flex flex-wrap items-center gap-4 sm:gap-6">
           <p className="text-paper/90 font-medium">© {currentYear} Rishab Chandgothia</p>
