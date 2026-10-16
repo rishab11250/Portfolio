@@ -1,5 +1,5 @@
 import React from 'react';
-import PanoramicVista from '@/components/sumie/PanoramicVista';
+import BentoGridHome from '@/components/sumie/BentoGridHome';
 
 export const metadata = {
   title: 'Rishab Chandgothia | Full Stack Developer',
@@ -11,7 +11,7 @@ export const metadata = {
 export default function Home() {
   return (
     <main id="main-content" data-page="sumie" className="w-full flex-1 flex flex-col justify-between overflow-hidden">
-      <PanoramicVista />
+      <BentoGridHome />
     </main>
   );
 }
