@@ -28,3 +28,6 @@ skills-lock.json
 .next
 out
 AGENTS.md
+.taste-skill/
+taste-skill/
+*taste-skill*

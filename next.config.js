@@ -6,7 +6,7 @@ const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval'" : ''} https://va.vercel-scripts.com;
     style-src 'self' 'unsafe-inline';
-    img-src 'self' data: blob: https://res.cloudinary.com https://api2.sololearn.com https://d8it4huxumps7.cloudfront.net https://img.shields.io https://camo.githubusercontent.com;
+    img-src 'self' data: blob: https://res.cloudinary.com https://api2.sololearn.com https://d8it4huxumps7.cloudfront.net;
     font-src 'self' data:;
     connect-src 'self' https://api.emailjs.com https://va.vercel-scripts.com https://vitals.vercel-insights.com;
     frame-ancestors 'none';
@@ -15,13 +15,15 @@ const cspHeader = `
 `.replace(/\s{2,}/g, ' ').trim();
 
 const nextConfig = {
+  poweredByHeader: false,
+  compress: true,
   images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
       { protocol: 'https', hostname: 'api2.sololearn.com' },
       { protocol: 'https', hostname: 'd8it4huxumps7.cloudfront.net' },
-      { protocol: 'https', hostname: 'img.shields.io' },
-      { protocol: 'https', hostname: 'camo.githubusercontent.com' },
     ],
   },
   async headers() {

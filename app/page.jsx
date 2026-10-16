@@ -1,37 +1,17 @@
-import ClientTerrain from '@/components/ClientTerrain';
-import Cursor from '@/components/Cursor';
-import ScrollToTop from '@/components/ScrollToTop';
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import Profile from '@/components/Profile';
-import TechStack from '@/components/TechStack';
-import Projects from '@/components/Projects';
-import Certificates from '@/components/Certificates';
-import Hackathons from '@/components/Hackathons';
-import EducationTimeline from '@/components/EducationTimeline';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
-import SessionLoader from '@/components/SessionLoader';
+import React from 'react';
+import PanoramicVista from '@/components/sumie/PanoramicVista';
+
+export const metadata = {
+  title: 'Rishab Chandgothia | Full Stack Developer',
+  description:
+    'Full-Stack Developer crafting reliable, high-performance web applications with clean design and solid engineering foundations.',
+  alternates: { canonical: '/' },
+};
 
 export default function Home() {
   return (
-    <div className="app-container">
-      <ClientTerrain />
-      <Cursor />
-      <ScrollToTop />
-      <Navbar />
-      <main className="content-container">
-        <Hero />
-        <Profile />
-        <TechStack />
-        <Projects />
-        <Certificates />
-        <Hackathons />
-        <EducationTimeline />
-        <Contact />
-        <Footer />
-      </main>
-      <SessionLoader />
-    </div>
+    <main id="main-content" data-page="sumie" className="w-full flex-1 flex flex-col justify-between overflow-hidden">
+      <PanoramicVista />
+    </main>
   );
 }

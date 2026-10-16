@@ -133,6 +133,15 @@ export const certificates = [
     description: "Built a Collaborative Whiteboard Application during HACKSTREET 2K26, securing 6th place among 170+ teams while working on UI/UX development, state management, and real-time collaboration features.",
     image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779562304/Screenshot_2026-05-24_002027_ayb0yc.png",
     link: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1779562304/Screenshot_2026-05-24_002027_ayb0yc.png"
+  },
+  {
+    id: 19,
+    title: "Elite Coders Summer of Code 2026",
+    issuer: "Elite Coders",
+    category: "Open Source",
+    description: "Contributed to open-source projects through Elite Coders Summer of Code 2026, collaborating with developers, improving codebases, and gaining hands-on experience with Git, GitHub, and collaborative software development.",
+    image: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1792122666/ecsoc-excellence-certificate-rishab_chandgothi_pc6fhu.png",
+    link: "https://res.cloudinary.com/dhr1jtyi2/image/upload/v1792122666/ecsoc-excellence-certificate-rishab_chandgothi_pc6fhu.png"
   }
 ];
 
