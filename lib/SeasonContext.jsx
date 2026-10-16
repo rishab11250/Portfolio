@@ -8,7 +8,7 @@ const emptySubscribe = () => () => {};
 /**
  * Seasonal atmospheric lighting palettes based on the 4 seasonal quarters:
  * - Spring (1–18): Soft cherry blossom & pale morning gold (Sakura petal drift)
- * - Summer (19–36): Fresh bamboo turquoise & warm sun gold (Firefly twilight)
+ * - Summer (19–36): Fresh bamboo jade & warm sun gold (Firefly twilight)
  * - Autumn (37–54): Persimmon dusk & rich amber harvest (Momiji maple drift)
  * - Winter (55–72): Frost blue & crisp snow silver (Crystalline snowfall)
  */
@@ -17,51 +17,83 @@ function getAtmosphereForSeason(seasonId) {
     return {
       quarter: 'Spring',
       quarterId: 1,
-      glow1: '#F48FB1',
-      glow2: '#FFE082',
-      accentColor: '#E95295',
+      glow1: 'rgba(244, 143, 177, 0.28)',
+      glow2: 'rgba(255, 224, 130, 0.20)',
+      accentColor: '#DF4F73', // Sakura crimson
+      secondaryColor: '#BE185D',
+      paperBg: '#FAF1F4', // Soft cherry washi tint
+      cardBg: '#FFFDFE',
+      cardBorder: 'rgba(223, 79, 115, 0.24)',
+      mistOverlay: 'rgba(244, 143, 177, 0.18)',
+      mistFilter: 'hue-rotate(310deg) saturate(1.4)',
       particleType: 'sakura',
       themeClass: 'theme-spring',
-      greeting: 'Vernal Awakening',
+      greeting: 'Haru • Vernal Bloom',
       icon: '春',
+      badgeBg: 'rgba(223, 79, 115, 0.14)',
+      badgeText: '#DF4F73',
     };
   }
   if (seasonId <= 36) {
     return {
       quarter: 'Summer',
       quarterId: 19,
-      glow1: '#4DD0E1',
-      glow2: '#FFD54F',
-      accentColor: '#1E3A5F',
+      glow1: 'rgba(13, 148, 136, 0.25)',
+      glow2: 'rgba(245, 158, 11, 0.22)',
+      accentColor: '#0D9488', // Bamboo teal / emerald
+      secondaryColor: '#047857',
+      paperBg: '#EDF6F2', // Fresh bamboo mist tint
+      cardBg: '#FAFCFB',
+      cardBorder: 'rgba(13, 148, 136, 0.24)',
+      mistOverlay: 'rgba(13, 148, 136, 0.18)',
+      mistFilter: 'hue-rotate(110deg) saturate(1.3)',
       particleType: 'firefly',
       themeClass: 'theme-summer',
-      greeting: 'Lush High Summer',
+      greeting: 'Natsu • Lush Bamboo',
       icon: '夏',
+      badgeBg: 'rgba(13, 148, 136, 0.14)',
+      badgeText: '#0D9488',
     };
   }
   if (seasonId <= 54) {
     return {
       quarter: 'Autumn',
       quarterId: 37,
-      glow1: '#E95295',
-      glow2: '#F2B84B',
-      accentColor: '#C91F37',
+      glow1: 'rgba(201, 31, 55, 0.22)',
+      glow2: 'rgba(245, 158, 11, 0.24)',
+      accentColor: '#C91F37', // Traditional Hanko Vermilion
+      secondaryColor: '#C2410C',
+      paperBg: '#F9F3E8', // Classic warm harvest washi
+      cardBg: '#FCFAF5',
+      cardBorder: 'rgba(201, 31, 55, 0.24)',
+      mistOverlay: 'rgba(245, 158, 11, 0.18)',
+      mistFilter: 'hue-rotate(15deg) saturate(1.5)',
       particleType: 'maple',
       themeClass: 'theme-autumn',
-      greeting: 'Harvest Twilight',
+      greeting: 'Aki • Golden Harvest',
       icon: '秋',
+      badgeBg: 'rgba(201, 31, 55, 0.14)',
+      badgeText: '#C91F37',
     };
   }
   return {
     quarter: 'Winter',
     quarterId: 55,
-    glow1: '#90CAF9',
-    glow2: '#E0E0E0',
-    accentColor: '#0B2545',
+    glow1: 'rgba(59, 130, 246, 0.26)',
+    glow2: 'rgba(224, 231, 255, 0.32)',
+    accentColor: '#2563EB', // Crystalline frost cobalt
+    secondaryColor: '#1D4ED8',
+    paperBg: '#EBF2F9', // Crisp glacial frost tint
+    cardBg: '#F7FAFD',
+    cardBorder: 'rgba(37, 99, 235, 0.24)',
+    mistOverlay: 'rgba(59, 130, 246, 0.18)',
+    mistFilter: 'hue-rotate(195deg) saturate(1.4)',
     particleType: 'snow',
     themeClass: 'theme-winter',
-    greeting: 'Crystalline Slumber',
+    greeting: 'Fuyu • Crisp Frost',
     icon: '冬',
+    badgeBg: 'rgba(37, 99, 235, 0.14)',
+    badgeText: '#2563EB',
   };
 }
 

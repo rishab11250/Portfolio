@@ -17,11 +17,11 @@ const getReducedMotionSnapshot = () => {
 
 /**
  * SeasonalAtmosphere
- * Living canvas particle engine & ambient light aura reflecting the 72 Japanese microseasons:
- * - Spring: Soft sakura petals floating and spinning in the vernal breeze.
- * - Summer: Luminous firefly motes floating up into the twilight.
+ * Immersive particle engine & ambient light aura reflecting the 72 Japanese microseasons:
+ * - Spring: Soft sakura petals floating and spinning in the vernal breeze across the screen.
+ * - Summer: Luminous glowing firefly motes floating up into the twilight with pulsing halos.
  * - Autumn: Tumbling golden & crimson momiji maple leaves.
- * - Winter: Crisp crystalline snowflakes descending softly.
+ * - Winter: Crisp crystalline snowflakes descending softly across the entire vista.
  */
 export default function SeasonalAtmosphere() {
   const {
@@ -40,6 +40,13 @@ export default function SeasonalAtmosphere() {
     getReducedMotionSnapshot,
     () => false
   );
+
+  // Synchronize dynamic paper tint across root HTML elements
+  useEffect(() => {
+    if (typeof document !== 'undefined' && atmosphere?.paperBg) {
+      document.documentElement.style.setProperty('--color-paper', atmosphere.paperBg);
+    }
+  }, [atmosphere?.paperBg]);
 
   // Canvas particle animation loop
   useEffect(() => {
@@ -63,29 +70,44 @@ export default function SeasonalAtmosphere() {
     let isPaused = false;
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
     const type = atmosphere.particleType || 'sakura';
-    const baseCount = type === 'firefly' ? 16 : 24;
-    const count = isMobile ? Math.floor(baseCount * 0.45) : baseCount;
+    const baseCount = type === 'firefly' ? 28 : type === 'snow' ? 48 : 36;
+    const count = isMobile ? Math.floor(baseCount * 0.5) : baseCount;
 
-    // Initialize particles
+    // Initialize particles tailored to the active season
     const particles = Array.from({ length: count }, () => {
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 6 + 4,
-        speedX: type === 'firefly' ? (Math.random() - 0.5) * 0.8 : (Math.random() - 0.5) * 1.5 - 0.5,
-        speedY: type === 'firefly' ? -Math.random() * 0.6 - 0.2 : Math.random() * 1.2 + 0.6,
+        size:
+          type === 'snow'
+            ? Math.random() * 4 + 2.5
+            : type === 'firefly'
+            ? Math.random() * 5 + 3
+            : Math.random() * 8 + 6,
+        speedX:
+          type === 'firefly'
+            ? (Math.random() - 0.5) * 0.8
+            : type === 'snow'
+            ? (Math.random() - 0.5) * 0.8
+            : (Math.random() - 0.5) * 1.6 - 0.4,
+        speedY:
+          type === 'firefly'
+            ? -Math.random() * 0.7 - 0.2
+            : type === 'snow'
+            ? Math.random() * 1.0 + 0.5
+            : Math.random() * 1.2 + 0.6,
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.03,
-        opacity: Math.random() * 0.6 + 0.2,
-        pulse: Math.random() * Math.PI,
+        rotationSpeed: (Math.random() - 0.5) * 0.035,
+        opacity: Math.random() * 0.5 + 0.35,
+        pulse: Math.random() * Math.PI * 2,
         color:
           type === 'sakura'
-            ? Math.random() > 0.4 ? '#F48FB1' : '#F8BBD0'
+            ? Math.random() > 0.4 ? '#F472B6' : '#FB7185'
             : type === 'firefly'
-            ? Math.random() > 0.5 ? '#FFEE58' : '#81C784'
+            ? Math.random() > 0.5 ? '#FBBF24' : '#34D399'
             : type === 'maple'
-            ? Math.random() > 0.5 ? '#D32F2F' : '#F57C00'
-            : '#FFFFFF',
+            ? Math.random() > 0.4 ? '#DC2626' : '#EA580C'
+            : Math.random() > 0.3 ? '#FFFFFF' : '#BAE6FD',
       };
     });
 
@@ -110,7 +132,7 @@ export default function SeasonalAtmosphere() {
         p.rotation += p.rotationSpeed;
         p.pulse += 0.04;
 
-        // Wrap around boundaries
+        // Boundary wrapping
         if (type === 'firefly') {
           if (p.y < -20) p.y = height + 20;
           if (p.x < -20) p.x = width + 20;
@@ -129,36 +151,41 @@ export default function SeasonalAtmosphere() {
         ctx.rotate(p.rotation);
 
         if (type === 'sakura') {
+          // Delicate fluttering cherry petal with notch
           ctx.beginPath();
           ctx.fillStyle = p.color;
           ctx.globalAlpha = p.opacity;
-          ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
+          ctx.ellipse(0, 0, p.size, p.size * 0.6, 0, 0, Math.PI * 2);
           ctx.fill();
         } else if (type === 'firefly') {
+          // Luminous pulsing firefly with radiant halo
           const glow = (Math.sin(p.pulse) + 1) * 0.5;
           ctx.beginPath();
           ctx.fillStyle = p.color;
-          ctx.globalAlpha = p.opacity * (0.3 + glow * 0.7);
-          ctx.shadowBlur = 12 * glow;
+          ctx.globalAlpha = p.opacity * (0.35 + glow * 0.65);
+          ctx.shadowBlur = 14 * glow;
           ctx.shadowColor = p.color;
-          ctx.arc(0, 0, p.size * 0.4, 0, Math.PI * 2);
+          ctx.arc(0, 0, p.size * 0.45, 0, Math.PI * 2);
           ctx.fill();
         } else if (type === 'maple') {
+          // 5-point Japanese Momiji leaf
           ctx.beginPath();
           ctx.fillStyle = p.color;
           ctx.globalAlpha = p.opacity * 0.85;
           ctx.moveTo(0, -p.size);
-          ctx.lineTo(p.size * 0.6, 0);
-          ctx.lineTo(p.size * 0.3, p.size * 0.8);
-          ctx.lineTo(-p.size * 0.3, p.size * 0.8);
-          ctx.lineTo(-p.size * 0.6, 0);
+          ctx.lineTo(p.size * 0.6, -p.size * 0.2);
+          ctx.lineTo(p.size * 0.4, p.size * 0.4);
+          ctx.lineTo(0, p.size * 0.8);
+          ctx.lineTo(-p.size * 0.4, p.size * 0.4);
+          ctx.lineTo(-p.size * 0.6, -p.size * 0.2);
           ctx.closePath();
           ctx.fill();
         } else {
+          // Crisp soft snowflakes
           ctx.beginPath();
-          ctx.fillStyle = p.color;
-          ctx.globalAlpha = p.opacity * 0.75;
-          ctx.arc(0, 0, p.size * 0.3, 0, Math.PI * 2);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.globalAlpha = p.opacity * 0.8;
+          ctx.arc(0, 0, p.size * 0.5, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -175,17 +202,23 @@ export default function SeasonalAtmosphere() {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [atmosphere.particleType, motionDisabled]);
+  }, [atmosphere.quarter, atmosphere.particleType, motionDisabled]);
 
   return (
     <>
+      {/* 1. Ambient Seasonal Mist Light Wash (Changes page atmosphere per season) */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 pointer-events-none z-0 transition-colors duration-700 ease-out"
+        style={{ backgroundColor: atmosphere.mistOverlay }}
+      />
 
-      {/* 2. Living Canvas Particles */}
+      {/* 2. Living Canvas Particles (Floating over vista with z-30) */}
       {!motionDisabled && (
         <canvas
           ref={canvasRef}
           aria-hidden="true"
-          className="fixed inset-0 pointer-events-none z-2"
+          className="fixed inset-0 pointer-events-none z-30"
         />
       )}
 

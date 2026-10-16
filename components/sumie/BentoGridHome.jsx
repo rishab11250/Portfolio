@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SeasonTag from '../SeasonTag';
+import { useSeason } from '../../lib/SeasonContext.jsx';
 
 const SKILL_BADGES = [
   'React',
@@ -76,6 +77,7 @@ const SOCIAL_DOCK = [
 
 export default function BentoGridHome() {
   const containerRef = useRef(null);
+  const { atmosphere } = useSeason();
 
   // Smooth pointer tracking for interactive sumi-e ink brush sweep
   useEffect(() => {
@@ -104,11 +106,12 @@ export default function BentoGridHome() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[calc(100dvh-4.25rem)] sm:h-[calc(100dvh-4.75rem)] flex flex-col justify-between px-3 sm:px-6 lg:px-8 py-2 sm:py-2.5 select-none overflow-hidden"
+      className="relative w-full h-[calc(100dvh-4.25rem)] sm:h-[calc(100dvh-4.75rem)] flex flex-col justify-between px-3 sm:px-6 lg:px-8 py-2 sm:py-2.5 select-none overflow-hidden transition-[background-color] duration-700 ease-out"
       style={{
         '--mx': '50%',
         '--my': '50%',
         '--mask-radius': '600px',
+        backgroundColor: atmosphere?.paperBg,
       }}
     >
       {/* 1. Full-Bleed Atmospheric Japanese Ink Mountain Landscape */}
@@ -129,7 +132,10 @@ export default function BentoGridHome() {
         </div>
 
         {/* Layer B: Drifting Mountain Mist Ribbon */}
-        <div className="absolute inset-x-0 bottom-36 sm:bottom-52 h-40 opacity-35 motion-safe:animate-[mistDrift_28s_ease-in-out_infinite_alternate]">
+        <div
+          className="absolute inset-x-0 bottom-36 sm:bottom-52 h-40 opacity-40 motion-safe:animate-[mistDrift_28s_ease-in-out_infinite_alternate] transition-[filter] duration-700"
+          style={{ filter: atmosphere?.mistFilter }}
+        >
           <Image
             src="/ink/mist.svg"
             alt=""
@@ -196,11 +202,15 @@ export default function BentoGridHome() {
           
           {/* ================= ROW 1, CARD 1: MASTER PROFILE CARD ================= */}
           <div
-            className="rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between animate-enter h-full"
-            style={{ animationDelay: '40ms' }}
+            className="rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border animate-enter h-full transition-[background-color,border-color] duration-500"
+            style={{
+              animationDelay: '40ms',
+              backgroundColor: atmosphere?.cardBg,
+              borderColor: atmosphere?.cardBorder,
+            }}
           >
             <div>
-              {/* Header: Centered Avatar + Status Pill (No duplicate logo) */}
+              {/* Header: Centered Avatar + Dynamic Seasonal Status Pill */}
               <div className="flex items-center justify-between mb-2">
                 <div className="relative w-13 h-13 sm:w-15 sm:h-15 rounded-2xl overflow-hidden border-2 border-ink/15 bg-ink/5">
                   <Image
@@ -212,17 +222,32 @@ export default function BentoGridHome() {
                     priority
                   />
                 </div>
-                <div className="px-2.5 py-0.5 rounded-full bg-pine/10 text-pine text-[13px] font-semibold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-pine" />
-                  <span>Open for Roles</span>
+                <div
+                  className="px-2.5 py-0.5 rounded-full text-[13px] font-semibold flex items-center gap-1.5 transition-colors duration-500"
+                  style={{
+                    backgroundColor: atmosphere?.badgeBg,
+                    color: atmosphere?.accentColor,
+                  }}
+                >
+                  <span
+                    className="w-2 h-2 rounded-full transition-colors duration-500"
+                    style={{ backgroundColor: atmosphere?.accentColor }}
+                  />
+                  <span>{atmosphere?.greeting || 'Open for Roles'}</span>
                 </div>
               </div>
 
               {/* Name & Title */}
               <h1 className="font-display font-black text-2xl sm:text-[24px] text-ink tracking-tight leading-tight mb-0.5">
-                Rishab <span className="text-seal">Chandgothia</span>
+                Rishab{' '}
+                <span className="transition-colors duration-500" style={{ color: atmosphere?.accentColor }}>
+                  Chandgothia
+                </span>
               </h1>
-              <p className="font-body text-indigo font-semibold text-sm sm:text-base mb-1.5">
+              <p
+                className="font-body font-semibold text-sm sm:text-base mb-1.5 transition-colors duration-500"
+                style={{ color: atmosphere?.accentColor }}
+              >
                 Full-Stack Developer &amp; Systems Engineer
               </p>
 
@@ -238,7 +263,8 @@ export default function BentoGridHome() {
                 href="/Rishab-Chandgothia-Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center h-9 px-4 rounded-xl bg-ink text-paper font-body text-sm font-semibold hover:bg-seal transition-colors duration-150 ease-[var(--ease-twos)] focus-visible:ring-2 focus-visible:ring-seal"
+                className="w-full inline-flex items-center justify-center h-9 px-4 rounded-xl text-paper font-body text-sm font-semibold transition-colors duration-150 ease-[var(--ease-twos)] focus-visible:ring-2"
+                style={{ backgroundColor: '#17181C' }}
               >
                 <svg className="w-4 h-4 mr-2 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 12L12 16.5m0 0L16.5 12M12 16.5V3" />
@@ -256,7 +282,7 @@ export default function BentoGridHome() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.label}
-                    className="p-1 rounded-lg text-ink/75 hover:text-seal hover:bg-seal/10 transition-colors duration-150"
+                    className="p-1 rounded-lg text-ink/75 hover:bg-ink/10 transition-colors duration-150"
                   >
                     {item.icon}
                   </a>
@@ -274,20 +300,30 @@ export default function BentoGridHome() {
           {/* ================= ROW 1, CARD 2: FEATURED PROJECTS ================= */}
           <Link
             href="/projects"
-            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
-            style={{ animationDelay: '100ms' }}
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            style={{
+              animationDelay: '100ms',
+              backgroundColor: atmosphere?.cardBg,
+              borderColor: atmosphere?.cardBorder,
+            }}
           >
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                  <span
+                    className="w-6 h-6 rounded-lg text-paper flex items-center justify-center font-bold text-[13px] font-serif transition-colors duration-500"
+                    style={{ backgroundColor: atmosphere?.accentColor }}
+                  >
                     創
                   </span>
-                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
+                  <span className="font-display font-bold text-base sm:text-lg text-ink transition-colors duration-150">
                     Projects
                   </span>
                 </div>
-                <span className="text-ink/50 group-hover:text-seal font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                <span
+                  className="font-semibold text-sm transition-transform duration-150 group-hover:translate-x-0.5"
+                  style={{ color: atmosphere?.accentColor }}
+                >
                   Explore ↗
                 </span>
               </div>
@@ -300,7 +336,13 @@ export default function BentoGridHome() {
               <div data-ui="project-mockup" className="p-2.5 rounded-xl bg-ink/5 space-y-1 mb-2">
                 <div className="flex items-center justify-between text-[13px] font-body font-semibold">
                   <span className="text-ink">Veltrix • Wealth Platform</span>
-                  <span className="px-1.5 py-0.5 rounded-md bg-seal/10 text-seal font-medium text-[13px]">
+                  <span
+                    className="px-1.5 py-0.5 rounded-md font-medium text-[13px] transition-colors duration-500"
+                    style={{
+                      backgroundColor: atmosphere?.badgeBg,
+                      color: atmosphere?.accentColor,
+                    }}
+                  >
                     Production
                   </span>
                 </div>
@@ -325,7 +367,10 @@ export default function BentoGridHome() {
               </div>
             </div>
 
-            <div className="pt-1.5 text-[13px] font-body text-seal font-semibold group-hover:underline">
+            <div
+              className="pt-1.5 text-[13px] font-body font-semibold group-hover:underline transition-colors duration-500"
+              style={{ color: atmosphere?.accentColor }}
+            >
               Explore production architectures &rarr;
             </div>
           </Link>
@@ -333,20 +378,30 @@ export default function BentoGridHome() {
           {/* ================= ROW 1, CARD 3: EXPERIENCE & PODIUMS ================= */}
           <Link
             href="/certificates"
-            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
-            style={{ animationDelay: '160ms' }}
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            style={{
+              animationDelay: '160ms',
+              backgroundColor: atmosphere?.cardBg,
+              borderColor: atmosphere?.cardBorder,
+            }}
           >
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                  <span
+                    className="w-6 h-6 rounded-lg text-paper flex items-center justify-center font-bold text-[13px] font-serif transition-colors duration-500"
+                    style={{ backgroundColor: atmosphere?.accentColor }}
+                  >
                     証
                   </span>
-                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-indigo transition-colors">
+                  <span className="font-display font-bold text-base sm:text-lg text-ink transition-colors duration-150">
                     Experience &amp; Podiums
                   </span>
                 </div>
-                <span className="text-ink/50 group-hover:text-indigo font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                <span
+                  className="font-semibold text-sm transition-transform duration-150 group-hover:translate-x-0.5"
+                  style={{ color: atmosphere?.accentColor }}
+                >
                   Verify ↗
                 </span>
               </div>
@@ -359,7 +414,9 @@ export default function BentoGridHome() {
               <div data-ui="experience-iiit" className="p-2.5 rounded-xl bg-ink/5 mb-1.5">
                 <div className="flex items-center justify-between text-[13px] font-body font-semibold">
                   <span className="text-ink">Dev Heat &bull; IIIT Surat</span>
-                  <span className="text-indigo font-medium">Finalist</span>
+                  <span className="font-medium transition-colors duration-500" style={{ color: atmosphere?.accentColor }}>
+                    Finalist
+                  </span>
                 </div>
                 <p className="font-body text-[13px] text-ink/80 leading-snug mt-0.5">
                   Led 3-member team to offline presentation finals at IIIT Surat.
@@ -370,7 +427,9 @@ export default function BentoGridHome() {
               <div data-ui="experience-ecsoc" className="p-2.5 rounded-xl bg-ink/5">
                 <div className="flex items-center justify-between text-[13px] font-body font-semibold">
                   <span className="text-ink">Elite Summer of Code</span>
-                  <span className="text-pine font-medium">Top 20 Nat’l</span>
+                  <span className="font-medium transition-colors duration-500" style={{ color: atmosphere?.accentColor }}>
+                    Top 20 Nat’l
+                  </span>
                 </div>
                 <p className="font-body text-[13px] text-ink/80 leading-snug mt-0.5">
                   Recognized among Top 20 participants out of 12,000+ national applicants.
@@ -378,7 +437,10 @@ export default function BentoGridHome() {
               </div>
             </div>
 
-            <div className="pt-1.5 text-[13px] font-body text-indigo font-semibold group-hover:underline">
+            <div
+              className="pt-1.5 text-[13px] font-body font-semibold group-hover:underline transition-colors duration-500"
+              style={{ color: atmosphere?.accentColor }}
+            >
               View competitive achievements &rarr;
             </div>
           </Link>
@@ -386,20 +448,30 @@ export default function BentoGridHome() {
           {/* ================= ROW 2, CARD 1: ABOUT ME (CodingGita • Surat) ================= */}
           <Link
             href="/about"
-            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
-            style={{ animationDelay: '220ms' }}
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            style={{
+              animationDelay: '220ms',
+              backgroundColor: atmosphere?.cardBg,
+              borderColor: atmosphere?.cardBorder,
+            }}
           >
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-seal text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                  <span
+                    className="w-6 h-6 rounded-lg text-paper flex items-center justify-center font-bold text-[13px] font-serif transition-colors duration-500"
+                    style={{ backgroundColor: atmosphere?.accentColor }}
+                  >
                     志
                   </span>
-                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-seal transition-colors">
+                  <span className="font-display font-bold text-base sm:text-lg text-ink transition-colors duration-150">
                     About Me
                   </span>
                 </div>
-                <span className="text-ink/50 group-hover:text-seal font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                <span
+                  className="font-semibold text-sm transition-transform duration-150 group-hover:translate-x-0.5"
+                  style={{ color: atmosphere?.accentColor }}
+                >
                   ↗
                 </span>
               </div>
@@ -418,7 +490,12 @@ export default function BentoGridHome() {
             </div>
 
             <div className="pt-1.5 flex items-center justify-between text-[13px] font-body">
-              <span className="text-seal font-semibold group-hover:underline">Read background dossier &rarr;</span>
+              <span
+                className="font-semibold group-hover:underline transition-colors duration-500"
+                style={{ color: atmosphere?.accentColor }}
+              >
+                Read background dossier &rarr;
+              </span>
               <span className="text-mist font-medium">Surat, Gujarat</span>
             </div>
           </Link>
@@ -426,20 +503,30 @@ export default function BentoGridHome() {
           {/* ================= ROW 2, CARD 2: SKILLS MATRIX ================= */}
           <Link
             href="/skills"
-            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
-            style={{ animationDelay: '280ms' }}
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            style={{
+              animationDelay: '280ms',
+              backgroundColor: atmosphere?.cardBg,
+              borderColor: atmosphere?.cardBorder,
+            }}
           >
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-pine text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                  <span
+                    className="w-6 h-6 rounded-lg text-paper flex items-center justify-center font-bold text-[13px] font-serif transition-colors duration-500"
+                    style={{ backgroundColor: atmosphere?.accentColor }}
+                  >
                     技
                   </span>
-                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-pine transition-colors">
+                  <span className="font-display font-bold text-base sm:text-lg text-ink transition-colors duration-150">
                     Skills Matrix
                   </span>
                 </div>
-                <span className="text-ink/50 group-hover:text-pine font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                <span
+                  className="font-semibold text-sm transition-transform duration-150 group-hover:translate-x-0.5"
+                  style={{ color: atmosphere?.accentColor }}
+                >
                   Inspect ↗
                 </span>
               </div>
@@ -453,7 +540,7 @@ export default function BentoGridHome() {
                 {SKILL_BADGES.map((skill) => (
                   <span
                     key={skill}
-                    className="px-2 py-0.5 rounded-md bg-ink/5 hover:bg-pine/10 hover:text-pine text-ink text-[13px] font-semibold transition-colors duration-150"
+                    className="px-2 py-0.5 rounded-md bg-ink/5 hover:bg-ink/10 text-ink text-[13px] font-semibold transition-colors duration-150"
                   >
                     {skill}
                   </span>
@@ -461,7 +548,10 @@ export default function BentoGridHome() {
               </div>
             </div>
 
-            <div className="pt-1.5 text-[13px] font-body text-pine font-semibold group-hover:underline">
+            <div
+              className="pt-1.5 text-[13px] font-body font-semibold group-hover:underline transition-colors duration-500"
+              style={{ color: atmosphere?.accentColor }}
+            >
               Enter 16-bit interactive skill realm &rarr;
             </div>
           </Link>
@@ -469,20 +559,30 @@ export default function BentoGridHome() {
           {/* ================= ROW 2, CARD 3: CERTIFICATES & HONORS ================= */}
           <Link
             href="/certificates"
-            className="group rounded-2xl sm:rounded-3xl bg-paper p-3.5 sm:p-4 flex flex-col justify-between hover:bg-paper/95 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-seal animate-enter h-full"
-            style={{ animationDelay: '340ms' }}
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            style={{
+              animationDelay: '340ms',
+              backgroundColor: atmosphere?.cardBg,
+              borderColor: atmosphere?.cardBorder,
+            }}
           >
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-indigo text-paper flex items-center justify-center font-bold text-[13px] font-serif">
+                  <span
+                    className="w-6 h-6 rounded-lg text-paper flex items-center justify-center font-bold text-[13px] font-serif transition-colors duration-500"
+                    style={{ backgroundColor: atmosphere?.accentColor }}
+                  >
                     誉
                   </span>
-                  <span className="font-display font-bold text-base sm:text-lg text-ink group-hover:text-indigo transition-colors">
+                  <span className="font-display font-bold text-base sm:text-lg text-ink transition-colors duration-150">
                     Certificates
                   </span>
                 </div>
-                <span className="text-ink/50 group-hover:text-indigo font-semibold text-sm transition-transform group-hover:translate-x-0.5">
+                <span
+                  className="font-semibold text-sm transition-transform duration-150 group-hover:translate-x-0.5"
+                  style={{ color: atmosphere?.accentColor }}
+                >
                   Verify ↗
                 </span>
               </div>
@@ -498,7 +598,9 @@ export default function BentoGridHome() {
                     <p className="font-body font-semibold text-[13px] text-ink">HackerRank Verified</p>
                     <p className="font-body text-[13px] text-mist">JavaScript (Basic) • 100% Score</p>
                   </div>
-                  <span className="text-indigo font-bold text-[13px]">100%</span>
+                  <span className="font-bold text-[13px] transition-colors duration-500" style={{ color: atmosphere?.accentColor }}>
+                    100%
+                  </span>
                 </div>
 
                 <div data-ui="cert-item" className="p-2 rounded-xl bg-ink/5 flex items-center justify-between">
@@ -506,7 +608,9 @@ export default function BentoGridHome() {
                     <p className="font-body font-semibold text-[13px] text-ink">Sololearn Certified</p>
                     <p className="font-body text-[13px] text-mist">C &amp; C++ Data Structures</p>
                   </div>
-                  <span className="text-indigo font-bold text-[13px]">Verified</span>
+                  <span className="font-bold text-[13px] transition-colors duration-500" style={{ color: atmosphere?.accentColor }}>
+                    Verified
+                  </span>
                 </div>
 
                 <div data-ui="cert-item" className="p-2 rounded-xl bg-ink/5 flex items-center justify-between">
@@ -514,12 +618,17 @@ export default function BentoGridHome() {
                     <p className="font-body font-semibold text-[13px] text-ink">IIIT Surat Dev Heat</p>
                     <p className="font-body text-[13px] text-mist">Offline Presentation Finalist</p>
                   </div>
-                  <span className="text-indigo font-bold text-[13px]">Finals</span>
+                  <span className="font-bold text-[13px] transition-colors duration-500" style={{ color: atmosphere?.accentColor }}>
+                    Finals
+                  </span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-1.5 text-[13px] font-body text-indigo font-semibold group-hover:underline">
+            <div
+              className="pt-1.5 text-[13px] font-body font-semibold group-hover:underline transition-colors duration-500"
+              style={{ color: atmosphere?.accentColor }}
+            >
               View verified credentials &rarr;
             </div>
           </Link>

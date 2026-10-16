@@ -87,7 +87,7 @@ export default function Navbar() {
               >
                 <span>{atmosphere.icon}</span>
                 <span className="truncate">{activeSeason.name}</span>
-                <span className="text-sm text-seal font-semibold">72↗</span>
+                <span className="text-sm font-semibold" style={{ color: atmosphere.accentColor }}>72↗</span>
               </button>
             )}
             <button
@@ -146,11 +146,14 @@ export default function Navbar() {
                         onClick={() => selectQuarter(q.key)}
                         title={q.title}
                         aria-label={q.title}
-                        className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-semibold transition-transform duration-150 cursor-pointer ${
+                        className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-transform duration-150 cursor-pointer ${
                           isActive
-                            ? 'bg-ink text-paper scale-105'
+                            ? 'text-white scale-110'
                             : 'hover:bg-ink/10 opacity-70 hover:opacity-100 hover:scale-105'
                         }`}
+                        style={{
+                          backgroundColor: isActive ? atmosphere.accentColor : undefined,
+                        }}
                       >
                         <span>{q.label}</span>
                       </button>
@@ -173,7 +176,7 @@ export default function Navbar() {
                   <span className="max-w-[130px] truncate text-sm font-semibold">
                     {activeSeason.name}
                   </span>
-                  <span className="text-sm text-seal font-semibold pl-0.5">
+                  <span className="text-sm font-semibold pl-0.5" style={{ color: atmosphere.accentColor }}>
                     72 ↗
                   </span>
                 </button>
