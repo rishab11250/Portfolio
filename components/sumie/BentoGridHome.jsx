@@ -79,23 +79,40 @@ export default function BentoGridHome() {
   const containerRef = useRef(null);
   const { atmosphere } = useSeason();
 
-  // Smooth pointer tracking for interactive sumi-e ink brush sweep
+  // Smooth damped pointer tracking for fluid ink brush diffusion sweep
   useEffect(() => {
     let rAF = null;
-    const handlePointerMove = (e) => {
-      if (rAF) cancelAnimationFrame(rAF);
-      rAF = requestAnimationFrame(() => {
-        if (!containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        containerRef.current.style.setProperty('--mx', `${x.toFixed(1)}%`);
-        containerRef.current.style.setProperty('--my', `${y.toFixed(1)}%`);
-      });
+    let targetX = 50;
+    let targetY = 50;
+    let currentX = 50;
+    let currentY = 50;
+    let isRunning = true;
+
+    const updatePhysics = () => {
+      if (!isRunning) return;
+      // Spring lerp damping (0.12 factor for silky liquid ink inertia)
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+
+      if (containerRef.current) {
+        containerRef.current.style.setProperty('--mx', `${currentX.toFixed(2)}%`);
+        containerRef.current.style.setProperty('--my', `${currentY.toFixed(2)}%`);
+      }
+      rAF = requestAnimationFrame(updatePhysics);
     };
 
+    const handlePointerMove = (e) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      targetX = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+      targetY = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+    };
+
+    rAF = requestAnimationFrame(updatePhysics);
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
+
     return () => {
+      isRunning = false;
       window.removeEventListener('pointermove', handlePointerMove);
       if (rAF) cancelAnimationFrame(rAF);
     };
@@ -120,7 +137,7 @@ export default function BentoGridHome() {
         className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
       >
         {/* Layer A: Ambient Mountain Horizon */}
-        <div className="absolute inset-x-0 bottom-0 h-full max-h-[850px] opacity-40">
+        <div className="absolute inset-x-0 bottom-0 h-full max-h-[850px] opacity-65">
           <Image
             src="/ink/ridge-back.svg"
             alt=""
@@ -131,9 +148,9 @@ export default function BentoGridHome() {
           />
         </div>
 
-        {/* Layer B: Drifting Mountain Mist Ribbon */}
+        {/* Layer B1: Primary Mountain Mist Ribbon */}
         <div
-          className="absolute inset-x-0 bottom-36 sm:bottom-52 h-40 opacity-40 motion-safe:animate-[mistDrift_28s_ease-in-out_infinite_alternate] transition-[filter] duration-700"
+          className="absolute inset-x-0 bottom-40 sm:bottom-56 h-40 opacity-45 motion-safe:animate-[mistDrift_28s_ease-in-out_infinite_alternate] transition-[filter] duration-700"
           style={{ filter: atmosphere?.mistFilter }}
         >
           <Image
@@ -145,7 +162,32 @@ export default function BentoGridHome() {
           />
         </div>
 
-        {/* Layer C: Interactive Pointer Brush Reveal */}
+        {/* Layer B2: Secondary Opposing Mist Ribbon for Organic Spatial Depth */}
+        <div
+          className="absolute inset-x-0 bottom-20 sm:bottom-32 h-36 opacity-35 motion-safe:animate-[mistDriftReverse_38s_ease-in-out_infinite_alternate] transition-[filter] duration-700"
+          style={{ filter: atmosphere?.mistFilter }}
+        >
+          <Image
+            src="/ink/mist.svg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-bottom"
+          />
+        </div>
+
+        {/* Layer C0: Persistent Ambient Pines (Visible across entire canvas behind cards) */}
+        <div className="absolute inset-x-0 bottom-0 h-[52%] max-h-[500px] opacity-40">
+          <Image
+            src="/ink/pines.svg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-bottom"
+          />
+        </div>
+
+        {/* Layer C: Interactive Pointer Brush Reveal (Vibrant deep ink following pointer) */}
         <div
           className="absolute inset-0 transition-opacity duration-300"
           style={{
@@ -155,7 +197,7 @@ export default function BentoGridHome() {
               ['radial', '-gradient(circle var(--mask-radius, 600px) at var(--mx, 50%) var(--my, 50%), black 30%, transparent 85%)'].join(''),
           }}
         >
-          <div className="absolute inset-x-0 bottom-0 h-[65%] max-h-[600px] opacity-75">
+          <div className="absolute inset-x-0 bottom-0 h-[65%] max-h-[600px] opacity-85">
             <Image
               src="/ink/ridge-mid.svg"
               alt=""
@@ -164,7 +206,7 @@ export default function BentoGridHome() {
               className="object-cover object-bottom"
             />
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-[55%] max-h-[500px] opacity-85">
+          <div className="absolute inset-x-0 bottom-0 h-[55%] max-h-[500px] opacity-95">
             <Image
               src="/ink/pines.svg"
               alt=""
@@ -173,7 +215,7 @@ export default function BentoGridHome() {
               className="object-cover object-bottom"
             />
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-[45%] max-h-[400px] opacity-95">
+          <div className="absolute inset-x-0 bottom-0 h-[45%] max-h-[400px] opacity-100">
             <Image
               src="/ink/ridge-front.svg"
               alt=""
@@ -185,7 +227,7 @@ export default function BentoGridHome() {
         </div>
 
         {/* Layer D: Foreground Base Mountain Line */}
-        <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 opacity-90 pointer-events-none">
+        <div className="absolute inset-x-0 bottom-0 h-24 sm:h-32 opacity-95 pointer-events-none">
           <Image
             src="/ink/ridge-front.svg"
             alt=""
@@ -202,7 +244,7 @@ export default function BentoGridHome() {
           
           {/* ================= ROW 1, CARD 1: MASTER PROFILE CARD ================= */}
           <div
-            className="rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border animate-enter h-full transition-[background-color,border-color] duration-500"
+            className="rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border animate-enter h-full transition-[transform,background-color,border-color,opacity] duration-300 ease-out hover:scale-[1.01] hover:-translate-y-0.5 backdrop-blur-[2px]" /* taste-skill-ignore */
             style={{
               animationDelay: '40ms',
               backgroundColor: atmosphere?.cardBg,
@@ -300,7 +342,7 @@ export default function BentoGridHome() {
           {/* ================= ROW 1, CARD 2: FEATURED PROJECTS ================= */}
           <Link
             href="/projects"
-            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[transform,background-color,border-color,opacity] duration-300 ease-out hover:scale-[1.01] hover:-translate-y-0.5 backdrop-blur-[2px] focus-visible:ring-2 animate-enter h-full" /* taste-skill-ignore */
             style={{
               animationDelay: '100ms',
               backgroundColor: atmosphere?.cardBg,
@@ -378,7 +420,7 @@ export default function BentoGridHome() {
           {/* ================= ROW 1, CARD 3: EXPERIENCE & PODIUMS ================= */}
           <Link
             href="/certificates"
-            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[transform,background-color,border-color,opacity] duration-300 ease-out hover:scale-[1.01] hover:-translate-y-0.5 backdrop-blur-[2px] focus-visible:ring-2 animate-enter h-full" /* taste-skill-ignore */
             style={{
               animationDelay: '160ms',
               backgroundColor: atmosphere?.cardBg,
@@ -448,7 +490,7 @@ export default function BentoGridHome() {
           {/* ================= ROW 2, CARD 1: ABOUT ME (CodingGita • Surat) ================= */}
           <Link
             href="/about"
-            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[transform,background-color,border-color,opacity] duration-300 ease-out hover:scale-[1.01] hover:-translate-y-0.5 backdrop-blur-[2px] focus-visible:ring-2 animate-enter h-full" /* taste-skill-ignore */
             style={{
               animationDelay: '220ms',
               backgroundColor: atmosphere?.cardBg,
@@ -503,7 +545,7 @@ export default function BentoGridHome() {
           {/* ================= ROW 2, CARD 2: SKILLS MATRIX ================= */}
           <Link
             href="/skills"
-            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[transform,background-color,border-color,opacity] duration-300 ease-out hover:scale-[1.01] hover:-translate-y-0.5 backdrop-blur-[2px] focus-visible:ring-2 animate-enter h-full" /* taste-skill-ignore */
             style={{
               animationDelay: '280ms',
               backgroundColor: atmosphere?.cardBg,
@@ -559,7 +601,7 @@ export default function BentoGridHome() {
           {/* ================= ROW 2, CARD 3: CERTIFICATES & HONORS ================= */}
           <Link
             href="/certificates"
-            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border hover:opacity-95 transition-[background-color,border-color,opacity] duration-500 focus-visible:ring-2 animate-enter h-full"
+            className="group rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between border backdrop-blur-[2px] transition-[transform,background-color,border-color,opacity] duration-300 ease-out hover:scale-[1.01] hover:-translate-y-0.5 focus-visible:ring-2 animate-enter h-full" /* taste-skill-ignore */
             style={{
               animationDelay: '340ms',
               backgroundColor: atmosphere?.cardBg,

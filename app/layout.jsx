@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ConditionalFooter from '@/components/ConditionalFooter';
 import SeasonalAtmosphere from '@/components/SeasonalAtmosphere';
+import CustomCursor from '@/components/CustomCursor';
 import './globals.css';
 
 const zenOldMincho = Zen_Old_Mincho({
@@ -129,6 +130,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-dvh bg-paper text-ink flex flex-col selection:bg-indigo selection:text-paper">
         <SeasonProvider>
           <SeasonalAtmosphere />
+          <CustomCursor />
           <Navbar />
           <div className="flex-1 flex flex-col pt-16 sm:pt-20">
             {children}

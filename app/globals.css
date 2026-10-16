@@ -97,6 +97,12 @@ body::before {
   100% { transform: translateX(0); }
 }
 
+@keyframes mistDriftReverse {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(25px); }
+  100% { transform: translateX(0); }
+}
+
 @keyframes sealPress {
   0% { transform: scale(1); }
   50% { transform: scale(0.92); }
@@ -116,6 +122,38 @@ body::before {
 
 .animate-enter {
   animation: enterUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes inkRipple {
+  0% {
+    width: 6px;
+    height: 6px;
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1);
+    border-width: 2px;
+    border-style: solid;
+  }
+  100% {
+    width: 54px;
+    height: 54px;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.6);
+    border-width: 1px;
+    border-style: solid;
+  }
+}
+
+.animate-ink-ripple {
+  animation: inkRipple 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active a,
+  html.custom-cursor-active button,
+  html.custom-cursor-active [role="button"] {
+    cursor: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

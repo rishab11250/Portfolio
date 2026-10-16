@@ -22,8 +22,8 @@ function getAtmosphereForSeason(seasonId) {
       accentColor: '#DF4F73', // Sakura crimson
       secondaryColor: '#BE185D',
       paperBg: '#FAF1F4', // Soft cherry washi tint
-      cardBg: '#FFFDFE',
-      cardBorder: 'rgba(223, 79, 115, 0.24)',
+      cardBg: 'rgba(255, 252, 254, 0.72)', // Translucent washi glass
+      cardBorder: 'rgba(223, 79, 115, 0.28)',
       mistOverlay: 'rgba(244, 143, 177, 0.18)',
       mistFilter: 'hue-rotate(310deg) saturate(1.4)',
       particleType: 'sakura',
@@ -43,8 +43,8 @@ function getAtmosphereForSeason(seasonId) {
       accentColor: '#0D9488', // Bamboo teal / emerald
       secondaryColor: '#047857',
       paperBg: '#EDF6F2', // Fresh bamboo mist tint
-      cardBg: '#FAFCFB',
-      cardBorder: 'rgba(13, 148, 136, 0.24)',
+      cardBg: 'rgba(247, 252, 250, 0.70)', // Translucent bamboo glass
+      cardBorder: 'rgba(13, 148, 136, 0.28)',
       mistOverlay: 'rgba(13, 148, 136, 0.18)',
       mistFilter: 'hue-rotate(110deg) saturate(1.3)',
       particleType: 'firefly',
@@ -64,8 +64,8 @@ function getAtmosphereForSeason(seasonId) {
       accentColor: '#C91F37', // Traditional Hanko Vermilion
       secondaryColor: '#C2410C',
       paperBg: '#F9F3E8', // Classic warm harvest washi
-      cardBg: '#FCFAF5',
-      cardBorder: 'rgba(201, 31, 55, 0.24)',
+      cardBg: 'rgba(253, 251, 247, 0.70)', // Translucent harvest glass
+      cardBorder: 'rgba(201, 31, 55, 0.28)',
       mistOverlay: 'rgba(245, 158, 11, 0.18)',
       mistFilter: 'hue-rotate(15deg) saturate(1.5)',
       particleType: 'maple',
@@ -84,8 +84,8 @@ function getAtmosphereForSeason(seasonId) {
     accentColor: '#2563EB', // Crystalline frost cobalt
     secondaryColor: '#1D4ED8',
     paperBg: '#EBF2F9', // Crisp glacial frost tint
-    cardBg: '#F7FAFD',
-    cardBorder: 'rgba(37, 99, 235, 0.24)',
+    cardBg: 'rgba(246, 250, 253, 0.70)', // Translucent frost glass
+    cardBorder: 'rgba(37, 99, 235, 0.28)',
     mistOverlay: 'rgba(59, 130, 246, 0.18)',
     mistFilter: 'hue-rotate(195deg) saturate(1.4)',
     particleType: 'snow',

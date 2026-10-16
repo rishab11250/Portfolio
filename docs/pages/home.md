@@ -21,25 +21,25 @@
   - **Mid-scroll layer (Content/Cards)**: Drifting mist bands (`mist.svg`) floating between section breaks, with semi-transparent pine tree groupings (`pines.svg`) emerging along the flanks.
   - **Bottom layer (Footer/Outro)**: Deep foreground mountain ridges (`ridge-front.svg`) rising up behind the footer and section navigation, grounding the page in solid ink.
 
-### B. Translucent Paper Scroll Cards
-- Navigation and content cards use semi-translucent washi glass (`bg-paper/75 backdrop-blur-xs` or `bg-paper/85`) so the mountain ridges and mist drift visibly underneath the cards as the user scrolls.
+### B. Translucent Washi Bento Cards
+- Bento grid cards use translucent washi glass (`rgba(..., 0.70)` to `0.74` with `backdrop-blur-[2px]`) so the majestic ink mountain ridges, pine tree groupings, and drifting mist ribbons are clearly visible directly beneath the cards.
+- Interactive 3D micro-tilt on mouse hover (`transform: perspective(1000px) scale3d(1.01, 1.01, 1.01)`) with smooth GPU-accelerated transition.
 
 ### C. Atmospheric Mist Ribbons
-- Horizontal SVG mist strips positioned at multiple vertical intervals (`top: 30%`, `top: 60%`, `top: 85%`) with staggered alternate drift speeds (`20s`, `35s`, `50s`).
-- Drifting seasonal particles (petals/leaves) caught in the mist currents.
+- Dual-opposing mist ribbons: Primary mist band drifting at 28s (`mistDrift`) and secondary opposing ribbon at 38s (`mistDriftReverse`) for organic spatial depth.
+- Filter hue-rotation synchronized to active season (vernal bloom pink, bamboo teal, harvest amber, crystalline frost blue).
 
-### D. Natural Brush Transition Dividers
-- Sumi-e brush stroke dividers between sections acting as organic horizon lines separating content tiers.
+### D. Fluid Inertial Pointer Physics
+- Radial ink wash mask (`WebkitMaskImage: radial-gradient(...)`) tracks cursor using RAF spring lerp (`current += (target - current) * 0.12`), producing a silky, natural ink-flow diffusion across the canvas.
 
-### E. Sumi-e Cascading Ink Waterfall (`InkWaterfall.jsx`)
-- Cascading ink-wash waterfall streaming down from the upper mountain ridge layer into the mid-page content basin.
-- Animated vertical brush streaks and water spray mist using lightweight SVG strokes and drifting mist billows.
-- Acts as a visual conduit guiding the eye from the Hero down into the portfolio sections.
+### E. Bespoke Sumi-e Cursor (`CustomCursor.jsx`)
+- Deep ink droplet core (`#17181C`) surrounded by an expanding water-wash capillary halo that radiates outward on mouse click and expands over interactive buttons.
 
 ---
 
 ## 3. Technical Specs
-- **Page Container**: `<div data-page="sumie" className="relative min-h-screen overflow-hidden">`
-- **Background Component**: `components/sumie/FullPageInkLandscape.jsx`
+- **Page Container**: `<div data-page="sumie" className="relative h-[calc(100dvh-4.25rem)] overflow-hidden">`
+- **Background Component**: Embedded in `components/sumie/BentoGridHome.jsx`
+- **Pointer System**: `components/CustomCursor.jsx` (smooth RAF physics, auto-adapting per route)
 - **Typography**: `Zen Old Mincho` (display) + `Zen Kaku Gothic New` (body)
-- **Asset Dependencies**: `/public/ink/ridge-*.svg`, `/public/ink/mist.svg`, `/public/ink/pines.svg`, `/public/ink/ink-landscape.svg`.
+- **Asset Dependencies**: `/public/ink/ridge-*.svg`, `/public/ink/mist.svg`, `/public/ink/pines.svg`.

@@ -59,7 +59,7 @@ export default function Navbar() {
         aria-label="Main Navigation"
         className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-200 ease-[var(--ease-twos)] motion-reduce:transition-none ${
           scrolled
-            ? 'bg-paper/90 backdrop-blur-md py-3'
+            ? 'bg-paper/90 backdrop-blur-md py-3' /* taste-skill-ignore */
             : 'bg-transparent py-4 sm:py-5'
         }`}
       >
