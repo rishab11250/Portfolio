@@ -136,10 +136,10 @@ export default function BentoGridHome() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
       >
-        {/* Layer A: Ambient Mountain Horizon */}
-        <div className="absolute inset-x-0 bottom-0 h-full max-h-[850px] opacity-65">
+        {/* Layer 1: Towering Distant Peaks (Rises to ~90% height, leaving top 10% clear sky) */}
+        <div className="absolute inset-0 w-full h-full opacity-65">
           <Image
-            src="/ink/ridge-back.svg"
+            src="/ink/towering-peaks.svg"
             alt=""
             fill
             sizes="100vw"
@@ -148,13 +148,24 @@ export default function BentoGridHome() {
           />
         </div>
 
-        {/* Layer B1: Primary Mountain Mist Ribbon */}
+        {/* Layer 2: Mid-High Mountain Ridge (Spans behind row 1 and row 2 cards) */}
+        <div className="absolute inset-0 w-full h-full opacity-55">
+          <Image
+            src="/ink/mid-peaks.svg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-bottom"
+          />
+        </div>
+
+        {/* Layer 3: Upper Mist Ribbon (Floating high across mountain crests) */}
         <div
-          className="absolute inset-x-0 bottom-40 sm:bottom-56 h-40 opacity-45 motion-safe:animate-[mistDrift_28s_ease-in-out_infinite_alternate] transition-[filter] duration-700"
+          className="absolute inset-0 w-full h-full opacity-45 motion-safe:animate-[mistDrift_32s_ease-in-out_infinite_alternate] transition-[filter] duration-700"
           style={{ filter: atmosphere?.mistFilter }}
         >
           <Image
-            src="/ink/mist.svg"
+            src="/ink/mist-upper.svg"
             alt=""
             fill
             sizes="100vw"
@@ -162,13 +173,13 @@ export default function BentoGridHome() {
           />
         </div>
 
-        {/* Layer B2: Secondary Opposing Mist Ribbon for Organic Spatial Depth */}
+        {/* Layer 4: Lower Mist Ribbon (Opposing drift across pine forests) */}
         <div
-          className="absolute inset-x-0 bottom-20 sm:bottom-32 h-36 opacity-35 motion-safe:animate-[mistDriftReverse_38s_ease-in-out_infinite_alternate] transition-[filter] duration-700"
+          className="absolute inset-0 w-full h-full opacity-40 motion-safe:animate-[mistDriftReverse_42s_ease-in-out_infinite_alternate] transition-[filter] duration-700"
           style={{ filter: atmosphere?.mistFilter }}
         >
           <Image
-            src="/ink/mist.svg"
+            src="/ink/mist-lower.svg"
             alt=""
             fill
             sizes="100vw"
@@ -176,10 +187,10 @@ export default function BentoGridHome() {
           />
         </div>
 
-        {/* Layer C0: Persistent Ambient Pines (Visible across entire canvas behind cards) */}
-        <div className="absolute inset-x-0 bottom-0 h-[52%] max-h-[500px] opacity-40">
+        {/* Layer 5: Ambient Multi-Tier Pine Forest (Visible across whole page through translucent cards) */}
+        <div className="absolute inset-0 w-full h-full opacity-50">
           <Image
-            src="/ink/pines.svg"
+            src="/ink/pines-all.svg"
             alt=""
             fill
             sizes="100vw"
@@ -187,7 +198,7 @@ export default function BentoGridHome() {
           />
         </div>
 
-        {/* Layer C: Interactive Pointer Brush Reveal (Vibrant deep ink following pointer) */}
+        {/* Layer 6: Interactive Pointer Brush Reveal (Vibrant deep ink following pointer) */}
         <div
           className="absolute inset-0 transition-opacity duration-300"
           style={{
@@ -197,27 +208,36 @@ export default function BentoGridHome() {
               ['radial', '-gradient(circle var(--mask-radius, 600px) at var(--mx, 50%) var(--my, 50%), black 30%, transparent 85%)'].join(''),
           }}
         >
-          <div className="absolute inset-x-0 bottom-0 h-[65%] max-h-[600px] opacity-85">
+          <div className="absolute inset-0 w-full h-full opacity-85">
             <Image
-              src="/ink/ridge-mid.svg"
+              src="/ink/towering-peaks.svg"
               alt=""
               fill
               sizes="100vw"
               className="object-cover object-bottom"
             />
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-[55%] max-h-[500px] opacity-95">
+          <div className="absolute inset-0 w-full h-full opacity-90">
             <Image
-              src="/ink/pines.svg"
+              src="/ink/mid-peaks.svg"
               alt=""
               fill
               sizes="100vw"
               className="object-cover object-bottom"
             />
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-[45%] max-h-[400px] opacity-100">
+          <div className="absolute inset-0 w-full h-full opacity-95">
             <Image
-              src="/ink/ridge-front.svg"
+              src="/ink/pines-all.svg"
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover object-bottom"
+            />
+          </div>
+          <div className="absolute inset-0 w-full h-full opacity-100">
+            <Image
+              src="/ink/crags-foreground.svg"
               alt=""
               fill
               sizes="100vw"
@@ -226,10 +246,10 @@ export default function BentoGridHome() {
           </div>
         </div>
 
-        {/* Layer D: Foreground Base Mountain Line */}
-        <div className="absolute inset-x-0 bottom-0 h-24 sm:h-32 opacity-95 pointer-events-none">
+        {/* Layer 7: Foreground Heavy Crags (Base anchor) */}
+        <div className="absolute inset-x-0 bottom-0 w-full h-[35%] opacity-90 pointer-events-none">
           <Image
-            src="/ink/ridge-front.svg"
+            src="/ink/crags-foreground.svg"
             alt=""
             fill
             sizes="100vw"
