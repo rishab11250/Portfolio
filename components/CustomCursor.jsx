@@ -87,8 +87,8 @@ export default function CustomCursor() {
     window.addEventListener('mouseup', onMouseUp);
     document.addEventListener('mouseover', onMouseOver, { passive: true });
 
-    // 60-120fps RAF spring physics loop
-    const lerpFactor = pathname === '/' ? 0.18 : 0.4;
+    // 60-120fps RAF spring physics loop (Instantaneous responsive tracking)
+    const lerpFactor = pathname === '/' ? 0.9 : 0.85;
     const animate = () => {
       const target = targetRef.current;
       const pos = posRef.current;
@@ -121,15 +121,16 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Click Ripples for Sumi-e Home */}
+      {/* Organic Sumi-e Ink Wash Bleed on Click */}
       {ripples.map((ripple) => (
         <span
           key={ripple.id}
-          className="fixed pointer-events-none rounded-full z-[9998] animate-ink-ripple"
+          className="fixed pointer-events-none rounded-full z-[9998] animate-ink-bleed"
           style={{
             left: ripple.x,
             top: ripple.y,
-            borderColor: accentColor,
+            backgroundColor: 'rgba(23, 24, 28, 0.35)',
+            filter: 'blur(2px)',
           }}
         />
       ))}
@@ -145,30 +146,72 @@ export default function CustomCursor() {
           transform: `translate3d(${posRef.current.x}px, ${posRef.current.y}px, 0)`,
         }}
       >
-        {/* ================= 1. HOME (/): SUMI-E INK DROPLET ================= */}
+        {/* ================= 1. HOME (/): TRADITIONAL JAPANESE FUDE BRUSH (筆) ================= */}
         {pathname === '/' && (
-          <div className="relative -top-1/2 -left-1/2 flex items-center justify-center">
-            {/* Breathing Water-Wash Ring */}
-            <div
-              className={`rounded-full transition-[width,height,transform] duration-300 ease-out flex items-center justify-center ${
-                isHovered ? 'w-12 h-12' : 'w-8 h-8'
-              } ${isPressed ? 'scale-75' : 'scale-100'}`}
-              style={{
-                backgroundColor: `${accentColor}15`,
-                border: `1.5px solid ${accentColor}40`,
-                boxShadow: `0 0 12px ${accentColor}25`,
-              }}
+          <div className="relative -top-0.5 -left-0.5">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={`transition-transform duration-150 ease-out origin-top-left ${
+                isHovered ? 'scale-110 -rotate-6' : 'scale-100 rotate-0'
+              } ${isPressed ? 'scale-90 translate-x-0.5 translate-y-0.5' : ''}`}
             >
-              {/* Dense Ink Droplet Core */}
-              <div
-                className={`rounded-full transition-transform duration-200 ease-out bg-ink ${
-                  isHovered ? 'w-3 h-3 scale-110' : 'w-2 h-2'
-                }`}
-                style={{
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.4)',
-                }}
+              {/* Bamboo Handle / Shaft */}
+              <path
+                d="M10 10 L24 24 C25 25 26.5 25 27.5 24 C28.5 23 28.5 21.5 27.5 20.5 L13.5 6.5 Z"
+                fill="#36251B"
+                stroke="#17181C"
+                strokeWidth="0.8"
+                strokeLinejoin="round"
               />
-            </div>
+              {/* Bamboo Segment Node */}
+              <line
+                x1="18"
+                y1="16"
+                x2="21"
+                y2="19"
+                stroke="#251A13"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              />
+              {/* Antique Brass Ferrule Collar */}
+              <path
+                d="M8 8 L13.5 6.5 L11 11.5 L6.5 9.5 Z"
+                fill="#C6A868"
+                stroke="#17181C"
+                strokeWidth="0.75"
+                strokeLinejoin="round"
+              />
+              {/* Ferrule Highlight */}
+              <line
+                x1="8.5"
+                y1="8"
+                x2="10.5"
+                y2="10"
+                stroke="#E6D3A3"
+                strokeWidth="0.75"
+                strokeLinecap="round"
+              />
+              {/* Sable / Goat Hair Tuft */}
+              <path
+                d="M0 0 C1.8 3.5 4.5 6.8 8 8 L7 9.5 C3.8 7.5 1.8 4.5 0 0 Z"
+                fill="#2E2421"
+              />
+              {/* Deep Pine-Soot Ink Needle Tip (Hotspot directly at 0,0) */}
+              <path
+                d="M0 0 C0.8 1.8 2.2 3.6 4 4.5 C2.8 4.5 1.4 3.2 0 0 Z"
+                fill="#17181C"
+              />
+              {/* Wet Ink Highlight Sheen */}
+              <circle cx="1.2" cy="1.2" r="0.6" fill="#FFFFFF" opacity="0.65" />
+              {/* Ink Bead Swell on Hover */}
+              {isHovered && (
+                <circle cx="0.5" cy="0.5" r="1.2" fill={accentColor} opacity="0.9" />
+              )}
+            </svg>
           </div>
         )}
 

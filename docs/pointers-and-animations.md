@@ -9,7 +9,7 @@ Each of the 6 portfolio worlds possesses a distinct physical reality. Rather tha
 
 | Route | Aesthetic World | Bespoke Pointer / Cursor | Primary Motion Physics | Signature Page Animations | Interactive State (Hover/Click) |
 |---|---|---|---|---|---|
-| `/` | **Sumi-e Mist Sanctuary** | **Sumi-e Ink Droplet (`fude` 筆)**<br>Fluid ink core with expanding water-diffusion aura | Damped spring lerp (`0.12` factor), fluid inertial glide | Multi-plane drifting mist ribbons, seasonal canvas wind particles, translucent washi glass tilt | Ink bead expands; capillary water ring radiates outward on click; cards tilt in 3D perspective |
+| `/` | **Sumi-e Mist Sanctuary** | **Traditional Japanese Fude Brush (`筆`)**<br>Slender dark bamboo handle, antique brass ferrule collar, and sable hair tapering to an ultra-precise soot ink needle tip | Instantaneous responsive tracking (`0.90` factor) | Full-bleed mountain sanctuary peaks, Gaussian-diffused dual mist ribbons, translucent washi glass cards | Brush flexes on hover (`-rotate-6`); depresses on click blooming an organic ink wash bleed (`animate-ink-bleed`) |
 | `/skills` | **8/16-Bit Pixel Realm** | **Pixel Gauntlet / 8-Bit Dagger**<br>Crisp pixelated icon (`image-rendering: pixelated`) | Stepped coordinates (`steps(4)` quantization option), instantaneous snap | 60fps Canvas animated pixel waterfall (falling droplets + foam splash), CRT scanline jitter | Pixel pointer animates to pressing index finger; retro floating chip hover bobbing (`translateY(-4px)`) |
 | `/projects` | **Shonen Manga / Anime** | **Manga Inking Nib (`G-pen` G-ペン)**<br>Stylized metallic inking nib with dynamic speed-crosshair | Sharp action response, velocity-weighted tilt angle | Asymmetric comic panel break & pop, radial SVG speed-line burst on hero cards, halftone parallax | Action-line burst trails behind cursor on rapid sweep; project panel breaks comic border (`scale(1.02)`) |
 | `/about` | **Cybernetic Blueprint** | **HUD Tactical Crosshair**<br>Precision targeting reticle with live `[X:### Y:###]` telemetry | Linear precision tracking with micro-accelerometer drift | Wireframe vector assembly (`stroke-dasharray` SVG draw), oscilloscope waveform sweep, radar sonar sweep | Target brackets rotate 45° and lock on interactive dossier chips; live coordinate telemetry ticks |
@@ -22,10 +22,13 @@ Each of the 6 portfolio worlds possesses a distinct physical reality. Rather tha
 
 ### A. Home (`/`) — Sumi-e Mist Sanctuary
 - **Bespoke Pointer**:
-  - Center: Solid ink core (`#17181C` in dark / seasonal accent) with `mix-blend-mode: multiply`.
-  - Outer: Faint seasonal water-wash aura (`36px` diameter) with `rgba(...)` halo that gently breathes.
-  - Hover: Water-wash ring scales to `48px`, aura intensifies with seasonal accent color (`#DF4F73`, `#0D9488`, `#C91F37`, `#2563EB`).
-  - Click: Radiates a capillary ripple wave that dissolves into the washi paper.
+  - **Traditional Japanese Calligraphy Brush (`Fude` 筆)**:
+    - **Active Tip Point**: Needle-sharp soot ink point (`#17181C`) positioned at exact mouse coordinate `(0, 0)` for pixel-perfect targeting.
+    - **Hair Tuft**: Sable & goat hair tuft (`#2E2421`) tapering from a 4px base down to the needle point.
+    - **Ferrule Collar**: Antique brass band (`#C6A868`) with specular metallic highlight.
+    - **Bamboo Shaft**: Slender dark lacquered bamboo handle (`#36251B`) angled at 40° matching a natural calligraphy grip.
+  - **Hover**: Brush flexes 6° (`rotate(-6deg) scale(1.10)`) as if poised to write, revealing a subtle ink bead at the tip.
+  - **Click**: Brush tip presses into the washi paper (`scale(0.90) translate(1px, 1px)`), leaving a soft organic ink wash bleed (`animate-ink-bleed`) that dissolves into paper fibers without artificial geometric borders.
 - **Page Motion Choreography**:
   - **Inertial Pointer Reveal**: Radial mask (`--mask-radius: 600px`) smoothly trails mouse coordinates using requestAnimationFrame linear damping (`current += (target - current) * 0.12`).
   - **Translucent Washi Bento Cards**: Cards are rendered with `rgba(..., 0.72)` semi-translucency and `backdrop-blur-[2px]`, allowing background pine trees (`pines.svg`) and mountain contours (`ridge-*.svg`) to visibly float underneath the text.
