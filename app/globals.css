@@ -143,15 +143,6 @@ body::before {
   animation: stampImprint 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@media (pointer: fine) {
-  html.custom-cursor-active,
-  html.custom-cursor-active a,
-  html.custom-cursor-active button,
-  html.custom-cursor-active [role="button"] {
-    cursor: none !important;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
