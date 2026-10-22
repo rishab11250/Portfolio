@@ -68,17 +68,6 @@ export default function RootLayout({ children }) {
       className={`${zenOldMincho.variable} ${zenKakuGothic.variable}`}
     >
       <head>
-        {/* SVG Filter for Indigo Duotone Image Processing */}
-        <svg width="0" height="0" className="sr-only" aria-hidden="true">
-          <filter id="duotone" colorInterpolationFilters="sRGB">
-            <feColorMatrix type="saturate" values="0" />
-            <feComponentTransfer>
-              <feFuncR type="table" tableValues="0.043 0.945" />
-              <feFuncG type="table" tableValues="0.145 0.925" />
-              <feFuncB type="table" tableValues="0.271 0.878" />
-            </feComponentTransfer>
-          </filter>
-        </svg>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -128,6 +117,17 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="min-h-dvh bg-paper text-ink flex flex-col selection:bg-indigo selection:text-paper">
+        {/* SVG Filter for Indigo Duotone Image Processing */}
+        <svg width="0" height="0" className="sr-only" aria-hidden="true">
+          <filter id="duotone" colorInterpolationFilters="sRGB">
+            <feColorMatrix type="saturate" values="0" />
+            <feComponentTransfer>
+              <feFuncR type="table" tableValues="0.043 0.945" />
+              <feFuncG type="table" tableValues="0.145 0.925" />
+              <feFuncB type="table" tableValues="0.271 0.878" />
+            </feComponentTransfer>
+          </filter>
+        </svg>
         <SeasonProvider>
           <SeasonalAtmosphere />
           <CustomCursor />

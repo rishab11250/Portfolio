@@ -7,24 +7,20 @@ import { useSeason } from '@/lib/SeasonContext';
 export default function CustomCursor() {
   const pathname = usePathname();
   const { atmosphere } = useSeason();
-  const accentColor = atmosphere?.accentColor || '#DF4F73';
+  const accentColor = atmosphere?.accentColor || '#C91F37';
 
   const [mounted, setMounted] = useState(false);
   const [isFinePointer, setIsFinePointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
+  const [stamps, setStamps] = useState([]);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
-  // Direct mouse target coordinates
   const targetRef = useRef({ x: -100, y: -100 });
-  // Dot coordinates (snappy/instant)
-  const dotPosRef = useRef({ x: -100, y: -100 });
-  // Outer magnetic trailing ring coordinates (smooth lerp)
-  const ringPosRef = useRef({ x: -100, y: -100 });
+  const posRef = useRef({ x: -100, y: -100 });
 
-  const dotRef = useRef(null);
-  const ringRef = useRef(null);
+  const cursorRef = useRef(null);
   const rafRef = useRef(null);
   const lastCoordUpdate = useRef(0);
 
@@ -47,7 +43,6 @@ export default function CustomCursor() {
       targetRef.current = { x: e.clientX, y: e.clientY };
       if (!isVisible) setIsVisible(true);
 
-      // Throttled telemetry for /about page
       const now = performance.now();
       if (now - lastCoordUpdate.current > 80) {
         lastCoordUpdate.current = now;
@@ -60,10 +55,19 @@ export default function CustomCursor() {
 
     const onMouseEnter = () => setIsVisible(true);
     const onMouseLeave = () => setIsVisible(false);
-    const onMouseDown = () => setIsPressed(true);
+
+    const onMouseDown = (e) => {
+      setIsPressed(true);
+      // Leave temporary vermilion seal imprint on click
+      const id = Date.now() + Math.random();
+      setStamps((prev) => [...prev.slice(-4), { id, x: e.clientX, y: e.clientY }]);
+      setTimeout(() => {
+        setStamps((prev) => prev.filter((s) => s.id !== id));
+      }, 650);
+    };
+
     const onMouseUp = () => setIsPressed(false);
 
-    // Interactive target detection (buttons, links, inputs, chips)
     const onMouseOver = (e) => {
       const target = e.target;
       if (!target) return;
@@ -80,26 +84,16 @@ export default function CustomCursor() {
     window.addEventListener('mouseup', onMouseUp);
     document.addEventListener('mouseover', onMouseOver, { passive: true });
 
-    // 60-120fps RAF physics loop
+    // Snappy responsive tracking
     const animate = () => {
       const target = targetRef.current;
-      const dot = dotPosRef.current;
-      const ring = ringPosRef.current;
+      const pos = posRef.current;
 
-      // 1. Crisp dot tracks mouse instantly (no lag)
-      dot.x = target.x;
-      dot.y = target.y;
+      pos.x += (target.x - pos.x) * 0.85;
+      pos.y += (target.y - pos.y) * 0.85;
 
-      // 2. Trailing magnetic ring follows with fluid damping (0.18 factor)
-      ring.x += (target.x - ring.x) * 0.18;
-      ring.y += (target.y - ring.y) * 0.18;
-
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${dot.x}px, ${dot.y}px, 0)`;
-      }
-
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ring.x}px, ${ring.y}px, 0)`;
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
       }
 
       rafRef.current = requestAnimationFrame(animate);
@@ -123,58 +117,68 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* 1. Trailing Magnetic Halo Ring */}
-      <div
-        ref={ringRef}
-        aria-hidden="true"
-        className={`fixed top-0 left-0 pointer-events-none z-[9998] will-change-transform transition-opacity duration-200 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{
-          transform: `translate3d(${ringPosRef.current.x}px, ${ringPosRef.current.y}px, 0)`,
-        }}
-      >
+      {/* Click Vermilion Hanko Stamp Imprints */}
+      {stamps.map((stamp) => (
         <div
-          className={`-translate-x-1/2 -translate-y-1/2 rounded-full transition-[width,height,transform,background-color,border-color] duration-300 ease-out flex items-center justify-center ${
-            isHovered ? 'w-11 h-11' : 'w-7 h-7'
-          } ${isPressed ? 'scale-75' : 'scale-100'}`}
+          key={stamp.id}
+          className="fixed pointer-events-none z-[9998] animate-stamp-imprint select-none"
           style={{
-            borderWidth: '1.5px',
-            borderStyle: 'solid',
-            borderColor: isHovered ? accentColor : 'rgba(23, 24, 28, 0.35)',
-            backgroundColor: isHovered ? `${accentColor}12` : 'rgba(23, 24, 28, 0.03)',
+            left: stamp.x,
+            top: stamp.y,
           }}
-        />
-      </div>
+        >
+          <div data-ui="hanko-imprint" className="w-6 h-6 border-[1.5px] border-seal/80 bg-seal/15 rounded flex items-center justify-center font-display font-black text-seal text-[11px] leading-none">
+            印
+          </div>
+        </div>
+      ))}
 
-      {/* 2. Razor-Sharp Precision Ink Dot + Route Accents */}
+      {/* Primary Hardware-Accelerated Floating Stamp Pointer */}
       <div
-        ref={dotRef}
+        ref={cursorRef}
         aria-hidden="true"
         className={`fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform transition-opacity duration-150 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
-          transform: `translate3d(${dotPosRef.current.x}px, ${dotPosRef.current.y}px, 0)`,
+          transform: `translate3d(${posRef.current.x}px, ${posRef.current.y}px, 0)`,
         }}
       >
-        {/* Core Dot (pinned to center) */}
-        <div className="relative -top-1/2 -left-1/2 flex items-center justify-center">
+        <div className="relative -top-1 -left-1">
+          {/* Hanko Stamp Vessel */}
           <div
-            className={`rounded-full transition-[transform,background-color] duration-150 ease-out ${
-              isHovered ? 'w-2 h-2 scale-125' : 'w-1.5 h-1.5 scale-100'
-            } ${isPressed ? 'scale-75' : ''}`}
-            style={{
-              backgroundColor: isHovered ? accentColor : '#17181C',
-            }}
-          />
-
-          {/* Route Special: /about live telemetry coordinates */}
-          {pathname === '/about' && (
-            <div className="absolute left-6 top-1 pointer-events-none select-none text-[9px] tracking-widest px-1.5 py-0.5 rounded bg-prussian text-paper whitespace-nowrap">
-              X:{String(coords.x).padStart(4, '0')} Y:{String(coords.y).padStart(4, '0')}
+            className={`transition-[transform,border-color,background-color] duration-150 ease-out origin-top-left flex items-center justify-center ${
+              isHovered
+                ? 'scale-110 -rotate-3'
+                : 'scale-100 rotate-0'
+            } ${isPressed ? 'scale-90 translate-x-0.5 translate-y-0.5' : ''}`}
+          >
+            {/* Square vermilion seal with traditional character */}
+            <div
+              className={`w-6 h-6 rounded border-[1.5px] flex items-center justify-center font-display font-black text-[11px] leading-none transition-colors duration-150 ${
+                isHovered
+                  ? 'border-seal bg-seal text-paper'
+                  : 'border-seal/80 bg-paper/90 text-seal'
+              }`}
+              style={{
+                boxShadow: isHovered
+                  ? '0 2px 8px rgba(201, 31, 55, 0.35)'
+                  : '0 1px 3px rgba(201, 31, 55, 0.2)',
+              }}
+            >
+              印
             </div>
-          )}
+
+            {/* Pinned Micro Precision Red Aim Dot at top-left (0,0) */}
+            <span className="absolute -top-0.5 -left-0.5 w-1.5 h-1.5 rounded-full bg-seal" />
+
+            {/* Telemetry coords for /about */}
+            {pathname === '/about' && (
+              <div className="absolute left-8 top-0 pointer-events-none select-none text-[9px] tracking-widest px-1.5 py-0.5 rounded bg-prussian text-paper whitespace-nowrap">
+                X:{String(coords.x).padStart(4, '0')} Y:{String(coords.y).padStart(4, '0')}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

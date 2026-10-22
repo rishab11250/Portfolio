@@ -124,23 +124,23 @@ body::before {
   animation: enterUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes inkBleed {
+@keyframes stampImprint {
   0% {
-    width: 6px;
-    height: 6px;
-    opacity: 0.85;
-    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  50% {
+    opacity: 0.75;
+    transform: translate(-50%, -50%) scale(1.02);
   }
   100% {
-    width: 36px;
-    height: 36px;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(2);
+    transform: translate(-50%, -50%) scale(1.08);
   }
 }
 
-.animate-ink-bleed {
-  animation: inkBleed 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-stamp-imprint {
+  animation: stampImprint 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @media (pointer: fine) {
