@@ -15,6 +15,9 @@ const cspHeader = `
 `.replace(/\s{2,}/g, ' ').trim();
 
 const nextConfig = {
+  experimental: {
+    agentUpgrade: 'security',
+  },
   poweredByHeader: false,
   compress: true,
   images: {
