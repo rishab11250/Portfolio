@@ -350,12 +350,6 @@ export default function BentoGridHome() {
                   </a>
                 ))}
               </div>
-
-              {/* Location indicator */}
-              <div className="flex items-center justify-between px-3 py-1 rounded-xl bg-ink/5 text-ink text-[13px] font-body">
-                <span className="text-mist font-medium">Location</span>
-                <span className="font-semibold text-ink">Surat, Gujarat, India</span>
-              </div>
             </div>
           </div>
 
