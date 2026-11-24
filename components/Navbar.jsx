@@ -19,7 +19,7 @@ export default function Navbar() {
   const openButtonRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { activeSeason, atmosphere, selectQuarter, setIsExplorerOpen } = useSeason();
+  const { atmosphere, selectQuarter } = useSeason();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,18 +78,35 @@ export default function Navbar() {
 
           {/* Mobile Header Controls */}
           <div className="flex lg:hidden items-center gap-2">
-            {activeSeason && (
-              <button
-                type="button"
-                onClick={() => setIsExplorerOpen(true)}
-                aria-label="Season Explorer"
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-paper/95 border border-ink/20 text-sm font-semibold text-ink max-w-[180px]"
-              >
-                <span>{atmosphere.icon}</span>
-                <span className="truncate">{activeSeason.name}</span>
-                <span className="text-sm font-semibold" style={{ color: atmosphere.accentColor }}>72↗</span>
-              </button>
-            )}
+            <div className="flex items-center gap-1 p-0.5 rounded-full bg-paper/95 border border-ink/20">
+              {[
+                { key: 'Spring', label: '春', title: 'Spring' },
+                { key: 'Summer', label: '夏', title: 'Summer' },
+                { key: 'Autumn', label: '秋', title: 'Autumn' },
+                { key: 'Winter', label: '冬', title: 'Winter' },
+              ].map((q) => {
+                const isActive = atmosphere.quarter === q.key;
+                return (
+                  <button
+                    key={q.key}
+                    type="button"
+                    onClick={() => selectQuarter(q.key)}
+                    title={q.title}
+                    aria-label={q.title}
+                    className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-transform cursor-pointer ${
+                      isActive
+                        ? 'text-white'
+                        : 'hover:bg-ink/10 opacity-70 hover:opacity-100'
+                    }`}
+                    style={{
+                      backgroundColor: isActive ? atmosphere.accentColor : undefined,
+                    }}
+                  >
+                    {q.label}
+                  </button>
+                );
+              })}
+            </div>
             <button
               type="button"
               onClick={openMobileMenu}
@@ -124,64 +141,42 @@ export default function Navbar() {
             </ul>
 
             {/* Interactive Top Bar Season Station */}
-            {activeSeason && (
-              <div
-                role="region"
-                aria-label="Seasonal Atmosphere Controller"
-                className="flex items-center p-1 rounded-full bg-paper/95 border border-ink/20"
-              >
-                {/* 4 Direct Season Buttons */}
-                <div className="flex items-center gap-1 pr-2">
-                  {[
-                    { key: 'Spring', label: '春', title: 'Switch to Spring' },
-                    { key: 'Summer', label: '夏', title: 'Switch to Summer' },
-                    { key: 'Autumn', label: '秋', title: 'Switch to Autumn' },
-                    { key: 'Winter', label: '冬', title: 'Switch to Winter' },
-                  ].map((q) => {
-                    const isActive = atmosphere.quarter === q.key;
-                    return (
-                      <button
-                        key={q.key}
-                        type="button"
-                        onClick={() => selectQuarter(q.key)}
-                        title={q.title}
-                        aria-label={q.title}
-                        className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-transform duration-150 cursor-pointer ${
-                          isActive
-                            ? 'text-white scale-110'
-                            : 'hover:bg-ink/10 opacity-70 hover:opacity-100 hover:scale-105'
-                        }`}
-                        style={{
-                          backgroundColor: isActive ? atmosphere.accentColor : undefined,
-                        }}
-                      >
-                        <span>{q.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Season Label & 72 Calendar Trigger */}
-                <button
-                  type="button"
-                  onClick={() => setIsExplorerOpen(true)}
-                  title="Explore all 72 Japanese microseasons"
-                  aria-label="Active microseason, click to explore all 72"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-sm font-semibold text-ink hover:text-seal transition-colors cursor-pointer"
-                >
-                  <span
-                    className="w-2 h-2 rounded-full shrink-0"
-                    style={{ backgroundColor: atmosphere.accentColor }}
-                  />
-                  <span className="max-w-[130px] truncate text-sm font-semibold">
-                    {activeSeason.name}
-                  </span>
-                  <span className="text-sm font-semibold pl-0.5" style={{ color: atmosphere.accentColor }}>
-                    72 ↗
-                  </span>
-                </button>
+            <div
+              role="region"
+              aria-label="Seasonal Atmosphere Controller"
+              className="flex items-center p-1 rounded-full bg-paper/95 border border-ink/20"
+            >
+              {/* 4 Direct Season Buttons */}
+              <div className="flex items-center gap-1">
+                {[
+                  { key: 'Spring', label: '春', title: 'Switch to Spring' },
+                  { key: 'Summer', label: '夏', title: 'Switch to Summer' },
+                  { key: 'Autumn', label: '秋', title: 'Switch to Autumn' },
+                  { key: 'Winter', label: '冬', title: 'Switch to Winter' },
+                ].map((q) => {
+                  const isActive = atmosphere.quarter === q.key;
+                  return (
+                    <button
+                      key={q.key}
+                      type="button"
+                      onClick={() => selectQuarter(q.key)}
+                      title={q.title}
+                      aria-label={q.title}
+                      className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-transform duration-150 cursor-pointer ${
+                        isActive
+                          ? 'text-white scale-110'
+                          : 'hover:bg-ink/10 opacity-70 hover:opacity-100 hover:scale-105'
+                      }`}
+                      style={{
+                        backgroundColor: isActive ? atmosphere.accentColor : undefined,
+                      }}
+                    >
+                      <span>{q.label}</span>
+                    </button>
+                  );
+                })}
               </div>
-            )}
+            </div>
           </div>
         </div>
       </nav>
@@ -255,24 +250,39 @@ export default function Navbar() {
           </ul>
 
           {/* Mobile Season Quick Access */}
-          {activeSeason && (
-            <div className="pt-4">
-              <button
-                type="button"
-                onClick={() => {
-                  closeMobileMenu();
-                  setIsExplorerOpen(true);
-                }}
-                className="w-full p-3 rounded-xl bg-ink/5 hover:bg-ink/10 flex items-center justify-between text-left text-sm text-ink"
-              >
-                <div>
-                  <span className="block text-mist text-sm font-medium">Active Season</span>
-                  <span className="font-semibold text-base">{activeSeason.name}</span>
-                </div>
-                <span className="text-seal font-semibold">Explore 72 ↗</span>
-              </button>
+          <div className="pt-4 border-t border-ink/10">
+            <span className="block text-mist text-xs font-medium mb-2">Seasonal Atmosphere</span>
+            <div className="flex items-center gap-1.5">
+              {[
+                { key: 'Spring', label: '春 Spring' },
+                { key: 'Summer', label: '夏 Summer' },
+                { key: 'Autumn', label: '秋 Autumn' },
+                { key: 'Winter', label: '冬 Winter' },
+              ].map((q) => {
+                const isActive = atmosphere.quarter === q.key;
+                return (
+                  <button
+                    key={q.key}
+                    type="button"
+                    onClick={() => {
+                      selectQuarter(q.key);
+                      closeMobileMenu();
+                    }}
+                    className={`flex-1 py-2 px-1 rounded-xl text-xs font-semibold text-center transition-colors cursor-pointer ${
+                      isActive
+                        ? 'text-white'
+                        : 'bg-ink/5 text-ink hover:bg-ink/10'
+                    }`}
+                    style={{
+                      backgroundColor: isActive ? atmosphere.accentColor : undefined,
+                    }}
+                  >
+                    {q.label}
+                  </button>
+                );
+              })}
             </div>
-          )}
+          </div>
         </div>
       </dialog>
     </>

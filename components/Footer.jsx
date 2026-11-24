@@ -1,6 +1,5 @@
 import React from 'react';
 import SealMark from './primitives/SealMark';
-import SeasonTag from './SeasonTag';
 
 const SOCIAL_LINKS = [
   { label: 'GitHub', href: 'https://github.com/rishab11250' },
@@ -9,7 +8,7 @@ const SOCIAL_LINKS = [
   { label: 'Email', href: 'mailto:rishab.chandgothia.cg@gmail.com' },
 ];
 
-export default function Footer({ seasonTag = null }) {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -60,14 +59,9 @@ export default function Footer({ seasonTag = null }) {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Season Tag Slot */}
+        {/* Bottom Bar: Copyright */}
         <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-paper/60 font-body">
           <p>© {currentYear} Rishab Chandgothia. All rights reserved.</p>
-
-          {/* Season Tag Slot */}
-          <div id="season-tag-container" className="flex items-center gap-2">
-            {seasonTag || <SeasonTag />}
-          </div>
         </div>
       </div>
     </footer>

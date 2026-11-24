@@ -4,7 +4,6 @@ import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import SealMark from '../primitives/SealMark';
-import SeasonTag from '../SeasonTag';
 
 const WAYPOINTS = [
   {
@@ -283,9 +282,6 @@ export default function PanoramicVista() {
 
         <div className="flex items-center gap-4">
           <p>© {currentYear} Rishab Chandgothia</p>
-          <div className="scale-90 origin-right">
-            <SeasonTag />
-          </div>
         </div>
       </div>
     </div>

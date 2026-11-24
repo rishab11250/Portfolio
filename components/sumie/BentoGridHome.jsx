@@ -3,7 +3,6 @@
 import React, { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import SeasonTag from '../SeasonTag';
 import { useSeason } from '../../lib/SeasonContext.jsx';
 
 const SKILL_BADGES = [
@@ -713,10 +712,6 @@ export default function BentoGridHome() {
               </li>
             ))}
           </ul>
-        </div>
-
-        <div className="scale-90 origin-right">
-          <SeasonTag theme="paper" />
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint components data app scripts lib",
-    "check:seasons": "node scripts/check-seasons.mjs",
     "measure": "node scripts/measure-bundle.mjs"
   },
   "dependencies": {

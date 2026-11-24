@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useSyncExternalStore } from 'react';
 import { useSeason } from '../lib/SeasonContext.jsx';
-import SeasonExplorerModal from './SeasonExplorerModal.jsx';
 
 const subscribeReducedMotion = (callback) => {
   if (typeof window === 'undefined') return () => {};
@@ -17,22 +16,14 @@ const getReducedMotionSnapshot = () => {
 
 /**
  * SeasonalAtmosphere
- * Immersive particle engine & ambient light aura reflecting the 72 Japanese microseasons:
+ * Immersive particle engine & ambient light aura reflecting the 4 Japanese seasonal atmospheres:
  * - Spring: Soft sakura petals floating and spinning in the vernal breeze across the screen.
  * - Summer: Luminous glowing firefly motes floating up into the twilight with pulsing halos.
  * - Autumn: Tumbling golden & crimson momiji maple leaves.
  * - Winter: Crisp crystalline snowflakes descending softly across the entire vista.
  */
 export default function SeasonalAtmosphere() {
-  const {
-    activeSeason,
-    liveSeason,
-    atmosphere,
-    selectSeason,
-    resetToLive,
-    isExplorerOpen,
-    setIsExplorerOpen,
-  } = useSeason();
+  const { atmosphere } = useSeason();
 
   const canvasRef = useRef(null);
   const motionDisabled = useSyncExternalStore(
@@ -221,16 +212,6 @@ export default function SeasonalAtmosphere() {
           className="fixed inset-0 pointer-events-none z-30"
         />
       )}
-
-      {/* 3. Global Season Explorer Modal mounted at root */}
-      <SeasonExplorerModal
-        isOpen={isExplorerOpen}
-        onClose={() => setIsExplorerOpen(false)}
-        currentLiveSeason={liveSeason}
-        activeSeason={activeSeason}
-        onSelectSeason={selectSeason}
-        onResetToLive={resetToLive}
-      />
     </>
   );
 }
